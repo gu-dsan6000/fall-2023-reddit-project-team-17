@@ -5,27 +5,30 @@
             "Effect": "Allow",
             "Principal": {
                 "AWS": [ 
-                    "arn:aws:iam::692960231031:role/LabRole", # Victor
-                    "arn:aws:iam::114580182108:role/LabRole", # Matt
-                    "arn:aws:iam::862339729993:role/LabRole", # Alex
-                    "arn:aws:iam::930712488410:role/LabRole" # Landon
+                    "arn:aws:iam::692960231031:role/LabRole", 
+                    "arn:aws:iam::114580182108:role/LabRole", 
+                    "arn:aws:iam::862339729993:role/LabRole", 
+                    "arn:aws:iam::930712488410:role/LabRole"
                 ]
             },
-            "Action": "s3:*",
-            "Resource": "arn:aws:s3:::project17-bucket0/*" # Landon - Replace
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::project17-bucket0"
         },
         {
             "Effect": "Allow",
             "Principal": {
                 "AWS": [ 
-                    "arn:aws:iam::692960231031:role/LabRole", # Victor
-                    "arn:aws:iam::114580182108:role/LabRole", # Matt
-                    "arn:aws:iam::862339729993:role/LabRole", # Alex
-                    "arn:aws:iam::930712488410:role/LabRole" # Landon
+                    "arn:aws:iam::692960231031:role/LabRole", 
+                    "arn:aws:iam::114580182108:role/LabRole", 
+                    "arn:aws:iam::862339729993:role/LabRole", 
+                    "arn:aws:iam::930712488410:role/LabRole"
                 ]
             },
             "Action": "s3:*",
-            "Resource": "arn:aws:s3:::project17-bucket0/*" # Landon - Replace with your own
+            "Resource": "arn:aws:s3:::project17-bucket0/*"
         }
     ]
 }
