@@ -1,0 +1,9 @@
+# Code and Data
+
+## Code
+
+All the code used in this project is available on [Github](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17).
+
+## Data
+
+This project uses the @baumgartner_pushshift_2020 dataset.

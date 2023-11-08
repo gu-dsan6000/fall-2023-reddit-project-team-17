@@ -1,0 +1,3 @@
+# Overview
+
+![Image generated with OpenAI DALL·E 3 with prompt "a group of four friends around a campfire sharing stories in modern digital illustration style"](../img/website-images/front-image.png){width=70%}
