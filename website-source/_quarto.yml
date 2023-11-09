@@ -16,12 +16,6 @@ website:
         href: secondary/authors.qmd           
       - text: References
         href: secondary/references.qmd      
-      #- href: nlp.qmd
-      #  text: NLP
-      #- href: ml.qmd
-      #  text: ML
-      #- href: summary.qmd
-      #  text: Summary
   page-footer:
     left: |
       A project by {{< var author.name >}}.
@@ -35,7 +29,11 @@ website:
     align: left
     contents:
       - index.qmd
-      - eda.qmd
+      - section: "EDA"
+        contents:
+          - eda/topics.qmd
+          - eda/exploratory.qmd
+      #- eda.qmd
       - nlp.qmd
       - ml.qmd
       - summary.qmd
