@@ -30,7 +30,7 @@ from IPython.display import display, HTML, IFrame
 ```{python}
 #| echo: false
 
-df = pd.read_csv("../../data/eda-plots/correlation_by_subreddit.csv")
+df = pd.read_csv("../../data/eda-data/correlation_by_subreddit.csv")
 md = tabulate(df, headers='keys', tablefmt='pipe',showindex=False)
 d.Markdown(md)
 
