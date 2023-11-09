@@ -2,6 +2,21 @@
 
 The questions we will address in this work are:
 
+**Idea 1**
+
+`Business goal`: Given a textual post, classify the subreddit to which it belongs.
+`Technical approach`: Use NLP techniques to construct a feature set from the textual components of a post. These features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of `n` words), or other types of features. Use the newly created features to build a multi-class classification model capable of classifying the subreddit to which a post belongs.
+
+**Idea 2**
+
+`Business goal`: Given a textual post, predict the age and gender of the author of the post.
+`Technical approach`: Use NLP techniques to extract the age and gender of the author of a post, if available (as an example: “My brother (24M) and I (23M) went to the store…”). Use NLP techniques to construct a feature set from the textual components of a post. Again, these features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of `n` words), or other types of features. Use the newly created features to build two models: a regression model for predicting the age of the author of the post, and a classification model for classifying the gender of the author of the post.
+
+**Idea 3**
+
+`Business goal`: Use a pre-trained model to build features surrounding NLP for our ML tasks.
+`Technical approach`: Identify available pre-trained models in the realm of NLP and what they are trained to extract from textual data. Use a pre-trained model, or models, to perform NLP tasks for downstream tasks. For instance, use a pre-trained model to obtain word embeddings (vector representations of words) that can be used as features in a subsequent ML model.
+
 1. a
 1. a
 1. a
