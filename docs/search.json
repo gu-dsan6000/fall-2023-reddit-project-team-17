@@ -1,17 +1,24 @@
 [
   {
-    "objectID": "eda.html",
-    "href": "eda.html",
-    "title": "EDA",
+    "objectID": "eda/topics.html",
+    "href": "eda/topics.html",
+    "title": "Topics",
     "section": "",
-    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+    "text": "Topics\nThe questions we will address in this work are:\n\na\na\na\na\na\na\na\na\na\na"
   },
   {
-    "objectID": "eda.html#why-do-we-use-it",
-    "href": "eda.html#why-do-we-use-it",
-    "title": "EDA",
-    "section": "",
-    "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+    "objectID": "eda/exploratory.html#question-2",
+    "href": "eda/exploratory.html#question-2",
+    "title": "Exploratory",
+    "section": "Question 2",
+    "text": "Question 2"
+  },
+  {
+    "objectID": "eda/exploratory.html#question-3",
+    "href": "eda/exploratory.html#question-3",
+    "title": "Exploratory",
+    "section": "Question 3",
+    "text": "Question 3\n\n\n\n\n\n\nsubreddit\ncorrelation_coefficient\n\n\n\n\nTrueOffMyChest\n0.854543\n\n\nunpopularopinion\n0.843297\n\n\nantiwork\n0.806886\n\n\nsocialskills\n0.834383\n\n\nAskMen\n0.846837\n\n\nAmItheAsshole\n0.810426\n\n\nrelationship_advice\n0.738167\n\n\nexplainlikeimfive\n0.852794\n\n\nOutOfTheLoop\n0.920336\n\n\ntifu\n0.931179\n\n\nNoStupidQuestions\n0.727365\n\n\nAskWomen\n0.841131"
   },
   {
     "objectID": "nlp.html",
