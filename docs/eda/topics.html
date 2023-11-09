@@ -190,23 +190,65 @@ ul.task-list li input[type="checkbox"] {
 <h1>Topics</h1>
 <p>The questions we will address in this work are:</p>
 <p><strong>Idea 1</strong></p>
-<p><code>Business goal</code>: Given a textual post, classify the subreddit to which it belongs. <code>Technical approach</code>: Use NLP techniques to construct a feature set from the textual components of a post. These features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of <code>n</code> words), or other types of features. Use the newly created features to build a multi-class classification model capable of classifying the subreddit to which a post belongs.</p>
+<ul>
+<li><code>Business goal</code>: Given a textual post, classify the subreddit to which it belongs.</li>
+<li><code>Technical approach</code>: Use NLP techniques to construct a feature set from the textual components of a post. These features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of <code>n</code> words), or other types of features. Use the newly created features to build a multi-class classification model capable of classifying the subreddit to which a post belongs.</li>
+</ul>
 <p><strong>Idea 2</strong></p>
-<p><code>Business goal</code>: Given a textual post, predict the age and gender of the author of the post. <code>Technical approach</code>: Use NLP techniques to extract the age and gender of the author of a post, if available (as an example: “My brother (24M) and I (23M) went to the store…”). Use NLP techniques to construct a feature set from the textual components of a post. Again, these features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of <code>n</code> words), or other types of features. Use the newly created features to build two models: a regression model for predicting the age of the author of the post, and a classification model for classifying the gender of the author of the post.</p>
+<ul>
+<li><code>Business goal</code>: Given a textual post, predict the age and gender of the author of the post.</li>
+<li><code>Technical approach</code>: Use NLP techniques to extract the age and gender of the author of a post, if available (as an example: “My brother (24M) and I (23M) went to the store…”). Use NLP techniques to construct a feature set from the textual components of a post. Again, these features may be word “dummy variables” (the existence or non-existence of a word), word counts, n-grams (sequences of <code>n</code> words), or other types of features. Use the newly created features to build two models: a regression model for predicting the age of the author of the post, and a classification model for classifying the gender of the author of the post.</li>
+</ul>
 <p><strong>Idea 3</strong></p>
-<p><code>Business goal</code>: Use a pre-trained model to build features surrounding NLP for our ML tasks. <code>Technical approach</code>: Identify available pre-trained models in the realm of NLP and what they are trained to extract from textual data. Use a pre-trained model, or models, to perform NLP tasks for downstream tasks. For instance, use a pre-trained model to obtain word embeddings (vector representations of words) that can be used as features in a subsequent ML model.</p>
-<ol type="1">
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-<li>a</li>
-</ol>
+<ul>
+<li><code>Business goal</code>: Use a pre-trained model to build features surrounding NLP for our ML tasks.</li>
+<li><code>Technical approach</code>: Identify available pre-trained models in the realm of NLP and what they are trained to extract from textual data. Use a pre-trained model, or models, to perform NLP tasks for downstream tasks. For instance, use a pre-trained model to obtain word embeddings (vector representations of words) that can be used as features in a subsequent ML model.</li>
+</ul>
+<p><strong>Idea 4</strong></p>
+<ul>
+<li><code>Business goal</code>: Predict the popularity of text-based submissions based on their text content.</li>
+<li><code>Technical approach</code>: Using NLP techniques on the text posts of various similarly sized subreddits (by number of subscribers) that typically contain posts with moderate to high word counts, extract the most pertinent features. Apply supervised machine learning models (e.g., regression) to predict the number of upvotes and/or comments a given text post will receive. Identify the most influential/important words and phrases that predict a post’s popularity and calculate accuracy metrics based on actual post popularity.</li>
+</ul>
+<p><strong>Idea 5</strong></p>
+<ul>
+<li><code>Business goal</code>: Determine/predict “flairs” of Reddit posts in r/AITA based on their text content.</li>
+<li><code>Technical approach</code>: Focusing primarily on the subreddit r/AITA and its flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here), apply NLP techniques such as tokenization on text-based submissions to extract the important contents of each post. Apply a multi-class classification model trained on labelled r/AITA posts (i.e., text posts with a flair) to predict which flair a given post will receive based on its text content. Present confusion matrices on testing dataset and identify the words/phrases most commonly associated with each flair type.</li>
+</ul>
+<p><strong>Idea 6</strong></p>
+<ul>
+<li><code>Business goal</code>: Determine which subreddit posts belong to based on their sentiment.</li>
+<li><code>Technical approach</code>: Use NLP techniques to clean content of various text based subreddits. Apply sentiment modeling to these posts. Train a classification model on these posts. Assess accuracy of the model using unlabelled posts (i.e., posts where the subreddit is not identified). Present findings in confusion matrices and calculate various accuracy metrics.</li>
+</ul>
+<p><strong>Idea 7</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
+<p><strong>Idea 8</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
+<p><strong>Idea 9</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
+<p><strong>Idea 10</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
+<p><strong>Idea 11</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
+<p><strong>Idea 12</strong></p>
+<ul>
+<li><code>Business goal</code>:</li>
+<li><code>Technical approach</code>:</li>
+</ul>
 
 
 </section>
