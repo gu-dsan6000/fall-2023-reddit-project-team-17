@@ -25,14 +25,14 @@
     "href": "eda/exploratory-analysis.html#external-data",
     "title": "Exploratory Analysis",
     "section": "External Data",
-    "text": "External Data"
+    "text": "External Data\nWe have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we’ll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#cleaning",
     "href": "eda/exploratory-analysis.html#cleaning",
     "title": "Exploratory Analysis",
     "section": "Cleaning",
-    "text": "Cleaning\nOur cleaning process includes removing from the comments database both datasets the columns that are not needed for each particular set of analyses. Also, in the comments table, we remove the rows where the body has been either removed or deleted. In the submissions table, we also remove where the selftext has been removed or deleted. The resulting rows are 977,181 for the submissions table and 70,594,314 for the comments table.\nThe count of posts per each subreddit is detailed below:\n\n\n\n\n\nSubreddit\nCount\n\n\n\n\nrelationship_advice\n311,882\n\n\nNoStupidQuestions\n234,253\n\n\nTrueOffMyChest\n125,159\n\n\nAmItheAsshole\n115,659\n\n\nantiwork\n76,647\n\n\nunpopularopinion\n39,642\n\n\nsocialskills\n23,005\n\n\nAskMen\n18,240\n\n\nexplainlikeimfive\n15,002\n\n\ntifu\n11,921\n\n\nOutOfTheLoop\n3,054\n\n\nAskWomen\n2,717\n\n\n\n\n\nThe plot below shows the count of valid comments per Subreddit:\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
+    "text": "Cleaning\nOur cleaning process includes removing from the comments database both datasets the columns that are not needed for each particular set of analyses. Also, in the comments table, we remove the rows where the body has been either removed or deleted. In the submissions table, we also remove where the selftext has been removed or deleted. The resulting rows are 977,181 for the submissions table and 70,594,314 for the comments table.\nThe count of posts per each subreddit is detailed below:\n\n\n\n\n\nSubreddit\nCount\n\n\n\n\nrelationship_advice\n311,882\n\n\nNoStupidQuestions\n234,253\n\n\nTrueOffMyChest\n125,159\n\n\nAmItheAsshole\n115,659\n\n\nantiwork\n76,647\n\n\nunpopularopinion\n39,642\n\n\nsocialskills\n23,005\n\n\nAskMen\n18,240\n\n\nexplainlikeimfive\n15,002\n\n\ntifu\n11,921\n\n\nOutOfTheLoop\n3,054\n\n\nAskWomen\n2,717\n\n\n\n\n\nAnother component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. The plot below shows the count of valid comments per Subreddit:\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#dummies",
@@ -67,14 +67,14 @@
     "href": "eda/exploratory-analysis.html#subreddit-community-prediction",
     "title": "Exploratory Analysis",
     "section": "Subreddit community prediction",
-    "text": "Subreddit community prediction\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
+    "text": "Subreddit community prediction\nOne interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore.\nOne component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the AmItheAsshole, relationship_advice, and antiwork subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#flair-prediction",
     "href": "eda/exploratory-analysis.html#flair-prediction",
     "title": "Exploratory Analysis",
     "section": "Flair prediction",
-    "text": "Flair prediction\nThe number of posts that are flaired as each of the flairs in the r/AITA is show below:\n\nThe treemap below shows the relative proportion of them:\n\n\n\n\n\n\n\nThe code used for this section is available here."
+    "text": "Flair prediction\nIn this section we take a closer look at the subreddit r/AmItheAsshole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.\nIn r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: Asshole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.\nThe number of posts that are flaired as each of the flairs in the r/AITA is show below:\n\nThe treemap below shows the relative proportion of them:\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "nlp.html",

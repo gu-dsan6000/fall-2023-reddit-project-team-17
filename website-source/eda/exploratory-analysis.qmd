@@ -18,6 +18,7 @@ We selected a subset of the data related to subreddits dedicated to storytelling
 
 ## External Data
 
+We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we'll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data).
 
 ## Cleaning 
 
@@ -44,7 +45,7 @@ Markdown(md)
 
 
 
-The plot below shows the count of valid comments per Subreddit:
+Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. The plot below shows the count of valid comments per Subreddit:
 
 ```{python}
 #| echo: false
@@ -160,6 +161,11 @@ We can create a boxplot with this small dataset to see the distribution. Since w
 ![](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png)
 
 
+
+We can infer from the plot that NSFW content increases the engagement with the post.
+
+
+
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
@@ -184,6 +190,10 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Subreddit community prediction
 
+One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore.
+
+One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the `AmItheAsshole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.
+
 
 ```{python}
 #| echo: false
@@ -203,6 +213,10 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Flair prediction
 
+In this section we take a closer look at the subreddit r/AmItheAsshole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.
+
+In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: Asshole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.
+
 The number of posts that are flaired as each of the flairs in the r/AITA is show below:
 
 ![](../img/eda-plots/AITA-flairs-barchart-2022.png)
@@ -219,5 +233,7 @@ The treemap below shows the relative proportion of them:
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb).
 ::: 
+
+
 
 
