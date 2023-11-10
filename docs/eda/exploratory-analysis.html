@@ -190,6 +190,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
   <li><a href="#subreddit-community-prediction" id="toc-subreddit-community-prediction" class="nav-link" data-scroll-target="#subreddit-community-prediction">Subreddit community prediction</a></li>
   <li><a href="#flair-prediction" id="toc-flair-prediction" class="nav-link" data-scroll-target="#flair-prediction">Flair prediction</a></li>
+  <li><a href="#nlp-eda-for-emerging-trends-and-controversial-comments" id="toc-nlp-eda-for-emerging-trends-and-controversial-comments" class="nav-link" data-scroll-target="#nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</a></li>
   </ul>
 </nav>
     </div>
@@ -442,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
 <p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
 <p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown below:</p>
 <p><img src="../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png" class="img-fluid"></p>
-<p>We can infer from the plot that NSFW content increases the engagement with the post.</p>
+<p>We can infer from the plot that NSFW content increases the engagement with the post, although more analysis will be conducted in subsequent sections.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -513,6 +514,24 @@ Tip with Title
 <p><img src="../img/eda-plots/AITA-flairs-barchart-2022.png" class="img-fluid"></p>
 <p>The treemap below shows the relative proportion of them:</p>
 <p><img src="../img/eda-plots/AITA-flairs-treemap-2022.png" class="img-fluid"></p>
+<p>As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nlp-eda-for-emerging-trends-and-controversial-comments" class="level2">
+<h2 class="anchored" data-anchor-id="nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</h2>
+<p>The plot below shows a regex count of the current events per Subreddit:</p>
+<p><img src="../img/eda-plots/current-events.png" class="img-fluid"></p>
+<p>The plot below shows the performance of controversial posts:</p>
+<p><img src="../img/eda-plots/engagement-comparison.png" class="img-fluid"></p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">

@@ -174,7 +174,7 @@ We can create a boxplot with this small dataset to see the distribution. Since w
 
 
 
-We can infer from the plot that NSFW content increases the engagement with the post.
+We can infer from the plot that NSFW content increases the engagement with the post, although more analysis will be conducted in subsequent sections.
 
 
 
@@ -247,7 +247,7 @@ The treemap below shows the relative proportion of them:
 ![](../img/eda-plots/AITA-flairs-treemap-2022.png)
 
 
-
+As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.
 
 
 ::: {.callout-note appearance="simple"}
@@ -255,5 +255,21 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
+
+## NLP EDA for Emerging Trends and Controversial Comments
+
+The plot below shows a regex count of the current events per Subreddit:
+
+![](../img/eda-plots/current-events.png)
+
+The plot below shows the performance of controversial posts:
+
+![](../img/eda-plots/engagement-comparison.png)
+
+
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb).
+::: 
 
 
