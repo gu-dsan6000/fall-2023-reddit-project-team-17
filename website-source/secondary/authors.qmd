@@ -5,7 +5,7 @@
 
 ### Alex Pattarini
 ![](../img/website-images/authors/alex.jpg)
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo metus vehicula nisi elementum rhoncus. Aliquam arcu augue, imperdiet nec lorem vitae, ultrices fermentum nibh. Aenean ut tincidunt ligula. Aenean felis quam, auctor vel varius dapibus, lobortis vitae dolor. Praesent vel facilisis elit. Donec non purus sit amet odio pharetra tincidunt id non nulla. amp419@georgetown.edu
+I am a second-year student in Georgetown University's Data Science and Analytics Accelerated Program after receiving a BA in Government at GU. I am most interested in analyzing geospatial and temporal data. Some of my other interests include sports analytics, history, and programming. amp419@georgetown.edu
 
 ### Landon Carpenter
 ![](../img/website-images/authors/landon.png)

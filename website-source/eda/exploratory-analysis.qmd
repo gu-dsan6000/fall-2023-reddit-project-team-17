@@ -14,7 +14,7 @@ from IPython.display import Markdown
 
 ## The Data Subset
 
-We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainitlikeim5`, `OutOfTheLoop`, and `NoStupidQuestions`. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
+We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop`, and `NoStupidQuestions`. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
 
 ## Cleaning 
 

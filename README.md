@@ -20,7 +20,7 @@ Website link: https://gu-dsan6000.github.io/fall-2023-reddit-project-team-17/
 
 ## Subreddits
 
-`AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainitlikeim5`, `OutOfTheLoop`, `NoStupidQuestions`
+`AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop `, `NoStupidQuestions`
 
 ## Theme Colors
 
