@@ -21,11 +21,18 @@
     "text": "We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits AITA, AskMen, AskWomen, TrueOffMyChest, unpopularopinion, tifu, socialskills, antiwork, relationship_advice, explainlikeimfive, OutOfTheLoop, and NoStupidQuestions. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table."
   },
   {
+    "objectID": "eda/exploratory-analysis.html#external-data",
+    "href": "eda/exploratory-analysis.html#external-data",
+    "title": "Exploratory Analysis",
+    "section": "External Data",
+    "text": "External Data"
+  },
+  {
     "objectID": "eda/exploratory-analysis.html#cleaning",
     "href": "eda/exploratory-analysis.html#cleaning",
     "title": "Exploratory Analysis",
     "section": "Cleaning",
-    "text": "Cleaning\nOur cleaning process includes removing from the comments database both datasets the columns that are not needed for each particular set of analyses. Also, in the comments table, we remove the rows where the body has been either removed or deleted. In the submissions table, we also remove where the selftext has been removed or deleted. The resulting rows are 977,181 for the submissions table and 70,594,314 for the comments table."
+    "text": "Cleaning\nOur cleaning process includes removing from the comments database both datasets the columns that are not needed for each particular set of analyses. Also, in the comments table, we remove the rows where the body has been either removed or deleted. In the submissions table, we also remove where the selftext has been removed or deleted. The resulting rows are 977,181 for the submissions table and 70,594,314 for the comments table.\nThe count of posts per each subreddit is detailed below:\n\n\n\n\n\nSubreddit\nCount\n\n\n\n\nrelationship_advice\n311,882\n\n\nNoStupidQuestions\n234,253\n\n\nTrueOffMyChest\n125,159\n\n\nAmItheAsshole\n115,659\n\n\nantiwork\n76,647\n\n\nunpopularopinion\n39,642\n\n\nsocialskills\n23,005\n\n\nAskMen\n18,240\n\n\nexplainlikeimfive\n15,002\n\n\ntifu\n11,921\n\n\nOutOfTheLoop\n3,054\n\n\nAskWomen\n2,717\n\n\n\n\n\nThe plot below shows the count of valid comments per Subreddit:\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#dummies",
@@ -56,25 +63,18 @@
     "text": "The times of the day when posts typically receive the most engagement.\nTo determine the times of day when a post typically receives the most engagement, we create two additional variables: ’ week_of_the_yearandhour_of_the_day, both coming from thecreated_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:\n\nThis analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
-    "objectID": "eda/exploratory-analysis.html#starting",
-    "href": "eda/exploratory-analysis.html#starting",
+    "objectID": "eda/exploratory-analysis.html#subreddit-community-prediction",
+    "href": "eda/exploratory-analysis.html#subreddit-community-prediction",
     "title": "Exploratory Analysis",
-    "section": "Starting",
-    "text": "Starting"
+    "section": "Subreddit community prediction",
+    "text": "Subreddit community prediction\n\n\n\n        \n        \n\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#flair-prediction",
     "href": "eda/exploratory-analysis.html#flair-prediction",
     "title": "Exploratory Analysis",
     "section": "Flair prediction",
-    "text": "Flair prediction"
-  },
-  {
-    "objectID": "eda/exploratory-analysis.html#subreddit-community-prediction",
-    "href": "eda/exploratory-analysis.html#subreddit-community-prediction",
-    "title": "Exploratory Analysis",
-    "section": "Subreddit community prediction",
-    "text": "Subreddit community prediction"
+    "text": "Flair prediction\nThe number of posts that are flaired as each of the flairs in the r/AITA is show below:\n\nThe treemap below shows the relative proportion of them:\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "nlp.html",
@@ -109,7 +109,7 @@
     "href": "secondary/authors.html",
     "title": "Authors",
     "section": "",
-    "text": "Authors\n\n\n\nAlex Pattarini\n I am a second-year student in Georgetown University’s Data Science and Analytics Accelerated Program after receiving a BA in Government at GU. I am most interested in analyzing geospatial and temporal data. Some of my other interests include sports analytics, history, and programming. amp419@georgetown.edu\n\n\nLandon Carpenter\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo metus vehicula nisi elementum rhoncus. Aliquam arcu augue, imperdiet nec lorem vitae, ultrices fermentum nibh. Aenean ut tincidunt ligula. Aenean felis quam, auctor vel varius dapibus, lobortis vitae dolor. Praesent vel facilisis elit. Donec non purus sit amet odio pharetra tincidunt id non nulla. lc1276@georgetown.edu\n\n\n\n\n\n\nMatt Moriarty\n I am currently a second-year student pursuing a Master of Science in Data Science and Analytics at Georgetown University. My main interest involves merging the topics of Time Series and Geographic Information Systems to perform spatio-temporal data analyses. Alongside this, I am very interested in Deep Learning, Data Visualization, and Data Ethics! mdm341@georgetown.edu\n\n\nVictor De Lima\n I am currently a second year student at the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I am hoping to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu"
+    "text": "Authors\n\n\n\nAlex Pattarini\n I am a second-year student in Georgetown University’s Data Science and Analytics Accelerated Program after receiving a BA in Government at GU. I am most interested in analyzing geospatial and temporal data. Some of my other interests include sports analytics, history, and programming. amp419@georgetown.edu\n\n\nLandon Carpenter\n I’m currently a second-year student in the Master of Science in the Data Science and Analytics program at Georgetown University. My favorite topics are Natural Language Processing, Computer Vision, and Time-Series Analysis. Outside of my coursework, I enjoy playing soccer and rock climbing. lc1276@georgetown.edu\n\n\n\n\n\n\nMatt Moriarty\n I am currently a second-year student pursuing a Master of Science in Data Science and Analytics at Georgetown University. My main interest involves merging the topics of Time Series and Geographic Information Systems to perform spatio-temporal data analyses. Alongside this, I am very interested in Deep Learning, Data Visualization, and Data Ethics! mdm341@georgetown.edu\n\n\nVictor De Lima\n I am currently a second year student at the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I am hoping to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu"
   },
   {
     "objectID": "secondary/references.html",

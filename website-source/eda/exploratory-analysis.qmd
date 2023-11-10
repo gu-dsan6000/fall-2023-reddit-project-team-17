@@ -16,9 +16,51 @@ from IPython.display import Markdown
 
 We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop`, and `NoStupidQuestions`. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
 
+## External Data
+
+
 ## Cleaning 
 
 Our cleaning process includes removing from the `comments` database both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed or deleted. In the `submissions` table, we also remove where the `selftext` has been removed or deleted. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. 
+
+The count of posts per each subreddit is detailed below:
+
+```{python}
+#| echo: false
+
+df = pd.read_csv("../../data/eda-data/subreddit-counts.csv")
+# format
+df = df.rename(columns={"subreddit": "Subreddit", "count": "Count"})
+df = df.sort_values(by="Count", ascending=False)
+df['Count'] = df['Count'].astype(int)
+df['Count'] = df['Count'].apply(lambda x: f"{x:,}")
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
+
+
+
+
+The plot below shows the count of valid comments per Subreddit:
+
+```{python}
+#| echo: false
+
+width_percentage = "100%"
+IFrame(src='../img/eda-plots/validity-counts.html', width=width_percentage, height=500)
+
+
+```
+
+
+
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-predicting-subreddits.ipynb).
+::: 
 
 
 
@@ -64,7 +106,7 @@ Markdown(md)
 
 
 ::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
 
@@ -102,7 +144,7 @@ We can see in both the table and figure that they are significantly correlated, 
 
 
 ::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
 
@@ -119,7 +161,7 @@ We can create a boxplot with this small dataset to see the distribution. Since w
 
 
 ::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
 
@@ -135,32 +177,12 @@ This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM t
 
 
 ::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
 
 
-## Starting
-
-
-![](../img/eda-plots/text-only-barcharts.png)
-
-
-
-
-## Flair prediction
-
-
-![](../img/eda-plots/AITA-flairs-barchart-2022.png)
-
-
-![](../img/eda-plots/AITA-flairs-treemap-2022.png)
-
-
-
 ## Subreddit community prediction
-
-
 
 
 ```{python}
@@ -173,15 +195,29 @@ IFrame(src='../img/eda-plots/counts-over-time.html', width=width_percentage, hei
 ```
 
 
-
-```{python}
-#| echo: false
-
-width_percentage = "100%"
-IFrame(src='../img/eda-plots/validity-counts.html', width=width_percentage, height=700)
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-predicting-subreddits.ipynb).
+::: 
 
 
-```
 
+## Flair prediction
+
+The number of posts that are flaired as each of the flairs in the r/AITA is show below:
+
+![](../img/eda-plots/AITA-flairs-barchart-2022.png)
+
+
+The treemap below shows the relative proportion of them:
+
+![](../img/eda-plots/AITA-flairs-treemap-2022.png)
+
+
+
+
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb).
+::: 
 
 
