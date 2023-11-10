@@ -65,8 +65,8 @@ The questions we will address in this work are:
 
 **Idea 11**
 
-* `Business goal`: 
-* `Technical approach`: 
+* `Business goal`: Identify whether current events are shown in different subreddits and their level of engagement.
+* `Technical approach`: Use NLP to identify current events in different subreddits and their level of engagement. 
 
 **Idea 12**
 
