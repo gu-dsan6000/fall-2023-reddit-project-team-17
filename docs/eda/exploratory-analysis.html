@@ -179,10 +179,12 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#the-data-subset" id="toc-the-data-subset" class="nav-link active" data-scroll-target="#the-data-subset">The Data Subset</a></li>
   <li><a href="#cleaning" id="toc-cleaning" class="nav-link" data-scroll-target="#cleaning">Cleaning</a></li>
-  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a></li>
-  <li><a href="#topic-1" id="toc-topic-1" class="nav-link" data-scroll-target="#topic-1">Topic 1</a></li>
-  <li><a href="#topic-2" id="toc-topic-2" class="nav-link" data-scroll-target="#topic-2">Topic 2</a></li>
-  <li><a href="#topic-3" id="toc-topic-3" class="nav-link" data-scroll-target="#topic-3">Topic 3</a></li>
+  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a>
+  <ul class="collapse">
+  <li><a href="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" id="toc-the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="nav-link" data-scroll-target="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</a></li>
+  <li><a href="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." id="toc-the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="nav-link" data-scroll-target="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
+  <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -239,23 +241,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-</section>
-<section id="topic-1" class="level2">
-<h2 class="anchored" data-anchor-id="topic-1">Topic 1</h2>
-<p><strong>Business Goal</strong>: Evaluate the relationship between the number of comments and the score of Reddit posts to establish an ‘interaction_score’ as an aggregate engagement metric.</p>
-<p><strong>Technical Proposal</strong>:</p>
-<p>We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using pyspark.sql.functions to calculate the correlation between these two metrics. We will develop an <code>interaction_score</code> metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb">here</a>.</p>
-</div>
-</div>
-</div>
-<p><strong>EDA</strong></p>
+<section id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="level3">
+<h3 class="anchored" data-anchor-id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</h3>
 <p>The number of comments (<code>num_comments</code>) and the score of a post (<code>score</code>), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the <code>corr</code> function from <code>pyspark.sql.functions</code>. The table below shows the results:</p>
 <div class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -322,13 +309,19 @@ ul.task-list li input[type="checkbox"] {
 <p>We can also visualize them separately as in the figure below:</p>
 <p><img src="../../img/eda-plots/mean-comments-vs-mean-score-data.png" class="img-fluid"></p>
 <p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="topic-2" class="level2">
-<h2 class="anchored" data-anchor-id="topic-2">Topic 2</h2>
-<p><strong>Business Goal</strong>: Assess the impact of not-safe-for-work (NSFW) content on user engagement.</p>
-<p><strong>Technical Proposal</strong>:</p>
-<p>To analyze the influence of NSFW content on user engagement, we will utilize a dataset of submissions, focusing on those marked with the <code>over_18</code> flag. Considering the limited proportion of such posts, we’ll create a balanced dataset by randomly selecting an equivalent number of submissions without the NSFW tag. This approach ensures a fair comparison between NSFW and non-NSFW content. We will employ the <code>interaction_score</code> from Topic 1 as a primary measure of user engagement. Our methodology includes generating a boxplot to visualize the distribution of interaction scores for both NSFW and non-NSFW posts.</p>
-<p><strong>EDA</strong></p>
+<section id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="level3">
+<h3 class="anchored" data-anchor-id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</h3>
 <p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
 <p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown below:</p>
 <p><img src="../../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png" class="img-fluid"></p>
@@ -343,12 +336,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="topic-3" class="level2">
-<h2 class="anchored" data-anchor-id="topic-3">Topic 3</h2>
-<p><strong>Business Goal</strong>: Identify the times of the day when posts typically receive the most engagement.</p>
-<p><strong>Technical Proposal</strong>:</p>
-<p>Implement a data analysis process that focuses on understanding the temporal patterns of user engagement on social media posts. Utilize the <code>created_utc</code> column from the dataset to create two new variables: <code>week_of_the_year</code> and <code>hour_of_the_day</code>. Exclude the first two days of 2022 to maintain accurate weekly categorization, as these days are part of week 53 of 2021. Aggregate and analyze the data based on these new variables to reveal patterns in user engagement across different times of the day and weeks of the year. The outcome will be visualized through a comprehensive plot, illustrating the times when posts receive the most engagement, thus guiding content strategies for optimal post timing.</p>
-<p><strong>EDA</strong></p>
+<section id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="level3">
+<h3 class="anchored" data-anchor-id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</h3>
 <p>To determine the times of day when a post typically receives the most engagement, we create two additional variables: ’ week_of_the_year<code>and</code>hour_of_the_day<code>, both coming from the</code>created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:</p>
 <p><img src="../../img/eda-plots/average-comments-hour-and-week-data.png" class="img-fluid"></p>
 <p>This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.</p>
@@ -364,6 +353,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
