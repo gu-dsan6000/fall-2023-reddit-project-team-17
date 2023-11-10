@@ -9,6 +9,14 @@ Website link: https://gu-dsan6000.github.io/fall-2023-reddit-project-team-17/
 * Matt Moriarty - mdm341@georgetown.edu
 * Victor De Lima - vad49@georgetown.edu
 
+## Feedback 
+
+| Group requesting feedback | Group giving feedback |
+| ------------------------- | --------------------- |
+| 17                        | 16                    |
+| 18                        | 17                    |
+
+
 ## Group bucket
 
 - s3://project17-bucket-alex/
