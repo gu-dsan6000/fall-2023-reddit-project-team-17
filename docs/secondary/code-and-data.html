@@ -141,7 +141,490 @@ div.csl-indent {
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>This project uses the <span class="citation" data-cites="baumgartner_pushshift_2020">Baumgartner et al. (<a href="#ref-baumgartner_pushshift_2020" role="doc-biblioref">2020</a>)</span> dataset.</p>
+<p>This project uses the <span class="citation" data-cites="baumgartner_pushshift_2020">Baumgartner et al. (<a href="#ref-baumgartner_pushshift_2020" role="doc-biblioref">2020</a>)</span> dataset. The columns available are listed below. Definitions were sourced from <span class="citation" data-cites="baumgartner_pushshift_2020">Baumgartner et al. (<a href="#ref-baumgartner_pushshift_2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="the_reddit_archives_json_2016">The Reddit Archives (<a href="#ref-the_reddit_archives_json_2016" role="doc-biblioref">2016</a>)</span>.</p>
+</section>
+<section id="submissions-data-card" class="level2">
+<h2 class="anchored" data-anchor-id="submissions-data-card"><code>submissions</code> Data Card</h2>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>adserver_click_url</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>adserver_imp_pixel</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>archived</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>author</td>
+<td>String</td>
+<td>The account name of the poster, e.g., “example username”</td>
+</tr>
+<tr class="odd">
+<td>author_cakeday</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>author_flair_css_class</td>
+<td>String</td>
+<td>The CSS class of the author’s flair. This field is specific to subreddit</td>
+</tr>
+<tr class="odd">
+<td>author_flair_text</td>
+<td>String</td>
+<td>The text of the author’s flair. This field is specific to subreddit</td>
+</tr>
+<tr class="even">
+<td>author_id</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>brand_safe</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>contest_mode</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>created_utc</td>
+<td>Integer</td>
+<td>UNIX timestamp referring to the time of the submission’s creation, e.g., 1483228803</td>
+</tr>
+<tr class="even">
+<td>crosspost_parent</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>crosspost_parent_list</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>disable_comments</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>distinguished</td>
+<td>String</td>
+<td>Flag to determine whether the submission is distinguished2 by moderators. “null” means <br>not distinguished</td>
+</tr>
+<tr class="even">
+<td>domain</td>
+<td>String</td>
+<td>The domain of the submission, e.g., self.AskReddit</td>
+</tr>
+<tr class="odd">
+<td>domain_override</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>edited</td>
+<td>Long</td>
+<td>Indicates whether the submission has been edited. Either a number indicating the UNIX <br>timestamp that the submission was edited at, “false” otherwise.</td>
+</tr>
+<tr class="odd">
+<td>embed_type</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>embed_url</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>gilded</td>
+<td>Integer</td>
+<td>The number of times this submission received Reddit gold, e.g., 0</td>
+</tr>
+<tr class="even">
+<td>hidden</td>
+<td>Boolean</td>
+<td>true if the post is hidden by the logged in user. false if not logged in or not hidden.</td>
+</tr>
+<tr class="odd">
+<td>hide_score</td>
+<td>Boolean</td>
+<td>Flag indicating if the submission’s score is hidden, e.g., false</td>
+</tr>
+<tr class="even">
+<td>href_url</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>id</td>
+<td>String</td>
+<td>The submission’s identifier, e.g., “5lcgjh”</td>
+</tr>
+<tr class="even">
+<td>imp_pixel</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>is_crosspostable</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>is_reddit_media_domain</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>is_self</td>
+<td>Boolean</td>
+<td>Flag that indicates whether the submission is a self post, e.g., true</td>
+</tr>
+<tr class="even">
+<td>is_video</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>link_flair_css_class</td>
+<td>String</td>
+<td>the CSS class of the link’s flair.</td>
+</tr>
+<tr class="even">
+<td>link_flair_text</td>
+<td>String</td>
+<td>the text of the link’s flair.</td>
+</tr>
+<tr class="odd">
+<td>locked</td>
+<td>Boolean</td>
+<td>Flag indicating whether the submission is currently closed to new comments, e.g., false</td>
+</tr>
+<tr class="even">
+<td>media</td>
+<td>Object</td>
+<td>Used for streaming video. Detailed information about the video and it’s origins are placed here</td>
+</tr>
+<tr class="odd">
+<td>media_embed</td>
+<td>Object</td>
+<td>Used for streaming video. Technical embed specific information is found here.</td>
+</tr>
+<tr class="even">
+<td>mobile_ad_url</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>num_comments</td>
+<td>Integer</td>
+<td>The number of comments associated with this submission, e.g., 7</td>
+</tr>
+<tr class="even">
+<td>num_crossposts</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>original_link</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>over_18</td>
+<td>Boolean</td>
+<td>Flag that indicates whether the submission is Not-Safe-For-Work, e.g., false</td>
+</tr>
+<tr class="odd">
+<td>parent_whitelist_status</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>permalink</td>
+<td>String</td>
+<td>Relative URL of the permanent link that points to this specific submission, <br>e.g., “/r/AskReddit/comments/5lcgj9/what did you think of the ending of rogue one/”</td>
+</tr>
+<tr class="odd">
+<td>pinned</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>post_hint</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>preview</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>promoted</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>promoted_by</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>promoted_display_name</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>promoted_url</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>retrieved_on</td>
+<td>Integer</td>
+<td>UNIX timestamp referring to the time we crawled the submission, e.g., 1483228803</td>
+</tr>
+<tr class="odd">
+<td>score</td>
+<td>Integer</td>
+<td>The score that the submission has accumulated. The score is the number of upvotes <br>minus the number of downvotes. E.g., 5 . NB: Reddit fuzzes the real score to prevent spam bots.</td>
+</tr>
+<tr class="even">
+<td>secure_media</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>secure_media_embed</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>selftext</td>
+<td>String</td>
+<td>The text that is associated with the submission</td>
+</tr>
+<tr class="odd">
+<td>spoiler</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>stickied</td>
+<td>Boolean</td>
+<td>Flag indicating whether the submission is set as sticky in the subreddit, e.g., false</td>
+</tr>
+<tr class="odd">
+<td>subreddit</td>
+<td>String</td>
+<td>Name of the subreddit that the submission is posted. Note that it excludes the prefix <br>/r/. E.g., ’AskReddit’</td>
+</tr>
+<tr class="even">
+<td>subreddit_id</td>
+<td>String</td>
+<td>The identifier of the subreddit, e.g., “t5 2qh1i”</td>
+</tr>
+<tr class="odd">
+<td>suggested_sort</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>third_party_trackers</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>third_party_tracking</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>third_party_tracking_2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>thumbnail</td>
+<td>String</td>
+<td>full URL to the thumbnail for this link; “self” if this is a self post; “image” if this is a <br>link to an image but has no thumbnail; “default” if a thumbnail is not available</td>
+</tr>
+<tr class="even">
+<td>thumbnail_height</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>thumbnail_width</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>title</td>
+<td>String</td>
+<td>The title that is associated with the submission, e.g., “What did you think of the <br>ending of Rogue One?”</td>
+</tr>
+<tr class="odd">
+<td>url</td>
+<td>String</td>
+<td>The URL that the submission is posting. This is the same with the permalink in <br>cases where the submission is a self post. E.g., “https://www.reddit.com/r/AskReddit/</td>
+</tr>
+<tr class="even">
+<td>whitelist_status</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comments-data-card" class="level2">
+<h2 class="anchored" data-anchor-id="comments-data-card"><code>comments</code> Data Card</h2>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>author</td>
+<td>String</td>
+<td>The account name of the poster, e.g., “example username”</td>
+</tr>
+<tr class="even">
+<td>author_cakeday</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>author_flair_css_class</td>
+<td>String</td>
+<td>The CSS class of the author’s flair. This field is specific to subreddit</td>
+</tr>
+<tr class="even">
+<td>author_flair_text</td>
+<td>String</td>
+<td>The text of the author’s flair. This field is specific to subreddit</td>
+</tr>
+<tr class="odd">
+<td>body</td>
+<td>String</td>
+<td>The comment’s text, e.g., “This is an example comment”</td>
+</tr>
+<tr class="even">
+<td>can_gild</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>controversiality</td>
+<td>Integer</td>
+<td>Number that indicates whether the comment is controversial, e.g., 0</td>
+</tr>
+<tr class="even">
+<td>created_utc</td>
+<td>Integer</td>
+<td>UNIX timestamp referring to the time of the submission’s creation, e.g., 1483228803</td>
+</tr>
+<tr class="odd">
+<td>distinguished</td>
+<td>String</td>
+<td>Flag to determine whether the comment is distinguished by the moderators. “null” means<br>not distinguished</td>
+</tr>
+<tr class="even">
+<td>edited</td>
+<td>Long</td>
+<td>Flag indicating if the comment has been edited. Either the UNIX timestamp that the comment<br>was edited at, or “false”.</td>
+</tr>
+<tr class="odd">
+<td>gilded</td>
+<td>Integer</td>
+<td>The number of times this comment received Reddit gold, e.g., 0</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>String</td>
+<td>The comment’s identifier, e.g., “dbumnq8”</td>
+</tr>
+<tr class="odd">
+<td>is_submitter</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>link_id</td>
+<td>String</td>
+<td>Identifier of the submission that this comment is in, e.g., “t3 5l954r”</td>
+</tr>
+<tr class="odd">
+<td>parent_id</td>
+<td>String</td>
+<td>Identifier of the parent of this comment, might be the identifier of the submission if it is top-level<br>comment or the identifier of another comment, e.g., “t1 dbu5bpp”</td>
+</tr>
+<tr class="even">
+<td>permalink</td>
+<td>String</td>
+<td>Relative URL of the permanent link that points to this specific submission,<br>e.g., “/r/AskReddit/comments/5lcgj9/what did you think of the ending of rogue one/”</td>
+</tr>
+<tr class="odd">
+<td>retrieved_on</td>
+<td>Integer</td>
+<td>UNIX timestamp that refers to the time that we crawled the comment, e.g., 1483228803</td>
+</tr>
+<tr class="even">
+<td>score</td>
+<td>Integer</td>
+<td>The score of the comment. The score is the number of upvotes minus the number of<br>downvotes. Note that Reddit fuzzes the real score to prevent spam bots. E.g., 5</td>
+</tr>
+<tr class="odd">
+<td>stickied</td>
+<td>Boolean</td>
+<td>Flag indicating whether the submission is set as sticky in the subreddit, e.g., false</td>
+</tr>
+<tr class="even">
+<td>subreddit</td>
+<td>String</td>
+<td>Name of the subreddit that the comment is posted. Note that it excludes the prefix /r/. E.g., ’AskReddit’</td>
+</tr>
+<tr class="odd">
+<td>subreddit_id</td>
+<td>String</td>
+<td>The identifier of the subreddit where the comment is posted, e.g., “t5 2qh1i”</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -151,6 +634,9 @@ div.csl-indent {
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-baumgartner_pushshift_2020" class="csl-entry" role="listitem">
 Baumgartner, Jason, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Blackburn. 2020. <span>“The <span>Pushshift</span> <span>Reddit</span> <span>Dataset</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2001.08435">https://doi.org/10.48550/arXiv.2001.08435</a>.
+</div>
+<div id="ref-the_reddit_archives_json_2016" class="csl-entry" role="listitem">
+The Reddit Archives. 2016. <span>“<span>JSON</span>.”</span> <em>GitHub</em>. <a href="https://github.com/reddit-archive/reddit/wiki/JSON">https://github.com/reddit-archive/reddit/wiki/JSON</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

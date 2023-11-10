@@ -32,20 +32,31 @@ The questions we will address in this work are:
 * `Business goal`: Determine which subreddit posts belong to based on their sentiment.
 * `Technical approach`: Use NLP techniques to clean content of various text based subreddits. Apply sentiment modeling to these posts. Train a classification model on these posts. Assess accuracy of the model using unlabelled posts (i.e., posts where the subreddit is not identified). Present findings in confusion matrices and calculate various accuracy metrics.
 
+
+
 **Idea 7**
 
-* `Business goal`: 
-* `Technical approach`: 
+* `Business goal`: Evaluate the relationship between the number of comments and the score of Reddit posts to establish an 'interaction_score' as an aggregate engagement metric.
+* `Technical approach`: We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using `pyspark.sql.functions` to calculate the correlation between these two metrics. We will develop an `interaction_score` metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.
+
+
 
 **Idea 8**
 
-* `Business goal`: 
-* `Technical approach`: 
+* `Business goal`: Assess the impact of not-safe-for-work (NSFW) content on user engagement.
+* `Technical approach`: To analyze the influence of NSFW content on user engagement, we will utilize a dataset of submissions, focusing on those marked with the `over_18` flag. Considering the limited proportion of such posts, we'll create a balanced dataset by randomly selecting an equivalent number of submissions without the NSFW tag. This approach ensures a fair comparison between NSFW and non-NSFW content. We will employ the `interaction_score` from Topic 1 as a primary measure of user engagement. Our methodology includes generating a boxplot to visualize the distribution of interaction scores for both NSFW and non-NSFW posts. 
+
+
 
 **Idea 9**
 
-* `Business goal`: 
-* `Technical approach`: 
+* `Business goal`: Identify the times of the day when posts typically receive the most engagement.
+
+* `Technical approach`: Implement a data analysis process that focuses on understanding the temporal patterns of user engagement on social media posts. Utilize the `created_utc` column from the dataset to create two new variables: `week_of_the_year` and `hour_of_the_day`. Exclude the first two days of 2022 to maintain accurate weekly categorization, as these days are part of week 53 of 2021. Aggregate and analyze the data based on these new variables to reveal patterns in user engagement across different times of the day and weeks of the year. The outcome will be visualized through a comprehensive plot, illustrating the times when posts receive the most engagement, thus guiding content strategies for optimal post timing.
+
+
+
+
 
 **Idea 10**
 

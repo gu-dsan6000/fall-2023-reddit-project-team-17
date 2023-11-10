@@ -143,8 +143,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../eda/exploratory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exploratory</span></a>
+  <a href="../eda/exploratory-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Analysis</span></a>
   </div>
 </li>
       </ul>
@@ -221,18 +221,18 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><strong>Idea 7</strong></p>
 <ul>
-<li><code>Business goal</code>:</li>
-<li><code>Technical approach</code>:</li>
+<li><code>Business goal</code>: Evaluate the relationship between the number of comments and the score of Reddit posts to establish an ‘interaction_score’ as an aggregate engagement metric.</li>
+<li><code>Technical approach</code>: We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using <code>pyspark.sql.functions</code> to calculate the correlation between these two metrics. We will develop an <code>interaction_score</code> metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.</li>
 </ul>
 <p><strong>Idea 8</strong></p>
 <ul>
-<li><code>Business goal</code>:</li>
-<li><code>Technical approach</code>:</li>
+<li><code>Business goal</code>: Assess the impact of not-safe-for-work (NSFW) content on user engagement.</li>
+<li><code>Technical approach</code>: To analyze the influence of NSFW content on user engagement, we will utilize a dataset of submissions, focusing on those marked with the <code>over_18</code> flag. Considering the limited proportion of such posts, we’ll create a balanced dataset by randomly selecting an equivalent number of submissions without the NSFW tag. This approach ensures a fair comparison between NSFW and non-NSFW content. We will employ the <code>interaction_score</code> from Topic 1 as a primary measure of user engagement. Our methodology includes generating a boxplot to visualize the distribution of interaction scores for both NSFW and non-NSFW posts.</li>
 </ul>
 <p><strong>Idea 9</strong></p>
 <ul>
-<li><code>Business goal</code>:</li>
-<li><code>Technical approach</code>:</li>
+<li><p><code>Business goal</code>: Identify the times of the day when posts typically receive the most engagement.</p></li>
+<li><p><code>Technical approach</code>: Implement a data analysis process that focuses on understanding the temporal patterns of user engagement on social media posts. Utilize the <code>created_utc</code> column from the dataset to create two new variables: <code>week_of_the_year</code> and <code>hour_of_the_day</code>. Exclude the first two days of 2022 to maintain accurate weekly categorization, as these days are part of week 53 of 2021. Aggregate and analyze the data based on these new variables to reveal patterns in user engagement across different times of the day and weeks of the year. The outcome will be visualized through a comprehensive plot, illustrating the times when posts receive the most engagement, thus guiding content strategies for optimal post timing.</p></li>
 </ul>
 <p><strong>Idea 10</strong></p>
 <ul>

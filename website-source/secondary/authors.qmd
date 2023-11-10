@@ -4,24 +4,24 @@
 ::: {layout-ncol=2}
 
 ### Alex Pattarini
-![](../../img/website-images/authors/temp.jpg)
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo metus vehicula nisi elementum rhoncus. Aliquam arcu augue, imperdiet nec lorem vitae, ultrices fermentum nibh. Aenean ut tincidunt ligula. Aenean felis quam, auctor vel varius dapibus, lobortis vitae dolor. Praesent vel facilisis elit. Donec non purus sit amet odio pharetra tincidunt id non nulla. amp419@georgetown.edu
+![](../img/website-images/authors/alex.jpg)
+I am a second-year student in Georgetown University's Data Science and Analytics Accelerated Program after receiving a BA in Government at GU. I am most interested in analyzing geospatial and temporal data. Some of my other interests include sports analytics, history, and programming. amp419@georgetown.edu
 
 ### Landon Carpenter
-![](../../img/website-images/authors/temp.jpg)
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo metus vehicula nisi elementum rhoncus. Aliquam arcu augue, imperdiet nec lorem vitae, ultrices fermentum nibh. Aenean ut tincidunt ligula. Aenean felis quam, auctor vel varius dapibus, lobortis vitae dolor. Praesent vel facilisis elit. Donec non purus sit amet odio pharetra tincidunt id non nulla. lc1276@georgetown.edu
+![](../img/website-images/authors/landon.png)
+I'm currently a second-year student in the Master of Science in the Data Science and Analytics program at Georgetown University. My favorite topics are Natural Language Processing, Computer Vision, and Time-Series Analysis. Outside of my coursework, I enjoy playing soccer and rock climbing. lc1276@georgetown.edu
 
 :::
 
 ::: {layout-ncol=2}
 
 ### Matt Moriarty
-![](../../img/website-images/authors/temp.jpg)
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam commodo metus vehicula nisi elementum rhoncus. Aliquam arcu augue, imperdiet nec lorem vitae, ultrices fermentum nibh. Aenean ut tincidunt ligula. Aenean felis quam, auctor vel varius dapibus, lobortis vitae dolor. Praesent vel facilisis elit. Donec non purus sit amet odio pharetra tincidunt id non nulla. mdm341@georgetown.edu
+![](../img/website-images/authors/matt.jpg)
+I am currently a second-year student pursuing a Master of Science in Data Science and Analytics at Georgetown University. My main interest involves merging the topics of Time Series and Geographic Information Systems to perform spatio-temporal data analyses. Alongside this, I am very interested in Deep Learning, Data Visualization, and Data Ethics! mdm341@georgetown.edu
 
 ### Victor De Lima
-![](../../img/website-images/authors/victor.jpeg)
-I am a currently a second year student at the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I am hoping to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu
+![](../img/website-images/authors/victor.jpeg)
+I am currently a second year student at the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I am hoping to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu
 
 
 :::
