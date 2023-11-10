@@ -33,6 +33,7 @@ website:
         contents:
           - eda/topics.qmd
           - eda/exploratory.qmd
+          - eda/eda-victor.qmd
       #- eda.qmd
       - nlp.qmd
       - ml.qmd
