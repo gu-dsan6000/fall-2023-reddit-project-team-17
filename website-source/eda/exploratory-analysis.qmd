@@ -62,7 +62,7 @@ Markdown(md)
 
 We can also visualize them separately as in the figure below:
 
-![](../../img/eda-plots/mean-comments-vs-mean-score-data.png)
+![](../img/eda-plots/mean-comments-vs-mean-score-data.png)
 
 
 We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.
@@ -82,7 +82,7 @@ To determine if not safe for work post affects user interactions, first, we filt
 
 We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the `interaction_score` is a good gauge of overall interaction, we can plot that variable as shown below:
 
-![](../../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png)
+![](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png)
 
 
 ::: {.callout-note appearance="simple"}
@@ -94,7 +94,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 To determine the times of day when a post typically receives the most engagement, we create two additional variables: ' week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
 
-![](../../img/eda-plots/average-comments-hour-and-week-data.png)
+![](../img/eda-plots/average-comments-hour-and-week-data.png)
 
 
 This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.
