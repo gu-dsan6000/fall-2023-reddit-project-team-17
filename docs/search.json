@@ -32,7 +32,7 @@
     "href": "eda/exploratory-analysis.html#dummies",
     "title": "Exploratory Analysis",
     "section": "Dummies",
-    "text": "Dummies\nTo gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in the following table:\n\n\n\n\n\nfascinating\ncount\n\n\n\n\n1\n51,424\n\n\n0\n76,451,939"
+    "text": "Dummies\nTo gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in the following table:\n\n\n\n\n\ncount\nfascinating\nentertaining\nboring\n\n\n\n\n1\n51,424\n30,870\n99,068\n\n\n0\n76,451,939\n76,472,493\n76,404,295\n\n\n\n\n\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "eda/exploratory-analysis.html#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts",

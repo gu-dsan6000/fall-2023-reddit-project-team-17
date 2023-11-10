@@ -26,17 +26,47 @@ Our cleaning process includes removing from the `comments` database both dataset
 
 To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in the following table:
 
+
 ```{python}
 #| echo: false
 
-fascinating = pd.read_csv("../../data/eda-data/keyword_counts_fascinating.csv")
-fascinating['count'] = fascinating['count'].apply(lambda x: f"{int(x):,}")
+# load
+fascinating = pd.read_csv("../../data/eda-data/keyword_counts_fascinating.csv", header=None)
+entertaining = pd.read_csv("../../data/eda-data/keyword_counts_entertaining.csv", header=None)
+boring = pd.read_csv("../../data/eda-data/keyword_counts_boring.csv", header=None)
 
-# show
-md = tabulate(fascinating, headers='keys', tablefmt='pipe', showindex=False)
+# use first col as key
+fascinating.columns = ['count', 'fascinating']
+entertaining.columns = ['count', 'entertaining']
+boring.columns = ['count', 'boring']
+
+# convert count to string
+fascinating['count'] = fascinating['count'].astype(str)
+entertaining['count'] = entertaining['count'].astype(str)
+boring['count'] = boring['count'].astype(str)
+
+# merge
+combined = fascinating.merge(entertaining, on='count').merge(boring, on='count')
+
+# format
+combined['fascinating'] = combined['fascinating'].apply(lambda x: "{:,}".format(int(x)))
+combined['entertaining'] = combined['entertaining'].apply(lambda x: "{:,}".format(int(x)))
+combined['boring'] = combined['boring'].apply(lambda x: "{:,}".format(int(x)))
+
+
+md = tabulate(combined, headers='keys', tablefmt='pipe', showindex=False)
 Markdown(md)
 
+
+
 ```
+
+
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+::: 
+
 
 
 ## The relationship between the number of comments and the score of Reddit posts
@@ -58,6 +88,8 @@ md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
 Markdown(md)
 
 ```
+
+
 
 
 We can also visualize them separately as in the figure below:
