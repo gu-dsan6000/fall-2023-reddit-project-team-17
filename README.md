@@ -1,5 +1,7 @@
 # DSAN 6000 Project
 
+Website link: https://gu-dsan6000.github.io/fall-2023-reddit-project-team-17/
+
 ## Group Memember
 
 * Alex Pattarini - amp419@georgetown.edu
@@ -7,10 +9,9 @@
 * Matt Moriarty - mdm341@georgetown.edu
 * Victor De Lima - vad49@georgetown.edu
 
-
 ## Group bucket
 
-aws s3 ls s3://project17-bucket0/
+- s3://project17-bucket-alex/
 
 ## Full dataset
 
