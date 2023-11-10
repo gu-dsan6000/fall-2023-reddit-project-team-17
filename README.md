@@ -14,8 +14,8 @@ aws s3 ls s3://project17-bucket0/
 
 ## Full dataset
 
-s3://bigdatateaching/reddit-parquet/submissions/
-s3://bigdatateaching/reddit-parquet/comments/
+* s3://bigdatateaching/reddit-parquet/submissions/
+* s3://bigdatateaching/reddit-parquet/comments/
 
 ## Subreddits
 
@@ -23,10 +23,10 @@ s3://bigdatateaching/reddit-parquet/comments/
 
 ## Theme Colors
 
-ORANGERED: <code><span style="color:#FF4500;">#FF4500</span></code>
-BELUGA:<code><span style="color:#FFFFFF;">#FFFFFF</span></code>
-DUGONG: <code><span style="color:#F2F6F7;">#F2F6F7</span></code>
-DOLPHIN: <code><span style="color:#D7DFE2;">#D7DFE2</span></code>
-SEAL: <code><span style="color:#B8C7CC;">#B8C7CC</span></code>
-NARWHAL:<code><span style="color:#7A9299;">#7A9299</span></code>
-ORCA: <code><span style="color:#1B2426;">#1B2426</span></code>
+ORANGERED: FF4500
+BELUGA: FFFFFF
+DUGONG: F2F6F7
+DOLPHIN: D7DFE2
+SEAL: B8C7CC
+NARWHAL: 7A9299
+ORCA: 1B2426
