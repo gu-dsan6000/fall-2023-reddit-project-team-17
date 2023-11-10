@@ -5,6 +5,9 @@ import pandas as pd
 from tabulate import tabulate
 import IPython.display as d
 from IPython.display import display, HTML, IFrame
+from IPython.display import Markdown
+
+
 ```
 
 # EDA 2
@@ -23,6 +26,18 @@ Our cleaning process includes removing from the `comments` database both dataset
 
 To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in the following table:
 
+```{python}
+#| echo: false
+
+fascinating = pd.read_csv("../../data/eda-data/keyword_counts_fascinating.csv")
+fascinating['count'] = fascinating['count'].apply(lambda x: f"{int(x):,}")
+
+# show
+md = tabulate(fascinating, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
+
 
 ## Topic 1
 
@@ -31,6 +46,11 @@ To gauge the overall engagement in the posts, we used regex to create dummy vari
 **Technical Proposal**:
 
 We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using pyspark.sql.functions to calculate the correlation between these two metrics. We will develop an `interaction_score` metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+::: 
+
 
 
 **EDA**
@@ -42,15 +62,21 @@ The number of comments (`num_comments`) and the score of a post (`score`), which
 #| echo: false
 
 df = pd.read_csv("../../data/eda-data/correlation_by_subreddit.csv")
-md = tabulate(df, headers='keys', tablefmt='pipe',showindex=False)
-d.Markdown(md)
+# format
+df = df.rename(columns={"subreddit": "Subreddit", "correlation_coefficient": "Correlation Coefficient"})
+df = df.sort_values(by="Correlation Coefficient", ascending=False)
+df['Correlation Coefficient'] = df['Correlation Coefficient'].round(2)
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
 
 ```
 
 
 We can also visualize them separately as in the figure below:
 
-![](/../../img/eda-plots/mean-comments-vs-mean-score-data.png)
+![](../../img/eda-plots/mean-comments-vs-mean-score-data.png)
 
 
 We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.
@@ -73,6 +99,10 @@ We can create a boxplot with this small dataset to see the distribution. Since w
 ![](../../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png)
 
 
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+::: 
+
 
 ## Topic 3
 
@@ -89,7 +119,10 @@ To determine the times of day when a post typically receives the most engagement
 ![](../../img/eda-plots/average-comments-hour-and-week-data.png)
 
 
+This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.
 
 
-![](/website-source/website-img/front-image.png)
 
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+::: 
