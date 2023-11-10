@@ -23,10 +23,10 @@ aws s3 ls s3://project17-bucket0/
 
 ## Theme Colors
 
-* ORANGERED: FF4500
-* BELUGA: FFFFFF
-* DUGONG: F2F6F7
-* DOLPHIN: D7DFE2
-* SEAL: B8C7CC
-* NARWHAL: 7A9299
-* ORCA: 1B2426
+- ![#ff4500](https://placehold.co/15x15/ff4500/ff4500.png) `ORANGERED: #ff4500`
+- ![#ffffff](https://placehold.co/15x15/ffffff/ffffff.png) `BELUGA: #ffffff`
+- ![#f2f6f7](https://placehold.co/15x15/f2f6f7/f2f6f7.png) `DUGONG: #f2f6f7`
+- ![#d7dfe2](https://placehold.co/15x15/d7dfe2/d7dfe2.png) `DOLPHIN: #d7dfe2`
+- ![#b8c7cc](https://placehold.co/15x15/b8c7cc/b8c7cc.png) `SEAL: #b8c7cc`
+- ![#7a9299](https://placehold.co/15x15/7a9299/7a9299.png) `NARWHAL: #7a9299`
+- ![#1b2426](https://placehold.co/15x15/1b2426/1b2426.png) `ORCA: #1b2426`

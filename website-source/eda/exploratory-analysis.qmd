@@ -94,7 +94,8 @@ Markdown(md)
 
 We can also visualize them separately as in the figure below:
 
-![](../img/eda-plots/mean-comments-vs-mean-score-data.png)
+![](../img/eda-plots/mean-score-comments-by-subreddit.png)
+
 
 
 We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.
@@ -137,6 +138,50 @@ This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM t
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
 ::: 
 
+
+
+## Starting
+
+
+![](../img/eda-plots/text-only-barcharts.png)
+
+
+
+
+## Flair prediction
+
+
+![](../img/eda-plots/AITA-flairs-barchart-2022.png)
+
+
+![](../img/eda-plots/AITA-flairs-treemap-2022.png)
+
+
+
+## Subreddit community prediction
+
+
+
+
+```{python}
+#| echo: false
+
+width_percentage = "100%"
+IFrame(src='../img/eda-plots/counts-over-time.html', width=width_percentage, height=700)
+
+
+```
+
+
+
+```{python}
+#| echo: false
+
+width_percentage = "100%"
+IFrame(src='../img/eda-plots/validity-counts.html', width=width_percentage, height=700)
+
+
+```
 
 
 

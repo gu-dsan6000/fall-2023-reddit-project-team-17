@@ -59,6 +59,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -183,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" id="toc-the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="nav-link" data-scroll-target="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</a></li>
   <li><a href="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." id="toc-the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="nav-link" data-scroll-target="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
   <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
+  <li><a href="#starting" id="toc-starting" class="nav-link" data-scroll-target="#starting">Starting</a></li>
+  <li><a href="#flair-prediction" id="toc-flair-prediction" class="nav-link" data-scroll-target="#flair-prediction">Flair prediction</a></li>
+  <li><a href="#subreddit-community-prediction" id="toc-subreddit-community-prediction" class="nav-link" data-scroll-target="#subreddit-community-prediction">Subreddit community prediction</a></li>
   </ul>
 </nav>
     </div>
@@ -322,7 +328,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>We can also visualize them separately as in the figure below:</p>
-<p><img src="../img/eda-plots/mean-comments-vs-mean-score-data.png" class="img-fluid"></p>
+<p><img src="../img/eda-plots/mean-score-comments-by-subreddit.png" class="img-fluid"></p>
 <p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -364,6 +370,32 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container">
 <p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb">here</a>.</p>
 </div>
+</div>
+</div>
+</section>
+<section id="starting" class="level2">
+<h2 class="anchored" data-anchor-id="starting">Starting</h2>
+<p><img src="../img/eda-plots/text-only-barcharts.png" class="img-fluid"></p>
+</section>
+<section id="flair-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="flair-prediction">Flair prediction</h2>
+<p><img src="../img/eda-plots/AITA-flairs-barchart-2022.png" class="img-fluid"></p>
+<p><img src="../img/eda-plots/AITA-flairs-treemap-2022.png" class="img-fluid"></p>
+</section>
+<section id="subreddit-community-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="subreddit-community-prediction">Subreddit community prediction</h2>
+<div class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+        <iframe width="100%" height="700" src="../img/eda-plots/counts-over-time.html" frameborder="0" allowfullscreen=""></iframe>
+        
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+        <iframe width="100%" height="700" src="../img/eda-plots/validity-counts.html" frameborder="0" allowfullscreen=""></iframe>
+        
 </div>
 </div>
 
