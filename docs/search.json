@@ -18,7 +18,56 @@
     "href": "eda/exploratory.html#question-3",
     "title": "Exploratory",
     "section": "Question 3",
-    "text": "Question 3\n\n\n\n\n\n\nsubreddit\ncorrelation_coefficient\n\n\n\n\nTrueOffMyChest\n0.854543\n\n\nunpopularopinion\n0.843297\n\n\nantiwork\n0.806886\n\n\nsocialskills\n0.834383\n\n\nAskMen\n0.846837\n\n\nAmItheAsshole\n0.810426\n\n\nrelationship_advice\n0.738167\n\n\nexplainlikeimfive\n0.852794\n\n\nOutOfTheLoop\n0.920336\n\n\ntifu\n0.931179\n\n\nNoStupidQuestions\n0.727365\n\n\nAskWomen\n0.841131"
+    "text": "Question 3\n\n\n\n\n\n\nsubreddit\ncorrelation_coefficient\n\n\n\n\nTrueOffMyChest\n0.790449\n\n\nunpopularopinion\n0.832907\n\n\nantiwork\n0.820351\n\n\nsocialskills\n0.724226\n\n\nAskMen\n0.85026\n\n\nAmItheAsshole\n0.805089\n\n\nrelationship_advice\n0.644363\n\n\nexplainlikeimfive\n0.876133\n\n\nOutOfTheLoop\n0.858787\n\n\ntifu\n0.815218\n\n\nNoStupidQuestions\n0.782943\n\n\nAskWomen\n0.77378"
+  },
+  {
+    "objectID": "eda/eda-victor.html",
+    "href": "eda/eda-victor.html",
+    "title": "EDA 2",
+    "section": "",
+    "text": "We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits AITA, AskMen, AskWomen, TrueOffMyChest, unpopularopinion, tifu, socialskills, antiwork, relationship_advice, explainitlikeim5, OutOfTheLoop, and NoStupidQuestions. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table."
+  },
+  {
+    "objectID": "eda/eda-victor.html#the-data-subset",
+    "href": "eda/eda-victor.html#the-data-subset",
+    "title": "EDA 2",
+    "section": "",
+    "text": "We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits AITA, AskMen, AskWomen, TrueOffMyChest, unpopularopinion, tifu, socialskills, antiwork, relationship_advice, explainitlikeim5, OutOfTheLoop, and NoStupidQuestions. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table."
+  },
+  {
+    "objectID": "eda/eda-victor.html#cleaning",
+    "href": "eda/eda-victor.html#cleaning",
+    "title": "EDA 2",
+    "section": "Cleaning",
+    "text": "Cleaning\nOur cleaning process includes removing from the comments database both datasets the columns that are not needed for each particular set of analyses. Also, in the comments table, we remove the rows where the body has been either removed or deleted. In the submissions table, we also remove where the selftext has been removed or deleted. The resulting rows are 977,181 for the submissions table and 70,594,314 for the comments table."
+  },
+  {
+    "objectID": "eda/eda-victor.html#dummies",
+    "href": "eda/eda-victor.html#dummies",
+    "title": "EDA 2",
+    "section": "Dummies",
+    "text": "Dummies\nTo gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in the following table:\n\n\n\n\n\nfascinating\ncount\n\n\n\n\n1\n51,424\n\n\n0\n76,451,939"
+  },
+  {
+    "objectID": "eda/eda-victor.html#topic-1",
+    "href": "eda/eda-victor.html#topic-1",
+    "title": "EDA 2",
+    "section": "Topic 1",
+    "text": "Topic 1\nBusiness Goal: Evaluate the relationship between the number of comments and the score of Reddit posts to establish an ‘interaction_score’ as an aggregate engagement metric.\nTechnical Proposal:\nWe plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using pyspark.sql.functions to calculate the correlation between these two metrics. We will develop an interaction_score metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.\n\n\n\n\n\n\nThe code used for this section is available here.\n\n\n\nEDA\nThe number of comments (num_comments) and the score of a post (score), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the corr function from pyspark.sql.functions. The table below shows the results:\n\n\n\n\n\nSubreddit\nCorrelation Coefficient\n\n\n\n\nexplainlikeimfive\n0.88\n\n\nOutOfTheLoop\n0.86\n\n\nAskMen\n0.85\n\n\nunpopularopinion\n0.83\n\n\nantiwork\n0.82\n\n\ntifu\n0.82\n\n\nAmItheAsshole\n0.81\n\n\nTrueOffMyChest\n0.79\n\n\nNoStupidQuestions\n0.78\n\n\nAskWomen\n0.77\n\n\nsocialskills\n0.72\n\n\nrelationship_advice\n0.64\n\n\n\n\n\nWe can also visualize them separately as in the figure below:\n\nWe can see in both the table and figure that they are significantly correlated, which leads to the creation of the interaction_score additional variable. This metric is an equal-weighted average of the number of comments and the score in each post."
+  },
+  {
+    "objectID": "eda/eda-victor.html#topic-2",
+    "href": "eda/eda-victor.html#topic-2",
+    "title": "EDA 2",
+    "section": "Topic 2",
+    "text": "Topic 2\nBusiness Goal: Assess the impact of not-safe-for-work (NSFW) content on user engagement.\nTechnical Proposal:\nTo analyze the influence of NSFW content on user engagement, we will utilize a dataset of submissions, focusing on those marked with the over_18 flag. Considering the limited proportion of such posts, we’ll create a balanced dataset by randomly selecting an equivalent number of submissions without the NSFW tag. This approach ensures a fair comparison between NSFW and non-NSFW content. We will employ the interaction_score from Topic 1 as a primary measure of user engagement. Our methodology includes generating a boxplot to visualize the distribution of interaction scores for both NSFW and non-NSFW posts.\nEDA\nTo determine if not safe for work post affects user interactions, first, we filter the submissions dataset for where the over_18 flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.\nWe can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the interaction_score is a good gauge of overall interaction, we can plot that variable as shown below:\n\n\n\n\n\n\n\nThe code used for this section is available here."
+  },
+  {
+    "objectID": "eda/eda-victor.html#topic-3",
+    "href": "eda/eda-victor.html#topic-3",
+    "title": "EDA 2",
+    "section": "Topic 3",
+    "text": "Topic 3\nBusiness Goal: Identify the times of the day when posts typically receive the most engagement.\nTechnical Proposal:\nImplement a data analysis process that focuses on understanding the temporal patterns of user engagement on social media posts. Utilize the created_utc column from the dataset to create two new variables: week_of_the_year and hour_of_the_day. Exclude the first two days of 2022 to maintain accurate weekly categorization, as these days are part of week 53 of 2021. Aggregate and analyze the data based on these new variables to reveal patterns in user engagement across different times of the day and weeks of the year. The outcome will be visualized through a comprehensive plot, illustrating the times when posts receive the most engagement, thus guiding content strategies for optimal post timing.\nEDA\nTo determine the times of day when a post typically receives the most engagement, we create two additional variables: ’ week_of_the_yearandhour_of_the_day, both coming from thecreated_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:\n\nThis analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.\n\n\n\n\n\n\nThe code used for this section is available here."
   },
   {
     "objectID": "nlp.html",
@@ -32,7 +81,7 @@
     "href": "index.html",
     "title": "Overview",
     "section": "",
-    "text": "Overview\n\n\n\nImage generated with OpenAI DALL·E 3 with prompt “a group of four friends around a campfire sharing stories in modern digital illustration style”"
+    "text": "Overview\nIn this project, we dive into the intersection of story telling in Reddit and machine learning (ML). Our exploration spans various aspects from classifying posts into specific subreddits to predicting the age and gender of posters based on their language. We’re also examining the influence of NSFW posts on user engagement and the correlation between post score and its comments. The project will utilize advanced Natural Language Processing (NLP) techniques to unearth trends within communities, predict post flairs, and delve into the sentiment analysis of subreddit posts. We also aim to use ML to distill meaningful insights from vast quantities of data.\n\n\n\nImage generated with OpenAI DALL·E 3 with prompt “a group of four friends around a campfire sharing stories in modern digital illustration style”"
   },
   {
     "objectID": "summary.html",
