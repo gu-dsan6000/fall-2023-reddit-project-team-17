@@ -32,8 +32,7 @@ website:
       - section: "EDA"
         contents:
           - eda/topics.qmd
-          - eda/exploratory.qmd
-          - eda/eda-victor.qmd
+          - eda/exploratory-analysis.qmd
       #- eda.qmd
       - nlp.qmd
       - ml.qmd

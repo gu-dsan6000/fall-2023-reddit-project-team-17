@@ -10,7 +10,7 @@ from IPython.display import Markdown
 
 ```
 
-# EDA 2
+# Exploratory Analysis
 
 ## The Data Subset
 
