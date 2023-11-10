@@ -183,7 +183,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#the-data-subset" id="toc-the-data-subset" class="nav-link active" data-scroll-target="#the-data-subset">The Data Subset</a></li>
   <li><a href="#external-data" id="toc-external-data" class="nav-link" data-scroll-target="#external-data">External Data</a></li>
   <li><a href="#cleaning" id="toc-cleaning" class="nav-link" data-scroll-target="#cleaning">Cleaning</a></li>
-  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a></li>
+  <li><a href="#data-transformations-and-additional-variables" id="toc-data-transformations-and-additional-variables" class="nav-link" data-scroll-target="#data-transformations-and-additional-variables">Data transformations and additional variables</a></li>
+  <li><a href="#regex-search-and-dummies" id="toc-regex-search-and-dummies" class="nav-link" data-scroll-target="#regex-search-and-dummies">Regex Search and Dummies</a></li>
   <li><a href="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" id="toc-the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="nav-link" data-scroll-target="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</a></li>
   <li><a href="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." id="toc-the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="nav-link" data-scroll-target="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
   <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
@@ -305,8 +306,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="dummies" class="level2">
-<h2 class="anchored" data-anchor-id="dummies">Dummies</h2>
+<section id="data-transformations-and-additional-variables" class="level2">
+<h2 class="anchored" data-anchor-id="data-transformations-and-additional-variables">Data transformations and additional variables</h2>
+<p>Although we summarize the new variables below, they are are described within the EDA sections below.</p>
+<ul>
+<li><code>engagements</code>: the sum of submissions and comments for a particular subreddit.</li>
+<li><code>interaction_score</code> an equal-weighted average of the number of comments and the score in each post.</li>
+<li><code>week_of_the_year</code>: created from the <code>created_utc</code> column, it describes the week of the year corresponding to the particular post’s date.</li>
+<li><code>hour_of_the_day</code>: created from the <code>created_utc</code> column, it describes the hour of the day corresponding to the particular post’s date.</li>
+</ul>
+</section>
+<section id="regex-search-and-dummies" class="level2">
+<h2 class="anchored" data-anchor-id="regex-search-and-dummies">Regex Search and Dummies</h2>
 <p>To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in the following table:</p>
 <div class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -414,7 +425,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>We can also visualize them separately as in the figure below:</p>
 <p><img src="../img/eda-plots/mean-score-comments-by-subreddit.png" class="img-fluid"></p>
-<p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
+<p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> <strong>additional variable</strong>. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -431,6 +442,7 @@ ul.task-list li input[type="checkbox"] {
 <p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
 <p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown below:</p>
 <p><img src="../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png" class="img-fluid"></p>
+<p>We can infer from the plot that NSFW content increases the engagement with the post.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -444,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="level2">
 <h2 class="anchored" data-anchor-id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</h2>
-<p>To determine the times of day when a post typically receives the most engagement, we create two additional variables: ’ week_of_the_year<code>and</code>hour_of_the_day<code>, both coming from the</code>created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:</p>
+<p>To determine the times of day when a post typically receives the most engagement, we create two <strong>additional variables</strong>: <code>week_of_the_year</code> and <code>hour_of_the_day</code>, both coming from the <code>created_utc</code> column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:</p>
 <p><img src="../img/eda-plots/average-comments-hour-and-week-data.png" class="img-fluid"></p>
 <p>This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.</p>
 <div class="callout callout-style-simple callout-note">
@@ -460,13 +472,26 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="subreddit-community-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="subreddit-community-prediction">Subreddit community prediction</h2>
-<p>One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore.</p>
+<p>One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable <code>engagements</code> as the sum of submissions and comments for a particular subreddit.</p>
 <p>One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the <code>AmItheAsshole</code>, <code>relationship_advice</code>, and <code>antiwork</code> subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.</p>
 <div class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 
         <iframe width="100%" height="700" src="../img/eda-plots/counts-over-time.html" frameborder="0" allowfullscreen=""></iframe>
         
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip with Title
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click on the bars of each Subreddit to focus them!</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note">

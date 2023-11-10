@@ -22,6 +22,7 @@ We have two primary sources of external data. The first is a community members d
 
 ## Cleaning 
 
+
 Our cleaning process includes removing from the `comments` database both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed or deleted. In the `submissions` table, we also remove where the `selftext` has been removed or deleted. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. 
 
 The count of posts per each subreddit is detailed below:
@@ -64,8 +65,19 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
+## Data transformations and additional variables 
 
-## Dummies
+Although we summarize the new variables below, they are are described within the EDA sections below.
+
+
+* `engagements`: the sum of submissions and comments for a particular subreddit.
+* `interaction_score` an equal-weighted average of the number of comments and the score in each post.
+* `week_of_the_year`: created from the `created_utc` column, it describes the week of the year corresponding to the particular post's date.
+* `hour_of_the_day`: created from the `created_utc` column, it describes the hour of the day corresponding to the particular post's date.
+
+
+
+## Regex Search and Dummies
 
 To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in the following table:
 
@@ -141,7 +153,7 @@ We can also visualize them separately as in the figure below:
 
 
 
-We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.
+We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` **additional variable**. This metric is an equal-weighted average of the number of comments and the score in each post.
 
 
 ::: {.callout-note appearance="simple"}
@@ -173,7 +185,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## The times of the day when posts typically receive the most engagement.
 
-To determine the times of day when a post typically receives the most engagement, we create two additional variables: ' week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
+To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
 
 ![](../img/eda-plots/average-comments-hour-and-week-data.png)
 
@@ -190,7 +202,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Subreddit community prediction
 
-One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore.
+One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable `engagements` as the sum of submissions and comments for a particular subreddit.
 
 One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the `AmItheAsshole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.
 
@@ -203,6 +215,14 @@ IFrame(src='../img/eda-plots/counts-over-time.html', width=width_percentage, hei
 
 
 ```
+
+
+::: {.callout-tip}
+## Tip with Title
+
+Click on the bars of each Subreddit to focus them!
+
+:::
 
 
 ::: {.callout-note appearance="simple"}
