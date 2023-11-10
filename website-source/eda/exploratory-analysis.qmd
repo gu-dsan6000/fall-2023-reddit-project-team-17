@@ -39,21 +39,7 @@ Markdown(md)
 ```
 
 
-## Topic 1
-
-**Business Goal**: Evaluate the relationship between the number of comments and the score of Reddit posts to establish an 'interaction_score' as an aggregate engagement metric.
-
-**Technical Proposal**:
-
-We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using pyspark.sql.functions to calculate the correlation between these two metrics. We will develop an `interaction_score` metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.
-
-::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
-::: 
-
-
-
-**EDA**
+### The relationship between the number of comments and the score of Reddit posts
 
 The number of comments (`num_comments`) and the score of a post (`score`), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the `corr` function from `pyspark.sql.functions`. The table below shows the results:
 
@@ -82,15 +68,15 @@ We can also visualize them separately as in the figure below:
 We can see in both the table and figure that they are significantly correlated, which leads to the creation of the `interaction_score` additional variable. This metric is an equal-weighted average of the number of comments and the score in each post.
 
 
-## Topic 2
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
+::: 
 
-**Business Goal**: Assess the impact of not-safe-for-work (NSFW) content on user engagement.
 
-**Technical Proposal**:
 
-To analyze the influence of NSFW content on user engagement, we will utilize a dataset of submissions, focusing on those marked with the `over_18` flag. Considering the limited proportion of such posts, we'll create a balanced dataset by randomly selecting an equivalent number of submissions without the NSFW tag. This approach ensures a fair comparison between NSFW and non-NSFW content. We will employ the `interaction_score` from Topic 1 as a primary measure of user engagement. Our methodology includes generating a boxplot to visualize the distribution of interaction scores for both NSFW and non-NSFW posts. 
 
-**EDA**
+### The impact of not-safe-for-work (NSFW) content on user engagement.
+
 
 To determine if not safe for work post affects user interactions, first, we filter the `submissions` dataset for where the `over_18` flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not. 
 
@@ -104,15 +90,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-## Topic 3
-
-**Business Goal**: Identify the times of the day when posts typically receive the most engagement.
-
-**Technical Proposal**:
-
-Implement a data analysis process that focuses on understanding the temporal patterns of user engagement on social media posts. Utilize the `created_utc` column from the dataset to create two new variables: `week_of_the_year` and `hour_of_the_day`. Exclude the first two days of 2022 to maintain accurate weekly categorization, as these days are part of week 53 of 2021. Aggregate and analyze the data based on these new variables to reveal patterns in user engagement across different times of the day and weeks of the year. The outcome will be visualized through a comprehensive plot, illustrating the times when posts receive the most engagement, thus guiding content strategies for optimal post timing.
-
-**EDA**
+### The times of the day when posts typically receive the most engagement.
 
 To determine the times of day when a post typically receives the most engagement, we create two additional variables: ' week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
 
@@ -126,3 +104,7 @@ This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM t
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project_eda/project_eda_victor.ipynb).
 ::: 
+
+
+
+
