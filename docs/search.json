@@ -81,7 +81,7 @@
     "href": "nlp.html",
     "title": "NLP",
     "section": "",
-    "text": "NLP"
+    "text": "NLP\nComing soon!"
   },
   {
     "objectID": "index.html",
@@ -95,14 +95,14 @@
     "href": "summary.html",
     "title": "Summary",
     "section": "",
-    "text": "Summary"
+    "text": "Summary\nComing soon!"
   },
   {
     "objectID": "ml.html",
     "href": "ml.html",
     "title": "ML",
     "section": "",
-    "text": "ML"
+    "text": "ML\nComing soon!"
   },
   {
     "objectID": "secondary/authors.html",
@@ -114,7 +114,7 @@
   {
     "objectID": "secondary/references.html",
     "href": "secondary/references.html",
-    "title": "It's Storytime!\n",
+    "title": "It's Storytime!",
     "section": "",
     "text": "References\n\n\nBaumgartner, Jason, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Blackburn. 2020. “The Pushshift Reddit Dataset.” arXiv. https://doi.org/10.48550/arXiv.2001.08435.\n\n\nThe Reddit Archives. 2016. “JSON.” GitHub. https://github.com/reddit-archive/reddit/wiki/JSON."
   },

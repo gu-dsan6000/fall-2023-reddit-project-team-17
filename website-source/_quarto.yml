@@ -3,8 +3,7 @@ project:
   output-dir: ../docs
 
 website:
-  title: |
-    It's Storytime!
+  title: It's Storytime!
   navbar:
     background: "#FF4500"
     left:
