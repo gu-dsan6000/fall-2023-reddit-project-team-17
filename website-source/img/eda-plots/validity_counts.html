@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300, "strokeOpacity": 0}, "axis": {"labelFontSize": 12, "titleFontSize": 12}, "title": {"fontSize": 16}}, "data": {"name": "data-e4245b825049671b04c16235bb7c3c8d"}, "mark": "bar", "encoding": {"color": {"field": "valid", "type": "nominal"}, "column": {"field": "subreddit", "header": {"labelAngle": -45, "labelOrient": "bottom"}, "type": "nominal"}, "x": {"field": "valid", "title": "Validity", "type": "nominal"}, "y": {"field": "count", "title": "Number of Comments", "type": "quantitative"}}, "selection": {"Random": {"type": "single", "fields": ["subreddit"]}}, "title": "Number of Valid and Invalid Comments per Subreddit", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-e4245b825049671b04c16235bb7c3c8d": [{"subreddit": "AmItheAsshole", "valid": true, "count": 1356573}, {"subreddit": "AmItheAsshole", "valid": false, "count": 23966637}, {"subreddit": "AskMen", "valid": true, "count": 604688}, {"subreddit": "AskMen", "valid": false, "count": 6128499}, {"subreddit": "AskWomen", "valid": true, "count": 291988}, {"subreddit": "AskWomen", "valid": false, "count": 1983041}, {"subreddit": "NoStupidQuestions", "valid": false, "count": 6534664}, {"subreddit": "NoStupidQuestions", "valid": true, "count": 567640}, {"subreddit": "OutOfTheLoop", "valid": false, "count": 407627}, {"subreddit": "OutOfTheLoop", "valid": true, "count": 110011}, {"subreddit": "relationship_advice", "valid": true, "count": 905005}, {"subreddit": "relationship_advice", "valid": false, "count": 8619521}, {"subreddit": "TrueOffMyChest", "valid": false, "count": 5277279}, {"subreddit": "TrueOffMyChest", "valid": true, "count": 531357}, {"subreddit": "socialskills", "valid": false, "count": 369460}, {"subreddit": "socialskills", "valid": true, "count": 29813}, {"subreddit": "unpopularopinion", "valid": false, "count": 4802312}, {"subreddit": "unpopularopinion", "valid": true, "count": 395035}, {"subreddit": "antiwork", "valid": false, "count": 9619320}, {"subreddit": "antiwork", "valid": true, "count": 773840}, {"subreddit": "tifu", "valid": false, "count": 1551256}, {"subreddit": "tifu", "valid": true, "count": 148486}, {"subreddit": "explainlikeimfive", "valid": true, "count": 193757}, {"subreddit": "explainlikeimfive", "valid": false, "count": 1335554}, {"subreddit": "AmItheAsshole", "valid": true, "count": 405845}, {"subreddit": "AmItheAsshole", "valid": false, "count": 115665}, {"subreddit": "AskMen", "valid": true, "count": 200588}, {"subreddit": "AskMen", "valid": false, "count": 48499}, {"subreddit": "AskWomen", "valid": true, "count": 141015}, {"subreddit": "AskWomen", "valid": false, "count": 18015}, {"subreddit": "NoStupidQuestions", "valid": false, "count": 347771}, {"subreddit": "NoStupidQuestions", "valid": true, "count": 247579}, {"subreddit": "relationship_advice", "valid": true, "count": 571060}, {"subreddit": "relationship_advice", "valid": false, "count": 311896}, {"subreddit": "OutOfTheLoop", "valid": false, "count": 3579}, {"subreddit": "OutOfTheLoop", "valid": true, "count": 22257}, {"subreddit": "socialskills", "valid": false, "count": 23264}, {"subreddit": "socialskills", "valid": true, "count": 27193}, {"subreddit": "TrueOffMyChest", "valid": false, "count": 128676}, {"subreddit": "TrueOffMyChest", "valid": true, "count": 161189}, {"subreddit": "antiwork", "valid": false, "count": 163085}, {"subreddit": "antiwork", "valid": true, "count": 89075}, {"subreddit": "unpopularopinion", "valid": false, "count": 39643}, {"subreddit": "unpopularopinion", "valid": true, "count": 223545}, {"subreddit": "explainlikeimfive", "valid": true, "count": 72480}, {"subreddit": "explainlikeimfive", "valid": false, "count": 31425}, {"subreddit": "tifu", "valid": false, "count": 12046}, {"subreddit": "tifu", "valid": true, "count": 38893}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
