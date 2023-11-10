@@ -269,7 +269,9 @@ The plot below shows the performance of controversial posts:
 
 
 ::: {.callout-note appearance="simple"}
-The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb).
+
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/topic_trends.ipynb) and [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/engagement_sentiment_corr.ipynb).
+
 ::: 
 
 

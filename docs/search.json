@@ -88,7 +88,7 @@
     "href": "eda/exploratory-analysis.html#nlp-eda-for-emerging-trends-and-controversial-comments",
     "title": "Exploratory Analysis",
     "section": "NLP EDA for Emerging Trends and Controversial Comments",
-    "text": "NLP EDA for Emerging Trends and Controversial Comments\nThe plot below shows a regex count of the current events per Subreddit:\n\nThe plot below shows the performance of controversial posts:\n\n\n\n\n\n\n\nThe code used for this section is available here."
+    "text": "NLP EDA for Emerging Trends and Controversial Comments\nThe plot below shows a regex count of the current events per Subreddit:\n\nThe plot below shows the performance of controversial posts:\n\n\n\n\n\n\n\nThe code used for this section is available here and here."
   },
   {
     "objectID": "nlp.html",
