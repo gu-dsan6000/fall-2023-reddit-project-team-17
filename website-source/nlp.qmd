@@ -1,3 +1,28 @@
 # NLP
 
-Coming soon!
+
+## Executive summary
+
+
+
+
+## Processing
+
+
+
+
+## Books External Data
+
+
+
+
+## Flair Sentiment Model
+
+
+![](img/nlp-plots/flair_engagements_barchart.png)
+
+
+
+![](img/nlp-plots/flair_sentiments_barchart.png)
+
+
