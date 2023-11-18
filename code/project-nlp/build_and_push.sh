@@ -8,7 +8,7 @@ echo "export REGION=${REGION}"
 export ACCOUNT_ID=$(aws sts get-caller-identity | jq -r '.Account')
 export IMAGE_NAME=latest
 export REPO_NAME=sagemaker-spark
-export BASE_IMAGE=862339729993.dkr.ecr.us-east-1.amazonaws.com/sagemaker-spark-processing:3.4-cpu-py39-v1.0
+export BASE_IMAGE=173754725891.dkr.ecr.us-east-1.amazonaws.com/sagemaker-spark-processing:3.4-cpu-py39-v1.0
 
 echo region=$REGION, image=${IMAGE_NAME}, account=${ACCOUNT_ID}, image=${IMAGE_NAME}, repo=${REPO_NAME}, base image=${BASE_IMAGE}
 
