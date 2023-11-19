@@ -1,3 +1,17 @@
+```{python}
+#| echo: false
+
+import pandas as pd
+from tabulate import tabulate
+import IPython.display as d
+from IPython.display import display, HTML, IFrame
+from IPython.display import Markdown
+
+
+```
+
+
+
 # NLP
 
 
@@ -11,7 +25,6 @@
 
 
 
-## Books External Data
 
 
 
@@ -24,5 +37,45 @@
 
 
 ![](img/nlp-plots/flair_sentiments_barchart.png)
+
+
+
+## Preparing Reddit and External Data for Training an RNN 
+
+For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically The Scarlet Letter by Nathaniel Hawthorne, The Odyssey by Homer, Crime and Punishment by Fyodor Dostoyevsky, Metamorphosis by Franz Kafka, and The Great Gatsby by F. Scott Fitzgerald.
+
+To prepare the Reddit data, we extracted only the relevant information from the parquets, such as `subreddit`, `title`, `selftext`, `score`, and `URL`, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any "Edit:" sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn't have at least 4500 characters (around 750 words). Then, we filtered for only stored with `score` in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.
+
+We then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in @fig-token-frequency-plot. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling. 
+
+
+![Shows the count of the Top 10 tokens](img/nlp-plots/books-and-stories-token-frequency-plot.png){#fig-token-frequency-plot}
+
+
+As an additionally way to visualzie the resulting dataset, we also can see the results of the top 10 N-Grams, where $N=5$ in @tbl-n-gram-results.
+
+```{python}
+#| echo: false
+#| label: tbl-n-gram-results
+#| tbl-cap-location: bottom
+#| tbl-cap: displays the top 10 most frequent N-Grams where $N=5$.
+
+
+
+# comma separate
+def format_count(count):
+    return f"{count:,}"
+
+df = pd.read_csv("../data/nlp-data/books-and-stories-n-grams.csv")
+
+# format
+df = df.rename(columns={"ngram": "5-Gram (incl spaces)", "count": "Count"})
+df['Count'] = df['Count'].apply(format_count)
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
 
 
