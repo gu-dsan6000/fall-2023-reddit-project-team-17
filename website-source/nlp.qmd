@@ -17,15 +17,19 @@ from IPython.display import Markdown
 
 ## Executive summary
 
+This section outlines the NLP procedures conducted for the project. We performed a comprehensive sentiment analysis on Reddit's r/AmItheA\*hole, revealing a dominant negative sentiment across posts, regardless of their flairs, and a correlation between positive sentiments and higher user engagement. Additional analysis of demographics showed varied sentiment distributions across age and gender. We also extend the analysis to multi-class classification on Reddit, aiming to predict authors' age and gender using NLP and ML techniques. We found that post sentiments varied minimally across age groups, predominantly featuring negative sentiments, with a significant concentration in the 18-25 age bracket. Gender analysis echoed this trend, with negative sentiments dominating all identified genders, as numerically validated by the gender sentiment distribution table. Furthermore, the data preparation for machine learning involved cleaning and transforming text through `CountVectorizer`, focusing on the most frequent words. 
+
+After identifying “NoStupidQuestions” as the subreddit that we would investigate for topics related to Covid-19 trends we created a plot that should convey its interest over time in this particular subreddit. Separately, the research integrated Reddit submissions with classic literature texts, employing detailed NLP transformations and data filtering. This preparation will facilitate the development of the input data to train a recurrent neural network (RNN) that will generate new story submissions. 
+
+All sections used johnsnowlabs `sparkNLP` to perform the text analysis. Please see the links to the `.ipynb` notebooks in each section for the specific implementation.
+
+## Analysis Report
 
 
+### Flair Sentiment Model
 
 
-
-## Flair Sentiment Model
-
-
-In this section we explored the textual content of the posts of r/AmItheAsshole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (Asshole, Not the A-hole, Everybody Sucks, No A-holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a "negative" sentiment, as shown in @fig-flair-sentiments-barchart. This holds true across posts assigned any of the four primary flairs.
+In this section we explored the textual content of the posts of r/AmItheA\*hole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (A\*hole, Not the A\*hole, Everybody Sucks, No A\*holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a "negative" sentiment, as shown in @fig-flair-sentiments-barchart. This holds true across posts assigned any of the four primary flairs.
 
 ![Shows the subreddit sentiment by flair.](img/nlp-plots/flair_sentiments_barchart.png){#fig-flair-sentiments-barchart}
 
@@ -34,9 +38,9 @@ To further delve into the sentiments of these posts in r/AITA, we analyzed these
 
 ![Shows the subreddit engagement by flair.](img/nlp-plots/flair_engagements_barchart.png){#fig-flair-engagements-barchart}
 
-From this plot above, we can extract several conclusions. We can see that posts assigned the "Asshole" flair receive the most user engagement (on average) and posts assigned "No A-holes here" receive the least engagement, on average. Additionally, it is apparent that posts assigned a "negative" sentiment receive less user engagement than those with a "positive" sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more "positive" a post's sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).
+From this plot above, we can extract several conclusions. We can see that posts assigned the "A\*hole" flair receive the most user engagement (on average) and posts assigned "No A-holes here" receive the least engagement, on average. Additionally, it is apparent that posts assigned a "negative" sentiment receive less user engagement than those with a "positive" sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more "positive" a post's sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).
 
-
+@tbl-aita-sentiment-engagements below is a numerical representation of @fig-flair-engagements-barchart showing the average number of comments per post by flair and sentiment assignment.
 
 ```{python}
 #| echo: false
@@ -66,22 +70,28 @@ Markdown(md)
 
 
 
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-nlp/flairs-nlp.ipynb).
+::: 
 
 
 
-## Preparing Reddit data for multi-class classification
+### Preparing Reddit data for multi-class classification
 
-See in @fig-sentiment-age.
+In using NLP and ML techniques to predict the age and gender of the author who created a post, it’s important to observe the distribution of ages and genders as they relate to other variables of interest. In particular, it can be interesting to observe these variables as they relate to post sentiment. Note that the age and gender of the author of the post is not provided in the dataset and is instead extracted from the post itself using regex, if available.
+
+In @fig-sentiment-age we can see a density plot of the age of the author of a post, grouped by the categorized sentiment of the post itself. We find that there doesn’t seem to be much of a difference between the distribution of ages for each sentiment, as each seems to peak around ages between 18 and 25 years old. Furthermore, we can clearly see that the vast majority of posts contain negative sentiment - likely posts written about negative experiences and asking for advice.
+
 
 ![Shows how age is distributed across sentiment](img/nlp-plots/predicting-subreddits-density-age.png){#fig-sentiment-age}
 
-
-See in @fig-sentiment-gender.
+We can visualize similar features regarding the identified gender of the author of a post in @fig-sentiment-gender. Here, we can see the distribution of categorized sentiment of posts, grouped by the identified gender of the author of the post. Again, we find that the distribution of sentiments across genders is relatively similar, with the vast majority of posts containing negative sentiment.
 
 ![Shows how gender is distributed across sentiment](img/nlp-plots/predicting-subreddits-density-gender.png){#fig-sentiment-gender}
 
 
-See in @tbl-gender-table.
+
+@tbl-gender-table represents the same data as above, but expresses the relative frequencies of categorized post sentiment, grouped by the author’s identified gender. Here, we find numerically that the distribution of sentiments is very similar across genders, with negative sentiments making up almost 95% of instances for all genders.
 
 
 ```{python}
@@ -109,25 +119,58 @@ Markdown(md)
 
 
 
+#### NLP with `CountVectorizer`
+
+In order to incorporate NLP-based predictors in a machine learning model, we first have to process the content of each reddit post such that it can appropriately be fed into the model. Importantly, textual data cannot be sent directly into a machine learning model - we must represent the text numerically such that it can be interpreted by the model. One way in which we do this is by identifying how many times each word is used in each post.
+
+In preparing the data for machine learning models, we first want to clean the textual data before we represent it numerically. In doing so, we opt to perform the following cleaning steps:
 
 
+* Remove all special characters, retaining only alphabetic characters and spaces: This will help us focus only on the words used, rather than any punctuation present.
+* Convert the text to lowercase: This will help us standardize word usage by interpreting capitalized and non-capitalized words as the same.
+* Tokenize the text: This will help us break down posts into their individual word tokens, rather than maintaining one long document.
+* Remove “stop words”: This will help us remove extremely common words, such as “a” and “and”, so that we can focus more on the selective vocabulary that each author uses.
+* Stem and lemmatize words: This will help us take different variations of the same word, such as “run”, “running”, and “ran”, and reduce them into the stem of the word (“run”).
 
-## Preparing Covid-19 data in `NoStupidQuestions`
+
+In performing these cleaning steps, we obtain representations of the textual components of each post that we can begin to represent numerically. To do this, we conduct a few more steps:
+
+* Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of time it occurs.
+* Subset to the “n” most frequent words across all documents: This will help us filter out very uncommon words, including, but not limited to, misspelled words.
+
+By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used, while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% most frequent words used might make up 80% of the total words used, with most words being used very infrequently (Zipf’s Law).
+
+@fig-count-vectorizer-dataframe-preview is a glimpse at what our transformed dataset looks like as it prepares to be sent into a machine learning model. We obtain “n” columns - one for each of the “n” most frequent words - with values representing the frequency with which they appear in each document. These features can be combined with other features of the data, such as the number of comments associated with a post, to form a feature set suitable for a machine learning model.
+
+![Shows the first 10 rows and columns of the `CountVectorizer` dataframe.](img/nlp-plots/count-vectorizer-dataframe-preview.png){#fig-count-vectorizer-dataframe-preview}
 
 
-See in @fig-covid-nsq.
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-nlp/project-nlp-predicting-subreddits.ipynb).
+::: 
+
+
+### Preparing Covid-19 data in `NoStupidQuestions`
+
+
+After performing NLP on the `NoStupidQuestions` subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work. We wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From @fig-covid-nsq, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.
+
 
 ![Shows how gender is distributed across sentiment](img/nlp-plots/covid-nsq.png){#fig-covid-nsq}
 
 
 
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-nlp/topics-nlp.ipynb).
+::: 
 
 
-## Preparing Reddit and External Data for Training an RNN 
+### Preparing Reddit and External Data for Training an RNN 
 
-For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically _The Scarlet Letter_ by Nathaniel Hawthorne, _The Odyssey_ by Homer, _Crime and Punishment_ by Fyodor Dostoyevsky, _Metamorphosis_ by Franz Kafka, and _The Great Gatsby_ by F. Scott Fitzgerald.
+For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically _The Scarlet Letter_ by Nathaniel Hawthorne [@hawthorne_scarlet_2008], _The Odyssey_ by Homer [@homer_odyssey_1999], _Crime and Punishment_ by Fyodor Dostoyevsky [@dostoyevsky_crime_2006], _Metamorphosis_ by Franz Kafka [@kafka_metamorphosis_2005], and _The Great Gatsby_ by F. Scott Fitzgerald [@fitzgerald_great_2021].
 
-To prepare the Reddit data, we extracted only the relevant information from the parquets, such as `subreddit`, `title`, `selftext`, `score`, and `URL`, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any "Edit:" sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn't have at least 4500 characters (around 750 words). Then, we filtered for only stored with `score` in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.
+
+To prepare the Reddit data, we extracted only the relevant information from the parquets, such as `subreddit`, `title`, `selftext`, `score`, and `URL`, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any "Edit:" sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn't have at least 4,500 characters (around 750 words). Then, we filtered for only stored with `score` in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.
 
 We then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in @fig-token-frequency-plot. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling. 
 
@@ -162,3 +205,18 @@ Markdown(md)
 ```
 
 
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-nlp/project-nlp-posts-and-books-generate.ipynb).
+::: 
+
+
+
+::: {.callout-note appearance="simple"}
+The external data is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data/books).
+::: 
+
+
+### Outputs
+
+Outputs of the NLP cleaning procedures are stored in `.parquet` the team bucket `s3a://project17-bucket-alex/` for ease of use with ML models.
