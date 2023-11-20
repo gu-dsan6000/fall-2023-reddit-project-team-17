@@ -49,6 +49,27 @@
     "text": "Summary\nComing soon!"
   },
   {
+    "objectID": "nlp.html#processing",
+    "href": "nlp.html#processing",
+    "title": "NLP",
+    "section": "Processing",
+    "text": "Processing"
+  },
+  {
+    "objectID": "nlp.html#flair-sentiment-model",
+    "href": "nlp.html#flair-sentiment-model",
+    "title": "NLP",
+    "section": "Flair Sentiment Model",
+    "text": "Flair Sentiment Model"
+  },
+  {
+    "objectID": "nlp.html#preparing-reddit-and-external-data-for-training-an-rnn",
+    "href": "nlp.html#preparing-reddit-and-external-data-for-training-an-rnn",
+    "title": "NLP",
+    "section": "Preparing Reddit and External Data for Training an RNN",
+    "text": "Preparing Reddit and External Data for Training an RNN\nFor this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically The Scarlet Letter by Nathaniel Hawthorne, The Odyssey by Homer, Crime and Punishment by Fyodor Dostoyevsky, Metamorphosis by Franz Kafka, and The Great Gatsby by F. Scott Fitzgerald.\nTo prepare the Reddit data, we extracted only the relevant information from the parquets, such as subreddit, title, selftext, score, and URL, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any “Edit:” sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn’t have at least 4500 characters (around 750 words). Then, we filtered for only stored with score in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.\nWe then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in Figure 1. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling.\n\n\n\nFigure 1: Shows the count of the Top 10 tokens\n\n\nAs an additionally way to visualzie the resulting dataset, we also can see the results of the top 10 N-Grams, where \\(N=5\\) in Table 1.\n\n\n\n\nTable 1: displays the top 10 most frequent N-Grams where \\(N=5\\).\n\n\n5-Gram (incl spaces)\nCount\n\n\n\n\ni was\n22,165\n\n\nand i\n17,933\n\n\nin the\n15,264\n\n\nof the\n13,807\n\n\nthat i\n11,631\n\n\nto be\n10,346\n\n\nit was\n10,172\n\n\nto the\n9,418\n\n\ni had\n8,307\n\n\ni dont\n8,212"
+  },
+  {
     "objectID": "eda/topics.html",
     "href": "eda/topics.html",
     "title": "Topics",
