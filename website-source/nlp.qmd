@@ -31,12 +31,64 @@ from IPython.display import Markdown
 
 ## Flair Sentiment Model
 
+See in @fig-flair-sentiments-barchart.
 
-![](img/nlp-plots/flair_engagements_barchart.png)
+![Shows the subreddit sentiment by flair.](img/nlp-plots/flair_sentiments_barchart.png){#fig-flair-sentiments-barchart}
+
+
+See in @fig-flair-engagements-barchart.
+
+![Shows the subreddit engagement by flair.](img/nlp-plots/flair_engagements_barchart.png){#fig-flair-engagements-barchart}
+
+
+## Preparing Reddit data for multi-class classification
+
+
+See in @fig-sentiment-age.
+
+![Shows how age is distributed across sentiment](img/nlp-plots/predicting-subreddits-density-age.png){#fig-sentiment-age}
+
+
+See in @fig-sentiment-gender.
+
+![Shows how gender is distributed across sentiment](img/nlp-plots/predicting-subreddits-density-gender.png){#fig-sentiment-gender}
+
+
+See in @tbl-gender-table.
+
+
+```{python}
+#| echo: false
+#| label: tbl-gender-table
+#| tbl-cap-location: bottom
+#| tbl-cap: displays the distribution of sentiment across genders.
 
 
 
-![](img/nlp-plots/flair_sentiments_barchart.png)
+# comma separate
+#def format_count(count):
+#    return f"{count:,}"
+
+df = pd.read_csv("../data/nlp-data/predicting-subreddits-gender-table.csv")
+
+# format
+df = df.rename(columns={"f": "Female", "m": "Male", "other": "Other"})
+#df['Count'] = df['Count'].astype(int)
+df['Female'] = df['Female'].round(2)
+df['Male'] = df['Male'].round(2)
+df['Other'] = df['Other'].round(2)
+
+
+
+
+
+#df['Count'] = df['Count'].apply(format_count)
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
 
 
 
@@ -52,7 +104,7 @@ We then combined the text sources. The data underwent a series of NLP transforma
 ![Shows the count of the Top 10 tokens](img/nlp-plots/books-and-stories-token-frequency-plot.png){#fig-token-frequency-plot}
 
 
-As an additionally way to visualzie the resulting dataset, we also can see the results of the top 10 N-Grams, where $N=5$ in @tbl-n-gram-results.
+As an additionally way to visualize the resulting dataset, we also can see the results of the top 10 N-Grams, where $N=5$ in @tbl-n-gram-results.
 
 ```{python}
 #| echo: false
