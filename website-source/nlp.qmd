@@ -20,13 +20,6 @@ from IPython.display import Markdown
 
 
 
-## Processing
-
-
-
-
-
-
 
 
 ## Flair Sentiment Model
@@ -42,6 +35,37 @@ To further delve into the sentiments of these posts in r/AITA, we analyzed these
 ![Shows the subreddit engagement by flair.](img/nlp-plots/flair_engagements_barchart.png){#fig-flair-engagements-barchart}
 
 From this plot above, we can extract several conclusions. We can see that posts assigned the "Asshole" flair receive the most user engagement (on average) and posts assigned "No A-holes here" receive the least engagement, on average. Additionally, it is apparent that posts assigned a "negative" sentiment receive less user engagement than those with a "positive" sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more "positive" a post's sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).
+
+
+
+```{python}
+#| echo: false
+#| label: tbl-aita-sentiment-engagements
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays the r/AITA subreddit sentiment engagements.
+
+
+df = pd.read_parquet("../data/nlp-data/aita_sentiments_engagements.parquet")
+
+# format
+df = df.rename(columns={"negative": "Negative", "neutral": "Neutral", "positive": "Positive"})
+df = df.rename_axis("Flair")
+
+#df['Count'] = df['Count'].astype(int)
+df['Negative'] = df['Negative'].round(2)
+df['Neutral'] = df['Neutral'].round(2)
+df['Positive'] = df['Positive'].round(2)
+
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=True)
+Markdown(md)
+
+```
+
+
+
+
 
 
 
@@ -64,13 +88,8 @@ See in @tbl-gender-table.
 #| echo: false
 #| label: tbl-gender-table
 #| tbl-cap-location: bottom
-#| tbl-cap: displays the distribution of sentiment across genders.
+#| tbl-cap: Displays the distribution of sentiment across genders.
 
-
-
-# comma separate
-#def format_count(count):
-#    return f"{count:,}"
 
 df = pd.read_csv("../data/nlp-data/predicting-subreddits-gender-table.csv")
 
@@ -81,11 +100,6 @@ df['Female'] = df['Female'].round(2)
 df['Male'] = df['Male'].round(2)
 df['Other'] = df['Other'].round(2)
 
-
-
-
-
-#df['Count'] = df['Count'].apply(format_count)
 
 # show
 md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
@@ -98,7 +112,7 @@ Markdown(md)
 
 
 
-## Covid NSQ
+## Preparing Covid-19 data in `NoStupidQuestions`
 
 
 See in @fig-covid-nsq.

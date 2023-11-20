@@ -183,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#processing" id="toc-processing" class="nav-link" data-scroll-target="#processing">Processing</a></li>
   <li><a href="#flair-sentiment-model" id="toc-flair-sentiment-model" class="nav-link" data-scroll-target="#flair-sentiment-model">Flair Sentiment Model</a></li>
   <li><a href="#preparing-reddit-data-for-multi-class-classification" id="toc-preparing-reddit-data-for-multi-class-classification" class="nav-link" data-scroll-target="#preparing-reddit-data-for-multi-class-classification">Preparing Reddit data for multi-class classification</a></li>
-  <li><a href="#covid-nsq" id="toc-covid-nsq" class="nav-link" data-scroll-target="#covid-nsq">Covid NSQ</a></li>
+  <li><a href="#preparing-covid-19-data-in-nostupidquestions" id="toc-preparing-covid-19-data-in-nostupidquestions" class="nav-link" data-scroll-target="#preparing-covid-19-data-in-nostupidquestions">Preparing Covid-19 data in <code>NoStupidQuestions</code></a></li>
   <li><a href="#preparing-reddit-and-external-data-for-training-an-rnn" id="toc-preparing-reddit-and-external-data-for-training-an-rnn" class="nav-link" data-scroll-target="#preparing-reddit-and-external-data-for-training-an-rnn">Preparing Reddit and External Data for Training an RNN</a></li>
   </ul>
 </nav>
@@ -231,6 +231,49 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>From this plot above, we can extract several conclusions. We can see that posts assigned the “Asshole” flair receive the most user engagement (on average) and posts assigned “No A-holes here” receive the least engagement, on average. Additionally, it is apparent that posts assigned a “negative” sentiment receive less user engagement than those with a “positive” sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more “positive” a post’s sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="tbl-aita-sentiment-engagements" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Displays the r/AITA subreddit sentiment engagements.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Flair</th>
+<th style="text-align: right;">Negative</th>
+<th style="text-align: right;">Neutral</th>
+<th style="text-align: right;">Positive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Asshole</td>
+<td style="text-align: right;">242.2</td>
+<td style="text-align: right;">225.59</td>
+<td style="text-align: right;">265.44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Everyone Sucks</td>
+<td style="text-align: right;">104.88</td>
+<td style="text-align: right;">172.31</td>
+<td style="text-align: right;">183.61</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No A-holes here</td>
+<td style="text-align: right;">63.15</td>
+<td style="text-align: right;">67.74</td>
+<td style="text-align: right;">90.92</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Not the A-hole</td>
+<td style="text-align: right;">105.07</td>
+<td style="text-align: right;">128.07</td>
+<td style="text-align: right;">148.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </section>
 <section id="preparing-reddit-data-for-multi-class-classification" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-reddit-data-for-multi-class-classification">Preparing Reddit data for multi-class classification</h2>
@@ -248,12 +291,12 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;4: Shows how gender is distributed across sentiment</figcaption>
 </figure>
 </div>
-<p>See in <a href="#tbl-gender-table">Table&nbsp;1</a>.</p>
-<div class="cell tbl-cap-location-bottom" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
+<p>See in <a href="#tbl-gender-table">Table&nbsp;2</a>.</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div id="tbl-gender-table" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Table&nbsp;1: displays the distribution of sentiment across genders.</caption>
+<caption>Table&nbsp;2: Displays the distribution of sentiment across genders.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: right;">Female</th>
@@ -283,8 +326,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="covid-nsq" class="level2">
-<h2 class="anchored" data-anchor-id="covid-nsq">Covid NSQ</h2>
+<section id="preparing-covid-19-data-in-nostupidquestions" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-covid-19-data-in-nostupidquestions">Preparing Covid-19 data in <code>NoStupidQuestions</code></h2>
 <p>See in <a href="#fig-covid-nsq">Figure&nbsp;5</a>.</p>
 <div id="fig-covid-nsq" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -304,12 +347,12 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;6: Shows the count of the Top 10 tokens</figcaption>
 </figure>
 </div>
-<p>As an additionally way to visualize the resulting dataset, we also can see the results of the top 10 N-Grams, where <span class="math inline">\(N=5\)</span> in <a href="#tbl-n-gram-results">Table&nbsp;2</a>.</p>
-<div class="cell tbl-cap-location-bottom" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<p>As an additionally way to visualize the resulting dataset, we also can see the results of the top 10 N-Grams, where <span class="math inline">\(N=5\)</span> in <a href="#tbl-n-gram-results">Table&nbsp;3</a>.</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div id="tbl-n-gram-results" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Table&nbsp;2: displays the top 10 most frequent N-Grams where <span class="math inline">\(N=5\)</span>.</caption>
+<caption>Table&nbsp;3: displays the top 10 most frequent N-Grams where <span class="math inline">\(N=5\)</span>.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">5-Gram (incl spaces)</th>
