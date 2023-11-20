@@ -31,18 +31,21 @@ from IPython.display import Markdown
 
 ## Flair Sentiment Model
 
-See in @fig-flair-sentiments-barchart.
+
+In this section we explored the textual content of the posts of r/AmItheAsshole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (Asshole, Not the A-hole, Everybody Sucks, No A-holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a "negative" sentiment, as shown in @fig-flair-sentiments-barchart. This holds true across posts assigned any of the four primary flairs.
 
 ![Shows the subreddit sentiment by flair.](img/nlp-plots/flair_sentiments_barchart.png){#fig-flair-sentiments-barchart}
 
 
-See in @fig-flair-engagements-barchart.
+To further delve into the sentiments of these posts in r/AITA, we analyzed these sentiment assignments with respect to the engagement a post receives, represented by the number of comments under each posts. In the  @fig-flair-engagements-barchart, the mean number of comments per post grouped by flair assignment and sentiment assignment.
 
 ![Shows the subreddit engagement by flair.](img/nlp-plots/flair_engagements_barchart.png){#fig-flair-engagements-barchart}
 
+From this plot above, we can extract several conclusions. We can see that posts assigned the "Asshole" flair receive the most user engagement (on average) and posts assigned "No A-holes here" receive the least engagement, on average. Additionally, it is apparent that posts assigned a "negative" sentiment receive less user engagement than those with a "positive" sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more "positive" a post's sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).
+
+
 
 ## Preparing Reddit data for multi-class classification
-
 
 See in @fig-sentiment-age.
 
@@ -89,6 +92,20 @@ md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
 Markdown(md)
 
 ```
+
+
+
+
+
+
+## Covid NSQ
+
+
+See in @fig-covid-nsq.
+
+![Shows how gender is distributed across sentiment](img/nlp-plots/covid-nsq.png){#fig-covid-nsq}
+
+
 
 
 

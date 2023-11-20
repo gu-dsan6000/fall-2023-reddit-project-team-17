@@ -149,7 +149,7 @@ Markdown(md)
 
 We can also visualize them separately as in the figure below:
 
-![](../img/eda-plots/mean-score-comments-by-subreddit.png)
+![Shows the mean score comments by subreddit](../img/eda-plots/mean-score-comments-by-subreddit.png){#fig-mean-score-comments-by-subreddit}
 
 
 
@@ -170,7 +170,7 @@ To determine if not safe for work post affects user interactions, first, we filt
 
 We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the `interaction_score` is a good gauge of overall interaction, we can plot that variable as shown below:
 
-![](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png)
+![Shows the distribution of comments and score by `over_18` status](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png){#fig-boxplot-comments-and-score}
 
 
 
@@ -187,7 +187,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
 
-![](../img/eda-plots/average-comments-hour-and-week-data.png)
+![Shows the average comments per hour and per week.](../img/eda-plots/average-comments-hour-and-week-data.png){#fig-average-comments-hour-and-week}
 
 
 This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.
@@ -239,12 +239,12 @@ In r/AITA, users post stories about situations in the real world where they have
 
 The number of posts that are flaired as each of the flairs in the r/AITA is show below:
 
-![](../img/eda-plots/AITA-flairs-barchart-2022.png)
+![Shows the subreddit's flairs in barchart form.](../img/eda-plots/AITA-flairs-barchart-2022.png){#fig-aita-flairs-barchart}
 
 
 The treemap below shows the relative proportion of them:
 
-![](../img/eda-plots/AITA-flairs-treemap-2022.png)
+![Shows the subreddit's flairs in treemap form.](../img/eda-plots/AITA-flairs-treemap-2022.png){#fig-aita-flairs-treemap}
 
 
 As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.
@@ -260,11 +260,11 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 The plot below shows a regex count of the current events per Subreddit:
 
-![](../img/eda-plots/current-events.png)
+![Shows the topic ocurrence counts in different subreddits.](../img/eda-plots/current-events.png){#fig-current-events}
 
 The plot below shows the performance of controversial posts:
 
-![](../img/eda-plots/engagement-comparison.png)
+![Shows the engagement by varying metrics.](../img/eda-plots/engagement-comparison.png){#fig-engagement-comparison}
 
 
 
