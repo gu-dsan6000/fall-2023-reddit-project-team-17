@@ -25,10 +25,14 @@ We have two primary sources of external data. The first is a community members d
 
 Our cleaning process includes removing from the `comments` database both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed or deleted. In the `submissions` table, we also remove where the `selftext` has been removed or deleted. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. 
 
-The count of posts per each subreddit is detailed below:
+The count of posts per each subreddit is detailed in @tbl-subreddit-counts:
 
 ```{python}
 #| echo: false
+#| label: tbl-subreddit-counts
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays the count of posts in each subreddit.
+
 
 df = pd.read_csv("../../data/eda-data/subreddit-counts.csv")
 # format
@@ -46,10 +50,13 @@ Markdown(md)
 
 
 
-Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. The plot below shows the count of valid comments per Subreddit:
+Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. @fig-validity-counts shows the count of valid comments per Subreddit:
 
 ```{python}
 #| echo: false
+#| label: fig-validity-counts
+#| fig-cap: "Shows the count of valid status of comments per subreddit."
+
 
 width_percentage = "100%"
 IFrame(src='../img/eda-plots/validity-counts.html', width=width_percentage, height=500)
@@ -79,11 +86,15 @@ Although we summarize the new variables below, they are are described within the
 
 ## Regex Search and Dummies
 
-To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in the following table:
+To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in @tbl-keyword-counts:
 
 
 ```{python}
 #| echo: false
+#| label: tbl-keyword-counts
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays the results of the dummy variable excercise using Regex.
+
 
 # load
 fascinating = pd.read_csv("../../data/eda-data/keyword_counts_fascinating.csv", header=None)
@@ -126,11 +137,16 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## The relationship between the number of comments and the score of Reddit posts
 
-The number of comments (`num_comments`) and the score of a post (`score`), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the `corr` function from `pyspark.sql.functions`. The table below shows the results:
+The number of comments (`num_comments`) and the score of a post (`score`), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the `corr` function from `pyspark.sql.functions`. @tbl-correlation-by-subreddit shows the results:
 
 
 ```{python}
 #| echo: false
+#| label: tbl-correlation-by-subreddit
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays the results of the correlation calculation for number of comments and scores.
+
+
 
 df = pd.read_csv("../../data/eda-data/correlation_by_subreddit.csv")
 # format
@@ -147,7 +163,7 @@ Markdown(md)
 
 
 
-We can also visualize them separately as in the figure below:
+We can also visualize them separately as in @fig-mean-score-comments-by-subreddit:
 
 ![Shows the mean score comments by subreddit](../img/eda-plots/mean-score-comments-by-subreddit.png){#fig-mean-score-comments-by-subreddit}
 
@@ -168,7 +184,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 To determine if not safe for work post affects user interactions, first, we filter the `submissions` dataset for where the `over_18` flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not. 
 
-We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the `interaction_score` is a good gauge of overall interaction, we can plot that variable as shown below:
+We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the `interaction_score` is a good gauge of overall interaction, we can plot that variable as shown in @fig-boxplot-comments-and-score:
 
 ![Shows the distribution of comments and score by `over_18` status](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png){#fig-boxplot-comments-and-score}
 
@@ -185,7 +201,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## The times of the day when posts typically receive the most engagement.
 
-To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:
+To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the @fig-average-comments-hour-and-week:
 
 ![Shows the average comments per hour and per week.](../img/eda-plots/average-comments-hour-and-week-data.png){#fig-average-comments-hour-and-week}
 
@@ -204,11 +220,13 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable `engagements` as the sum of submissions and comments for a particular subreddit.
 
-One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the `AmItheAsshole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.
+One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. In @fig-aita-counts-over-time, we can see this distribution, with many engagements coming from the `AmItheAsshole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.
 
 
 ```{python}
 #| echo: false
+#| label: fig-aita-counts-over-time
+#| fig-cap: "Shows the counts of subreddit engagement per month."
 
 width_percentage = "100%"
 IFrame(src='../img/eda-plots/counts-over-time.html', width=width_percentage, height=700)
@@ -237,12 +255,12 @@ In this section we take a closer look at the subreddit r/AmItheAsshole (hencefor
 
 In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: Asshole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.
 
-The number of posts that are flaired as each of the flairs in the r/AITA is show below:
+The number of posts that are flaired as each of the flairs in the r/AITA is show in @fig-aita-flairs-barchart:
 
 ![Shows the subreddit's flairs in barchart form.](../img/eda-plots/AITA-flairs-barchart-2022.png){#fig-aita-flairs-barchart}
 
 
-The treemap below shows the relative proportion of them:
+@fig-aita-flairs-treemap shows the relative proportion of them:
 
 ![Shows the subreddit's flairs in treemap form.](../img/eda-plots/AITA-flairs-treemap-2022.png){#fig-aita-flairs-treemap}
 
@@ -258,11 +276,11 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## NLP EDA for Emerging Trends and Controversial Comments
 
-The plot below shows a regex count of the current events per Subreddit:
+@fig-current-events shows a regex count of the current events per Subreddit:
 
 ![Shows the topic ocurrence counts in different subreddits.](../img/eda-plots/current-events.png){#fig-current-events}
 
-The plot below shows the performance of controversial posts:
+@fig-engagement-comparison shows the performance of controversial posts:
 
 ![Shows the engagement by varying metrics.](../img/eda-plots/engagement-comparison.png){#fig-engagement-comparison}
 

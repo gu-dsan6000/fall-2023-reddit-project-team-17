@@ -180,7 +180,6 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive summary</a></li>
-  <li><a href="#processing" id="toc-processing" class="nav-link" data-scroll-target="#processing">Processing</a></li>
   <li><a href="#flair-sentiment-model" id="toc-flair-sentiment-model" class="nav-link" data-scroll-target="#flair-sentiment-model">Flair Sentiment Model</a></li>
   <li><a href="#preparing-reddit-data-for-multi-class-classification" id="toc-preparing-reddit-data-for-multi-class-classification" class="nav-link" data-scroll-target="#preparing-reddit-data-for-multi-class-classification">Preparing Reddit data for multi-class classification</a></li>
   <li><a href="#preparing-covid-19-data-in-nostupidquestions" id="toc-preparing-covid-19-data-in-nostupidquestions" class="nav-link" data-scroll-target="#preparing-covid-19-data-in-nostupidquestions">Preparing Covid-19 data in <code>NoStupidQuestions</code></a></li>
@@ -210,9 +209,6 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
-</section>
-<section id="processing" class="level2">
-<h2 class="anchored" data-anchor-id="processing">Processing</h2>
 </section>
 <section id="flair-sentiment-model" class="level2">
 <h2 class="anchored" data-anchor-id="flair-sentiment-model">Flair Sentiment Model</h2>
@@ -338,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="preparing-reddit-and-external-data-for-training-an-rnn" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-reddit-and-external-data-for-training-an-rnn">Preparing Reddit and External Data for Training an RNN</h2>
-<p>For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically The Scarlet Letter by Nathaniel Hawthorne, The Odyssey by Homer, Crime and Punishment by Fyodor Dostoyevsky, Metamorphosis by Franz Kafka, and The Great Gatsby by F. Scott Fitzgerald.</p>
+<p>For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically <em>The Scarlet Letter</em> by Nathaniel Hawthorne, <em>The Odyssey</em> by Homer, <em>Crime and Punishment</em> by Fyodor Dostoyevsky, <em>Metamorphosis</em> by Franz Kafka, and <em>The Great Gatsby</em> by F. Scott Fitzgerald.</p>
 <p>To prepare the Reddit data, we extracted only the relevant information from the parquets, such as <code>subreddit</code>, <code>title</code>, <code>selftext</code>, <code>score</code>, and <code>URL</code>, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any “Edit:” sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn’t have at least 4500 characters (around 750 words). Then, we filtered for only stored with <code>score</code> in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.</p>
 <p>We then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in <a href="#fig-token-frequency-plot">Figure&nbsp;6</a>. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling.</p>
 <div id="fig-token-frequency-plot" class="quarto-figure quarto-figure-center anchored">

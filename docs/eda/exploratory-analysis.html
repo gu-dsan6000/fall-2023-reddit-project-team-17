@@ -225,10 +225,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="cleaning">Cleaning</h2>
 <p>Our cleaning process includes removing from the <code>comments</code> database both datasets the columns that are not needed for each particular set of analyses. Also, in the <code>comments</code> table, we remove the rows where the <code>body</code> has been either removed or deleted. In the <code>submissions</code> table, we also remove where the <code>selftext</code> has been removed or deleted. The resulting rows are 977,181 for the <code>submissions</code> table and 70,594,314 for the <code>comments</code> table.</p>
-<p>The count of posts per each subreddit is detailed below:</p>
-<div class="cell" data-execution_count="2">
+<p>The count of posts per each subreddit is detailed in <a href="#tbl-subreddit-counts">Table&nbsp;1</a>:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
+<div id="tbl-subreddit-counts" class="anchored">
 <table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Displays the count of posts in each subreddit.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Subreddit</th>
@@ -288,12 +290,16 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-<p>Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. The plot below shows the count of valid comments per Subreddit:</p>
+</div>
+<p>Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. <a href="#fig-validity-counts">Figure&nbsp;1</a> shows the count of valid comments per Subreddit:</p>
 <div class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="fig-validity-counts" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
         <iframe width="100%" height="500" src="../img/eda-plots/validity-counts.html" frameborder="0" allowfullscreen=""></iframe>
         
+<figcaption class="figure-caption">Figure&nbsp;1: Shows the count of valid status of comments per subreddit.</figcaption>
+</figure>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note">
@@ -319,10 +325,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="regex-search-and-dummies" class="level2">
 <h2 class="anchored" data-anchor-id="regex-search-and-dummies">Regex Search and Dummies</h2>
-<p>To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in the following table:</p>
-<div class="cell" data-execution_count="4">
+<p>To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in <a href="#tbl-keyword-counts">Table&nbsp;2</a>:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
+<div id="tbl-keyword-counts" class="anchored">
 <table class="table table-sm table-striped small">
+<caption>Table&nbsp;2: Displays the results of the dummy variable excercise using Regex.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: right;">count</th>
@@ -348,6 +356,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
+</div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -361,10 +370,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="level2">
 <h2 class="anchored" data-anchor-id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</h2>
-<p>The number of comments (<code>num_comments</code>) and the score of a post (<code>score</code>), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the <code>corr</code> function from <code>pyspark.sql.functions</code>. The table below shows the results:</p>
-<div class="cell" data-execution_count="5">
+<p>The number of comments (<code>num_comments</code>) and the score of a post (<code>score</code>), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the <code>corr</code> function from <code>pyspark.sql.functions</code>. <a href="#tbl-correlation-by-subreddit">Table&nbsp;3</a> shows the results:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
+<div id="tbl-correlation-by-subreddit" class="anchored">
 <table class="table table-sm table-striped small">
+<caption>Table&nbsp;3: Displays the results of the correlation calculation for number of comments and scores.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Subreddit</th>
@@ -424,11 +435,12 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-<p>We can also visualize them separately as in the figure below:</p>
+</div>
+<p>We can also visualize them separately as in <a href="#fig-mean-score-comments-by-subreddit">Figure&nbsp;2</a>:</p>
 <div id="fig-mean-score-comments-by-subreddit" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/mean-score-comments-by-subreddit.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Shows the mean score comments by subreddit</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: Shows the mean score comments by subreddit</figcaption>
 </figure>
 </div>
 <p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> <strong>additional variable</strong>. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
@@ -446,11 +458,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="level2">
 <h2 class="anchored" data-anchor-id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</h2>
 <p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
-<p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown below:</p>
+<p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown in <a href="#fig-boxplot-comments-and-score">Figure&nbsp;3</a>:</p>
 <div id="fig-boxplot-comments-and-score" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Shows the distribution of comments and score by <code>over_18</code> status</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3: Shows the distribution of comments and score by <code>over_18</code> status</figcaption>
 </figure>
 </div>
 <p>We can infer from the plot that NSFW content increases the engagement with the post, although more analysis will be conducted in subsequent sections.</p>
@@ -467,11 +479,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="level2">
 <h2 class="anchored" data-anchor-id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</h2>
-<p>To determine the times of day when a post typically receives the most engagement, we create two <strong>additional variables</strong>: <code>week_of_the_year</code> and <code>hour_of_the_day</code>, both coming from the <code>created_utc</code> column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the plot below:</p>
+<p>To determine the times of day when a post typically receives the most engagement, we create two <strong>additional variables</strong>: <code>week_of_the_year</code> and <code>hour_of_the_day</code>, both coming from the <code>created_utc</code> column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the <a href="#fig-average-comments-hour-and-week">Figure&nbsp;4</a>:</p>
 <div id="fig-average-comments-hour-and-week" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/average-comments-hour-and-week-data.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: Shows the average comments per hour and per week.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4: Shows the average comments per hour and per week.</figcaption>
 </figure>
 </div>
 <p>This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.</p>
@@ -489,12 +501,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="subreddit-community-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="subreddit-community-prediction">Subreddit community prediction</h2>
 <p>One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable <code>engagements</code> as the sum of submissions and comments for a particular subreddit.</p>
-<p>One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. Below, we can see this distribution, with many engagements coming from the <code>AmItheAsshole</code>, <code>relationship_advice</code>, and <code>antiwork</code> subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.</p>
+<p>One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. In <a href="#fig-aita-counts-over-time">Figure&nbsp;5</a>, we can see this distribution, with many engagements coming from the <code>AmItheAsshole</code>, <code>relationship_advice</code>, and <code>antiwork</code> subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.</p>
 <div class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="fig-aita-counts-over-time" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
         <iframe width="100%" height="700" src="../img/eda-plots/counts-over-time.html" frameborder="0" allowfullscreen=""></iframe>
         
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the counts of subreddit engagement per month.</figcaption>
+</figure>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -525,18 +540,18 @@ Tip with Title
 <h2 class="anchored" data-anchor-id="flair-prediction">Flair prediction</h2>
 <p>In this section we take a closer look at the subreddit r/AmItheAsshole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.</p>
 <p>In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: Asshole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.</p>
-<p>The number of posts that are flaired as each of the flairs in the r/AITA is show below:</p>
+<p>The number of posts that are flaired as each of the flairs in the r/AITA is show in <a href="#fig-aita-flairs-barchart">Figure&nbsp;6</a>:</p>
 <div id="fig-aita-flairs-barchart" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/AITA-flairs-barchart-2022.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Shows the subreddit’s flairs in barchart form.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: Shows the subreddit’s flairs in barchart form.</figcaption>
 </figure>
 </div>
-<p>The treemap below shows the relative proportion of them:</p>
+<p><a href="#fig-aita-flairs-treemap">Figure&nbsp;7</a> shows the relative proportion of them:</p>
 <div id="fig-aita-flairs-treemap" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/AITA-flairs-treemap-2022.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Shows the subreddit’s flairs in treemap form.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Shows the subreddit’s flairs in treemap form.</figcaption>
 </figure>
 </div>
 <p>As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.</p>
@@ -553,18 +568,18 @@ Tip with Title
 </section>
 <section id="nlp-eda-for-emerging-trends-and-controversial-comments" class="level2">
 <h2 class="anchored" data-anchor-id="nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</h2>
-<p>The plot below shows a regex count of the current events per Subreddit:</p>
+<p><a href="#fig-current-events">Figure&nbsp;8</a> shows a regex count of the current events per Subreddit:</p>
 <div id="fig-current-events" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/current-events.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: Shows the topic ocurrence counts in different subreddits.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: Shows the topic ocurrence counts in different subreddits.</figcaption>
 </figure>
 </div>
-<p>The plot below shows the performance of controversial posts:</p>
+<p><a href="#fig-engagement-comparison">Figure&nbsp;9</a> shows the performance of controversial posts:</p>
 <div id="fig-engagement-comparison" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="../img/eda-plots/engagement-comparison.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: Shows the engagement by varying metrics.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Shows the engagement by varying metrics.</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-simple callout-note">
