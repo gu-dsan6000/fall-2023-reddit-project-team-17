@@ -28,11 +28,7 @@ website:
     align: left
     contents:
       - index.qmd
-      - section: "EDA"
-        contents:
-          - eda/topics.qmd
-          - eda/exploratory-analysis.qmd
-      #- eda.qmd
+      - eda.qmd
       - nlp.qmd
       - ml.qmd
       - summary.qmd

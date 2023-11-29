@@ -10,7 +10,7 @@ from IPython.display import Markdown
 
 ```
 
-# Exploratory Analysis
+# EDA
 
 ## The Data Subset
 
@@ -34,7 +34,7 @@ The count of posts per each subreddit is detailed in @tbl-subreddit-counts:
 #| tbl-cap: Displays the count of posts in each subreddit.
 
 
-df = pd.read_csv("../../data/eda-data/subreddit-counts.csv")
+df = pd.read_csv("../data/eda-data/subreddit-counts.csv")
 # format
 df = df.rename(columns={"subreddit": "Subreddit", "count": "Count"})
 df = df.sort_values(by="Count", ascending=False)
@@ -59,7 +59,7 @@ Another component of the data that we’d like to observe is how many submission
 
 
 width_percentage = "100%"
-IFrame(src='../img/eda-plots/validity-counts.html', width=width_percentage, height=500)
+IFrame(src='img/eda-plots/validity-counts-new.html', width=width_percentage, height=500)
 
 
 ```
@@ -97,9 +97,9 @@ To gauge the overall engagement in the posts, we used regex to create dummy vari
 
 
 # load
-fascinating = pd.read_csv("../../data/eda-data/keyword_counts_fascinating.csv", header=None)
-entertaining = pd.read_csv("../../data/eda-data/keyword_counts_entertaining.csv", header=None)
-boring = pd.read_csv("../../data/eda-data/keyword_counts_boring.csv", header=None)
+fascinating = pd.read_csv("../data/eda-data/keyword_counts_fascinating.csv", header=None)
+entertaining = pd.read_csv("../data/eda-data/keyword_counts_entertaining.csv", header=None)
+boring = pd.read_csv("../data/eda-data/keyword_counts_boring.csv", header=None)
 
 # use first col as key
 fascinating.columns = ['count', 'fascinating']
@@ -148,7 +148,7 @@ The number of comments (`num_comments`) and the score of a post (`score`), which
 
 
 
-df = pd.read_csv("../../data/eda-data/correlation_by_subreddit.csv")
+df = pd.read_csv("../data/eda-data/correlation_by_subreddit.csv")
 # format
 df = df.rename(columns={"subreddit": "Subreddit", "correlation_coefficient": "Correlation Coefficient"})
 df = df.sort_values(by="Correlation Coefficient", ascending=False)
@@ -165,7 +165,7 @@ Markdown(md)
 
 We can also visualize them separately as in @fig-mean-score-comments-by-subreddit:
 
-![Shows the mean score comments by subreddit](../img/eda-plots/mean-score-comments-by-subreddit.png){#fig-mean-score-comments-by-subreddit}
+![Shows the mean score comments by subreddit](img/eda-plots/mean-score-comments-by-subreddit.png){#fig-mean-score-comments-by-subreddit}
 
 
 
@@ -186,7 +186,7 @@ To determine if not safe for work post affects user interactions, first, we filt
 
 We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the `interaction_score` is a good gauge of overall interaction, we can plot that variable as shown in @fig-boxplot-comments-and-score:
 
-![Shows the distribution of comments and score by `over_18` status](../img/eda-plots/boxplot-comments-and-score-by-over-18-status.png){#fig-boxplot-comments-and-score}
+![Shows the distribution of comments and score by `over_18` status](img/eda-plots/boxplot-comments-and-score-by-over-18-status.png){#fig-boxplot-comments-and-score}
 
 
 
@@ -203,7 +203,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the @fig-average-comments-hour-and-week:
 
-![Shows the average comments per hour and per week.](../img/eda-plots/average-comments-hour-and-week-data.png){#fig-average-comments-hour-and-week}
+![Shows the average comments per hour and per week.](img/eda-plots/average-comments-hour-and-week-data.png){#fig-average-comments-hour-and-week}
 
 
 This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.
@@ -229,7 +229,7 @@ One component of the data that we’d like to look at is the distribution of sub
 #| fig-cap: "Shows the counts of subreddit engagement per month."
 
 width_percentage = "100%"
-IFrame(src='../img/eda-plots/counts-over-time.html', width=width_percentage, height=700)
+IFrame(src='img/eda-plots/counts-over-time-new.html', width=width_percentage, height=700)
 
 
 ```
@@ -257,12 +257,12 @@ In r/AITA, users post stories about situations in the real world where they have
 
 The number of posts that are flaired as each of the flairs in the r/AITA is show in @fig-aita-flairs-barchart:
 
-![Shows the subreddit's flairs in barchart form.](../img/eda-plots/AITA-flairs-barchart-2022.png){#fig-aita-flairs-barchart}
+![Shows the subreddit's flairs in barchart form.](img/eda-plots/AITA-flairs-barchart-2022.png){#fig-aita-flairs-barchart}
 
 
 @fig-aita-flairs-treemap shows the relative proportion of them:
 
-![Shows the subreddit's flairs in treemap form.](../img/eda-plots/AITA-flairs-treemap-2022.png){#fig-aita-flairs-treemap}
+![Shows the subreddit's flairs in treemap form.](img/eda-plots/AITA-flairs-treemap-2022.png){#fig-aita-flairs-treemap}
 
 
 As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.
@@ -278,11 +278,11 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 @fig-current-events shows a regex count of the current events per Subreddit:
 
-![Shows the topic ocurrence counts in different subreddits.](../img/eda-plots/current-events.png){#fig-current-events}
+![Shows the topic ocurrence counts in different subreddits.](img/eda-plots/current-events.png){#fig-current-events}
 
 @fig-engagement-comparison shows the performance of controversial posts:
 
-![Shows the engagement by varying metrics.](../img/eda-plots/engagement-comparison.png){#fig-engagement-comparison}
+![Shows the engagement by varying metrics.](img/eda-plots/engagement-comparison.png){#fig-engagement-comparison}
 
 
 

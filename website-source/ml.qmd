@@ -1,3 +1,29 @@
+```{python}
+#| echo: false
+
+import pandas as pd
+from tabulate import tabulate
+import IPython.display as d
+from IPython.display import display, HTML, IFrame
+from IPython.display import Markdown
+
+
+```
+
 # ML
 
-Coming soon!
+![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/random-forest-cv-train-cm.png){#fig-random-forest-training width=70%}
+
+![Shows the confusion matrix for the Random Forest, evaluated on the testing data.](img/ml-plots/random-forest-cv-test-cm.png){#fig-random-forest-testing width=70%}
+
+```{python}
+#| echo: false
+#| label: fig-random-forest-eval
+#| fig-cap: "Shows the evaluation metrics for the Random Forest Classifier."
+
+
+width_percentage = "100%"
+IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, height=500)
+
+
+```

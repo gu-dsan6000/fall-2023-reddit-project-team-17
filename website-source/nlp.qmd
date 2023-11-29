@@ -140,9 +140,28 @@ In performing these cleaning steps, we obtain representations of the textual com
 
 By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used, while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% most frequent words used might make up 80% of the total words used, with most words being used very infrequently (Zipf’s Law).
 
-@fig-count-vectorizer-dataframe-preview is a glimpse at what our transformed dataset looks like as it prepares to be sent into a machine learning model. We obtain “n” columns - one for each of the “n” most frequent words - with values representing the frequency with which they appear in each document. These features can be combined with other features of the data, such as the number of comments associated with a post, to form a feature set suitable for a machine learning model.
+@tbl-count-vectorizer-dataframe-preview is a glimpse at what our transformed dataset looks like as it prepares to be sent into a machine learning model. We obtain “n” columns - one for each of the “n” most frequent words - with values representing the frequency with which they appear in each document. These features can be combined with other features of the data, such as the number of comments associated with a post, to form a feature set suitable for a machine learning model.
 
-![Shows the first 10 rows and columns of the `CountVectorizer` dataframe.](img/nlp-plots/count-vectorizer-dataframe-preview.png){#fig-count-vectorizer-dataframe-preview}
+```{python}
+#| echo: false
+#| label: tbl-count-vectorizer-dataframe-preview
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays a preview of the CountVectorized submissions data.
+
+
+df = pd.read_csv("../data/nlp-data/full-df-cv-sample.csv")
+
+# format
+df = df.rename(columns={"subreddit": "Subreddit", "word_like": "'like'", "word_feel": "'feel'",
+                        "word_want": "'want'", "word_know": "'know'", "word_time": "'time'",
+                        "word_tell": "'tell'", "word_get": "'get'", "word_im": "'im'",
+                        "word_think": "'think'", "word_friend": "'friend'"})
+
+# show
+md = tabulate(df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
 
 
 ::: {.callout-note appearance="simple"}

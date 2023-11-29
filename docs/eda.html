@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>It's Storytime! – eda</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">It’s Storytime!</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Main</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./secondary/code-and-data.html" rel="" target="">
+ <span class="menu-text">Code and Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./secondary/authors.html" rel="" target="">
+ <span class="menu-text">Authors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./secondary/references.html" rel="" target="">
+ <span class="menu-text">References</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./eda.html">EDA</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">EDA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nlp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NLP</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-data-subset" id="toc-the-data-subset" class="nav-link active" data-scroll-target="#the-data-subset">The Data Subset</a></li>
+  <li><a href="#external-data" id="toc-external-data" class="nav-link" data-scroll-target="#external-data">External Data</a></li>
+  <li><a href="#cleaning" id="toc-cleaning" class="nav-link" data-scroll-target="#cleaning">Cleaning</a></li>
+  <li><a href="#data-transformations-and-additional-variables" id="toc-data-transformations-and-additional-variables" class="nav-link" data-scroll-target="#data-transformations-and-additional-variables">Data transformations and additional variables</a></li>
+  <li><a href="#regex-search-and-dummies" id="toc-regex-search-and-dummies" class="nav-link" data-scroll-target="#regex-search-and-dummies">Regex Search and Dummies</a></li>
+  <li><a href="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" id="toc-the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="nav-link" data-scroll-target="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</a></li>
+  <li><a href="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." id="toc-the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="nav-link" data-scroll-target="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
+  <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
+  <li><a href="#subreddit-community-prediction" id="toc-subreddit-community-prediction" class="nav-link" data-scroll-target="#subreddit-community-prediction">Subreddit community prediction</a></li>
+  <li><a href="#flair-prediction" id="toc-flair-prediction" class="nav-link" data-scroll-target="#flair-prediction">Flair prediction</a></li>
+  <li><a href="#nlp-eda-for-emerging-trends-and-controversial-comments" id="toc-nlp-eda-for-emerging-trends-and-controversial-comments" class="nav-link" data-scroll-target="#nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">EDA</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="the-data-subset" class="level2">
+<h2 class="anchored" data-anchor-id="the-data-subset">The Data Subset</h2>
+<p>We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits <code>AITA</code>, <code>AskMen</code>, <code>AskWomen</code>, <code>TrueOffMyChest</code>, <code>unpopularopinion</code>, <code>tifu</code>, <code>socialskills</code>, <code>antiwork</code>, <code>relationship_advice</code>, <code>explainlikeimfive</code>, <code>OutOfTheLoop</code>, and <code>NoStupidQuestions</code>. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.</p>
+</section>
+<section id="external-data" class="level2">
+<h2 class="anchored" data-anchor-id="external-data">External Data</h2>
+<p>We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we’ll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data">here</a>.</p>
+</section>
+<section id="cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning">Cleaning</h2>
+<p>Our cleaning process includes removing from the <code>comments</code> database both datasets the columns that are not needed for each particular set of analyses. Also, in the <code>comments</code> table, we remove the rows where the <code>body</code> has been either removed or deleted. In the <code>submissions</code> table, we also remove where the <code>selftext</code> has been removed or deleted. The resulting rows are 977,181 for the <code>submissions</code> table and 70,594,314 for the <code>comments</code> table.</p>
+<p>The count of posts per each subreddit is detailed in <a href="#tbl-subreddit-counts">Table&nbsp;1</a>:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="tbl-subreddit-counts" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Displays the count of posts in each subreddit.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Subreddit</th>
+<th style="text-align: left;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">relationship_advice</td>
+<td style="text-align: left;">311,882</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NoStupidQuestions</td>
+<td style="text-align: left;">234,253</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TrueOffMyChest</td>
+<td style="text-align: left;">125,159</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AmItheAsshole</td>
+<td style="text-align: left;">115,659</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">antiwork</td>
+<td style="text-align: left;">76,647</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unpopularopinion</td>
+<td style="text-align: left;">39,642</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">socialskills</td>
+<td style="text-align: left;">23,005</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AskMen</td>
+<td style="text-align: left;">18,240</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">explainlikeimfive</td>
+<td style="text-align: left;">15,002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tifu</td>
+<td style="text-align: left;">11,921</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OutOfTheLoop</td>
+<td style="text-align: left;">3,054</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AskWomen</td>
+<td style="text-align: left;">2,717</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. <a href="#fig-validity-counts">Figure&nbsp;1</a> shows the count of valid comments per Subreddit:</p>
+<div class="cell" data-execution_count="3">
+<div id="fig-validity-counts" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+        <iframe width="100%" height="500" src="img/eda-plots/validity-counts-new.html" frameborder="0" allowfullscreen=""></iframe>
+        
+<figcaption class="figure-caption">Figure&nbsp;1: Shows the count of valid status of comments per subreddit.</figcaption>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-predicting-subreddits.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-transformations-and-additional-variables" class="level2">
+<h2 class="anchored" data-anchor-id="data-transformations-and-additional-variables">Data transformations and additional variables</h2>
+<p>Although we summarize the new variables below, they are are described within the EDA sections below.</p>
+<ul>
+<li><code>engagements</code>: the sum of submissions and comments for a particular subreddit.</li>
+<li><code>interaction_score</code> an equal-weighted average of the number of comments and the score in each post.</li>
+<li><code>week_of_the_year</code>: created from the <code>created_utc</code> column, it describes the week of the year corresponding to the particular post’s date.</li>
+<li><code>hour_of_the_day</code>: created from the <code>created_utc</code> column, it describes the hour of the day corresponding to the particular post’s date.</li>
+</ul>
+</section>
+<section id="regex-search-and-dummies" class="level2">
+<h2 class="anchored" data-anchor-id="regex-search-and-dummies">Regex Search and Dummies</h2>
+<p>To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in <a href="#tbl-keyword-counts">Table&nbsp;2</a>:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="tbl-keyword-counts" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;2: Displays the results of the dummy variable excercise using Regex.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">count</th>
+<th style="text-align: left;">fascinating</th>
+<th style="text-align: left;">entertaining</th>
+<th style="text-align: left;">boring</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">51,424</td>
+<td style="text-align: left;">30,870</td>
+<td style="text-align: left;">99,068</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">76,451,939</td>
+<td style="text-align: left;">76,472,493</td>
+<td style="text-align: left;">76,404,295</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="level2">
+<h2 class="anchored" data-anchor-id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</h2>
+<p>The number of comments (<code>num_comments</code>) and the score of a post (<code>score</code>), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the <code>corr</code> function from <code>pyspark.sql.functions</code>. <a href="#tbl-correlation-by-subreddit">Table&nbsp;3</a> shows the results:</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="tbl-correlation-by-subreddit" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;3: Displays the results of the correlation calculation for number of comments and scores.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Subreddit</th>
+<th style="text-align: right;">Correlation Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">explainlikeimfive</td>
+<td style="text-align: right;">0.88</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OutOfTheLoop</td>
+<td style="text-align: right;">0.86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AskMen</td>
+<td style="text-align: right;">0.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unpopularopinion</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">antiwork</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tifu</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AmItheAsshole</td>
+<td style="text-align: right;">0.81</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TrueOffMyChest</td>
+<td style="text-align: right;">0.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NoStupidQuestions</td>
+<td style="text-align: right;">0.78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AskWomen</td>
+<td style="text-align: right;">0.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">socialskills</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">relationship_advice</td>
+<td style="text-align: right;">0.64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>We can also visualize them separately as in <a href="#fig-mean-score-comments-by-subreddit">Figure&nbsp;2</a>:</p>
+<div id="fig-mean-score-comments-by-subreddit" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/mean-score-comments-by-subreddit.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Shows the mean score comments by subreddit</figcaption>
+</figure>
+</div>
+<p>We can see in both the table and figure that they are significantly correlated, which leads to the creation of the <code>interaction_score</code> <strong>additional variable</strong>. This metric is an equal-weighted average of the number of comments and the score in each post.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="level2">
+<h2 class="anchored" data-anchor-id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</h2>
+<p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
+<p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown in <a href="#fig-boxplot-comments-and-score">Figure&nbsp;3</a>:</p>
+<div id="fig-boxplot-comments-and-score" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/boxplot-comments-and-score-by-over-18-status.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Shows the distribution of comments and score by <code>over_18</code> status</figcaption>
+</figure>
+</div>
+<p>We can infer from the plot that NSFW content increases the engagement with the post, although more analysis will be conducted in subsequent sections.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="level2">
+<h2 class="anchored" data-anchor-id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</h2>
+<p>To determine the times of day when a post typically receives the most engagement, we create two <strong>additional variables</strong>: <code>week_of_the_year</code> and <code>hour_of_the_day</code>, both coming from the <code>created_utc</code> column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the <a href="#fig-average-comments-hour-and-week">Figure&nbsp;4</a>:</p>
+<div id="fig-average-comments-hour-and-week" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/average-comments-hour-and-week-data.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Shows the average comments per hour and per week.</figcaption>
+</figure>
+</div>
+<p>This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="subreddit-community-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="subreddit-community-prediction">Subreddit community prediction</h2>
+<p>One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable <code>engagements</code> as the sum of submissions and comments for a particular subreddit.</p>
+<p>One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. In <a href="#fig-aita-counts-over-time">Figure&nbsp;5</a>, we can see this distribution, with many engagements coming from the <code>AmItheA\*hole</code>, <code>relationship_advice</code>, and <code>antiwork</code> subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.</p>
+<div class="cell" data-execution_count="6">
+<div id="fig-aita-counts-over-time" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+        <iframe width="100%" height="700" src="img/eda-plots/counts-over-time-new.html" frameborder="0" allowfullscreen=""></iframe>
+        
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the counts of subreddit engagement per month.</figcaption>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip with Title
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click on the bars of each Subreddit to focus them!</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-predicting-subreddits.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="flair-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="flair-prediction">Flair prediction</h2>
+<p>In this section we take a closer look at the subreddit r/AmItheA*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.</p>
+<p>In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: A*hole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.</p>
+<p>The number of posts that are flaired as each of the flairs in the r/AITA is show in <a href="#fig-aita-flairs-barchart">Figure&nbsp;6</a>:</p>
+<div id="fig-aita-flairs-barchart" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/AITA-flairs-barchart-2022.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Shows the subreddit’s flairs in barchart form.</figcaption>
+</figure>
+</div>
+<p><a href="#fig-aita-flairs-treemap">Figure&nbsp;7</a> shows the relative proportion of them:</p>
+<div id="fig-aita-flairs-treemap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/AITA-flairs-treemap-2022.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Shows the subreddit’s flairs in treemap form.</figcaption>
+</figure>
+</div>
+<p>As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-aita-texts.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nlp-eda-for-emerging-trends-and-controversial-comments" class="level2">
+<h2 class="anchored" data-anchor-id="nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</h2>
+<p><a href="#fig-current-events">Figure&nbsp;8</a> shows a regex count of the current events per Subreddit:</p>
+<div id="fig-current-events" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/current-events.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Shows the topic ocurrence counts in different subreddits.</figcaption>
+</figure>
+</div>
+<p><a href="#fig-engagement-comparison">Figure&nbsp;9</a> shows the performance of controversial posts:</p>
+<div id="fig-engagement-comparison" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/eda-plots/engagement-comparison.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Shows the engagement by varying metrics.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/topic_trends.ipynb">here</a> and <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/engagement_sentiment_corr.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">A project by Team 17.</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17">View the source at GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
