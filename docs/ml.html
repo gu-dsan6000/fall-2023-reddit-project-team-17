@@ -158,7 +158,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link active" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a></li>
+  <li><a href="#flair-text" id="toc-flair-text" class="nav-link" data-scroll-target="#flair-text">Flair Text</a></li>
+  <li><a href="#flair-engagement" id="toc-flair-engagement" class="nav-link" data-scroll-target="#flair-engagement">Flair Engagement</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,6 +188,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="subreddit-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="subreddit-prediction">Subreddit Prediction</h2>
 <div id="fig-random-forest-training" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/random-forest-cv-train-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
@@ -202,8 +212,51 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </div>
+</section>
+<section id="flair-text" class="level2">
+<h2 class="anchored" data-anchor-id="flair-text">Flair Text</h2>
+<div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-text-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+</figure>
+</div>
+<div id="fig-flair-text-test" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-text-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
+</figure>
+</div>
+<div id="fig-flair-text-metrics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-text-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Shows the evalutation metrics for the Random Forest.</figcaption>
+</figure>
+</div>
+</section>
+<section id="flair-engagement" class="level2">
+<h2 class="anchored" data-anchor-id="flair-engagement">Flair Engagement</h2>
+<div id="fig-flair-engagement-train" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-engagement-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+</figure>
+</div>
+<div id="fig-flair-engagement-test" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-engagement-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+</figure>
+</div>
+<div id="fig-flair-engagement-metrics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/flair-engagement-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Shows the evaluation metrics for the Random Forest..</figcaption>
+</figure>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

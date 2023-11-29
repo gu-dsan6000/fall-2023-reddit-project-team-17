@@ -12,6 +12,10 @@ from IPython.display import Markdown
 
 # ML
 
+## Subreddit Prediction
+
+
+
 ![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/random-forest-cv-train-cm.png){#fig-random-forest-training width=70%}
 
 ![Shows the confusion matrix for the Random Forest, evaluated on the testing data.](img/ml-plots/random-forest-cv-test-cm.png){#fig-random-forest-testing width=70%}
@@ -27,3 +31,19 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 
 
 ```
+
+## Flair Text
+
+![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-text-cm-train-plot.png){#fig-flair-text-train width=70%}
+
+![Shows the confusion matrix for the Random Forest, evaluated on the testing data.](img/ml-plots/flair-text-cm-test-plot.png){#fig-flair-text-test width=70%}
+
+![Shows the evalutation metrics for the Random Forest.](img/ml-plots/flair-text-model-metrics-plot.png){#fig-flair-text-metrics width=70%}
+
+## Flair Engagement
+
+![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-engagement-cm-train-plot.png){#fig-flair-engagement-train width=70%}
+
+![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-engagement-cm-test-plot.png){#fig-flair-engagement-test width=70%}
+
+![Shows the evaluation metrics for the Random Forest.](img/ml-plots/flair-engagement-model-metrics-plot.png){#fig-flair-engagement-metrics width=70%}

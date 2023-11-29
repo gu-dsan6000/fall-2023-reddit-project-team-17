@@ -140,6 +140,27 @@
     "text": "Figure 1: Shows the confusion matrix for the Random Forest, evaluated on the training data.\n\n\n\n\n\nFigure 2: Shows the confusion matrix for the Random Forest, evaluated on the testing data.\n\n\n\n\n\n\n        \n        \nFigure 3: Shows the evaluation metrics for the Random Forest Classifier."
   },
   {
+    "objectID": "ml.html#subreddit-prediction",
+    "href": "ml.html#subreddit-prediction",
+    "title": "ML",
+    "section": "",
+    "text": "Figure 1: Shows the confusion matrix for the Random Forest, evaluated on the training data.\n\n\n\n\n\nFigure 2: Shows the confusion matrix for the Random Forest, evaluated on the testing data.\n\n\n\n\n\n\n        \n        \nFigure 3: Shows the evaluation metrics for the Random Forest Classifier."
+  },
+  {
+    "objectID": "ml.html#flair-text",
+    "href": "ml.html#flair-text",
+    "title": "ML",
+    "section": "Flair Text",
+    "text": "Flair Text\n\n\n\nFigure 4: Shows the confusion matrix for the Random Forest, evaluated on the training data.\n\n\n\n\n\nFigure 5: Shows the confusion matrix for the Random Forest, evaluated on the testing data.\n\n\n\n\n\nFigure 6: Shows the evalutation metrics for the Random Forest."
+  },
+  {
+    "objectID": "ml.html#flair-engagement",
+    "href": "ml.html#flair-engagement",
+    "title": "ML",
+    "section": "Flair Engagement",
+    "text": "Flair Engagement\n\n\n\nFigure 7: Shows the confusion matrix for the Random Forest, evaluated on the training data.\n\n\n\n\n\nFigure 8: Shows the confusion matrix for the Random Forest, evaluated on the training data.\n\n\n\n\n\nFigure 9: Shows the evaluation metrics for the Random Forest.."
+  },
+  {
     "objectID": "secondary/authors.html",
     "href": "secondary/authors.html",
     "title": "Authors",
