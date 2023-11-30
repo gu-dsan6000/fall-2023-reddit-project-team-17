@@ -14,11 +14,48 @@ from IPython.display import Markdown
 
 ## Subreddit Prediction
 
+### Baseline Model
 
+For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the `r/relationship_advice` subreddit than any others.
+
+Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline.
+Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if `50%` of our training dataset contains observations from `r/relationship_advice`, `30%` from `r/NoStupidQuestions`, and `20%` from `r/TrueOffMyChest`, our baseline model will predict that a post belongs to the subreddit `r/relationship_advice` with probability `0.50`, the subreddit `r/NoStupidQuestions` with probability `0.30`, and the subreddit `r/TrueOffMyChest` with probability `0.20`. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.
+
+Below, in @fig-baseline-training, we can see the results of the model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as `r/relationship_advice` and `r/NoStupidQuestions`, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.
+
+![Shows the confusion matrix for the Baseline Model, evaluated on the training data.](img/ml-plots/baseline-cv-train-cm.png){#fig-baseline-training width=70%}
+
+Below, in @fig-baseline-testing, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing quite poorly.
+
+![Shows the confusion matrix for the Baseline Model, evaluated on the testing data.](img/ml-plots/baseline-cv-test-cm.png){#fig-baseline-testing width=70%}
+
+Below, in @fig-baseline-eval, is a summary table of the performance metrics for the baseline model on both the training and testing sets. Each metric reports values of approximately 0.20, which is to be expected with such a simple model. We look to improve this performance with a Random Forest model below.
+
+```{python}
+#| echo: false
+#| label: fig-baseline-eval
+#| fig-cap: "Shows the evaluation metrics for the Baseline Model Classifier."
+
+
+width_percentage = "100%"
+IFrame(src='img/ml-plots/baseline-eval.html', width=width_percentage, height=500)
+
+
+```
+
+### Random Forest Model
+
+In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add RF explanation here>.
+
+Below, in @fig-random-forest-training, we can see the results of the model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, `r/relationship_advice` and `r/NoStupidQuestions`, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.
 
 ![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/random-forest-cv-train-cm.png){#fig-random-forest-training width=70%}
 
+Below, in @fig-random-forest-testing, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing well in some aspects, but with plenty of room for improvement.
+
 ![Shows the confusion matrix for the Random Forest, evaluated on the testing data.](img/ml-plots/random-forest-cv-test-cm.png){#fig-random-forest-testing width=70%}
+
+Below, in @fig-random-forest-eval, is a summary table of the performance metrics for the Random Forest model on both the training and testing sets. Each metric reports values of approximately 0.50, which is a great improvement over the baseline model. However, we feel that further improvements can be made in order to achieve higher performance on our subreddit prediction task.
 
 ```{python}
 #| echo: false
@@ -32,6 +69,9 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 
 ```
 
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-predicting-subreddits.ipynb).
+::: 
 
 ## Flair Prediction Using Random Forest Classification
 
@@ -87,11 +127,9 @@ Markdown(md)
 
 ```
 
-
-
-
-
-
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-aita-flair-prediction.ipynb).
+:::
 
 ## Story Generation
 
@@ -121,7 +159,9 @@ We were ready to generate stories with the trained. Some examples are shown in @
 
 Although our model cannot yet generate cohesive stories, it's important to recognize the success in the underlying process. The characters produced by the model consistently combine to form coherent words, an ability that demonstrates the model's understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model's output aligns well with the objectives of our project.
 
-
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb).
+:::
 
 ## ML Models in `r/NoStupidQuestions`
 
@@ -164,5 +204,9 @@ The model used to perform this summarization was a “facebook/bart-large-cnn”
 Another topic that we needed to understand in relation to the COVID-19 comments in `r/NoStupidQuestions` was the sentiment. To do this we used “yiyanghkust/finbert-tone” [@huang_span_2023] on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in @fig-sentiment-analysis-plot. Additionally, this is just a small subset to show that the model worked.
 
 
-![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/sentiment_analysis_plot.png){#fig-sentiment-analysis-plot}
+![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/sentiment_analysis.png){#fig-sentiment-analysis-plot}
+
+::: {.callout-note appearance="simple"}
+The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/topic_summarization.ipynb).
+:::
 

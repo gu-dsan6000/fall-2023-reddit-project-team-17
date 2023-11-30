@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300, "strokeOpacity": 0}, "axis": {"labelFontSize": 12, "titleFontSize": 12}, "title": {"fontSize": 16}}, "data": {"name": "data-648e250b16531236f32888f4114e7737"}, "mark": "bar", "encoding": {"color": {"condition": {"field": "dataset", "scale": {"domain": ["train", "test"], "range": ["#ff4500", "#7a9299"]}, "type": "nominal", "selection": "Random"}, "value": "lightgray"}, "column": {"field": "metric", "header": {"labelAngle": 0, "labelOrient": "top"}, "type": "nominal"}, "x": {"field": "dataset", "sort": ["train", "test"], "title": "Dataset", "type": "nominal"}, "y": {"field": "value", "scale": {"domain": [0, 1]}, "title": "Evaluation", "type": "quantitative"}}, "selection": {"Random": {"type": "single", "fields": ["dataset"]}}, "title": "Baseline Model Evaluation Metrics", "width": 120, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-648e250b16531236f32888f4114e7737": [{"dataset": "train", "metric": "accuracy", "value": 0.1986619426845741}, {"dataset": "test", "metric": "accuracy", "value": 0.1973653233978525}, {"dataset": "train", "metric": "f1", "value": 0.1987017063048047}, {"dataset": "test", "metric": "f1", "value": 0.1973401893646371}, {"dataset": "train", "metric": "precision", "value": 0.198742049677304}, {"dataset": "test", "metric": "precision", "value": 0.1973181247935554}, {"dataset": "train", "metric": "recall", "value": 0.1986619426845741}, {"dataset": "test", "metric": "recall", "value": 0.1973653233978525}, {"dataset": "train", "metric": "tprate", "value": 0.1986619426845741}, {"dataset": "test", "metric": "tprate", "value": 0.1973653233978525}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

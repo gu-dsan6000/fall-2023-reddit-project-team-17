@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.333">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,8 +74,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
@@ -182,7 +181,11 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link active" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a></li>
+  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link active" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a>
+  <ul class="collapse">
+  <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model">Baseline Model</a></li>
+  <li><a href="#random-forest-model" id="toc-random-forest-model" class="nav-link" data-scroll-target="#random-forest-model">Random Forest Model</a></li>
+  </ul></li>
   <li><a href="#flair-prediction-using-random-forest-classification" id="toc-flair-prediction-using-random-forest-classification" class="nav-link" data-scroll-target="#flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</a></li>
   <li><a href="#story-generation" id="toc-story-generation" class="nav-link" data-scroll-target="#story-generation">Story Generation</a></li>
   <li><a href="#ml-models-in-rnostupidquestions" id="toc-ml-models-in-rnostupidquestions" class="nav-link" data-scroll-target="#ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></a>
@@ -215,28 +218,75 @@ div.csl-indent {
 
 <section id="subreddit-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="subreddit-prediction">Subreddit Prediction</h2>
+<section id="baseline-model" class="level3">
+<h3 class="anchored" data-anchor-id="baseline-model">Baseline Model</h3>
+<p>For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the <code>r/relationship_advice</code> subreddit than any others.</p>
+<p>Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline. Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if <code>50%</code> of our training dataset contains observations from <code>r/relationship_advice</code>, <code>30%</code> from <code>r/NoStupidQuestions</code>, and <code>20%</code> from <code>r/TrueOffMyChest</code>, our baseline model will predict that a post belongs to the subreddit <code>r/relationship_advice</code> with probability <code>0.50</code>, the subreddit <code>r/NoStupidQuestions</code> with probability <code>0.30</code>, and the subreddit <code>r/TrueOffMyChest</code> with probability <code>0.20</code>. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.</p>
+<p>Below, in <a href="#fig-baseline-training">Figure&nbsp;1</a>, we can see the results of the model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.</p>
+<div id="fig-baseline-training" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/baseline-cv-train-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Shows the confusion matrix for the Baseline Model, evaluated on the training data.</figcaption>
+</figure>
+</div>
+<p>Below, in <a href="#fig-baseline-testing">Figure&nbsp;2</a>, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing quite poorly.</p>
+<div id="fig-baseline-testing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/baseline-cv-test-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Shows the confusion matrix for the Baseline Model, evaluated on the testing data.</figcaption>
+</figure>
+</div>
+<p>Below, in <a href="#fig-baseline-eval">Figure&nbsp;3</a>, is a summary table of the performance metrics for the baseline model on both the training and testing sets. Each metric reports values of approximately 0.20, which is to be expected with such a simple model. We look to improve this performance with a Random Forest model below.</p>
+<div class="cell" data-execution_count="2">
+<div id="fig-baseline-eval" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+        <iframe width="100%" height="500" src="img/ml-plots/baseline-eval.html" frameborder="0" allowfullscreen=""></iframe>
+        
+<figcaption class="figure-caption">Figure&nbsp;3: Shows the evaluation metrics for the Baseline Model Classifier.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="random-forest-model" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-model">Random Forest Model</h3>
+<p>In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add rf="" explanation="" here="">.</add></p>
+<p>Below, in <a href="#fig-random-forest-training">Figure&nbsp;4</a>, we can see the results of the model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.</p>
 <div id="fig-random-forest-training" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/random-forest-cv-train-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
+<p>Below, in <a href="#fig-random-forest-testing">Figure&nbsp;5</a>, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing well in some aspects, but with plenty of room for improvement.</p>
 <div id="fig-random-forest-testing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/random-forest-cv-test-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
 </figure>
 </div>
-<div class="cell" data-execution_count="2">
+<p>Below, in <a href="#fig-random-forest-eval">Figure&nbsp;6</a>, is a summary table of the performance metrics for the Random Forest model on both the training and testing sets. Each metric reports values of approximately 0.50, which is a great improvement over the baseline model. However, we feel that further improvements can be made in order to achieve higher performance on our subreddit prediction task.</p>
+<div class="cell" data-execution_count="3">
 <div id="fig-random-forest-eval" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
         <iframe width="100%" height="500" src="img/ml-plots/random-forest-eval.html" frameborder="0" allowfullscreen=""></iframe>
         
-<figcaption class="figure-caption">Figure&nbsp;3: Shows the evaluation metrics for the Random Forest Classifier.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: Shows the evaluation metrics for the Random Forest Classifier.</figcaption>
 </figure>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-predicting-subreddits.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="flair-prediction-using-random-forest-classification" class="level2">
 <h2 class="anchored" data-anchor-id="flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</h2>
@@ -245,19 +295,19 @@ div.csl-indent {
 <div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-text-test" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-text-metrics" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: Shows the evalutation metrics for the Random Forest.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Shows the evalutation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
 <p>Based on the metrics above, this model did not predict the flairs of these posts particularly accurately, but performed better than a blind random guess, which would have a theoretical accuracy of 25% compared to our model’s ~30-40%. For both the training and testing subsets, the model did an extremely poor job at predicting “Not the A-hole posts”. This model does perform reasonably well when predicting “Everyone Sucks” and “Asshole” flaired posts, but does not predict the posts with the more positively connoted flairs (No A-holes here and Not the A-hole).</p>
@@ -265,25 +315,25 @@ div.csl-indent {
 <div id="fig-flair-engagement-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;10: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-engagement-test" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;8: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-engagement-metrics" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Shows the evaluation metrics for the Random Forest.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;12: Shows the evaluation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
 <p>As shown above, this model performs fairly similarly to the previous text-based model but with some slight improvements in some of the model performance metrics along with more comparative performance metrics of the model for the training and test sets. This model more effectively predicted posts with the flairs “Asshole” and “Everyone Sucks” compared to the text-based model, but similarly struggled to correctly identify posts with more positive flairs. Ultimately, while this model does perform slightly better than the previous text-based model, especially at predicting the posts with more negative flairs attached, it still would not serve as an effective tool for accurately predicting these flairs on a larger scale. It is possible that these data are too homogeneous to be easily differentiated using a machine learning model, or using different models and/or hyperparameters may generate more accurate predictions.</p>
 <p>We also include the evaluation metrics in <a href="#tbl-flair-model-metrics-df">Table&nbsp;1</a> below:</p>
-<div class="cell tbl-cap-location-bottom" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell tbl-cap-location-bottom" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div id="tbl-flair-model-metrics-df" class="anchored">
 <table class="table table-sm table-striped small">
 <caption>Table&nbsp;1: Displays the evaluation metrics of both engagement and text-based models.</caption>
@@ -337,17 +387,27 @@ div.csl-indent {
 </div>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-aita-flair-prediction.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="story-generation" class="level2">
 <h2 class="anchored" data-anchor-id="story-generation">Story Generation</h2>
 <p>In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using <code>PySpark</code> and <code>PyTorch</code>. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.</p>
 <p>The model’s architecture is based on a Long Short-Term Memory (LSTM) layer, which captures long-term dependencies in sequential data. In our setup, we defined hyperparameters such as the input size of 128, hidden state at 256, and used a two-layer LSTM. The model has 12,766,510 trainable parameters.</p>
 <p>For the training process, we set the learning rate at 0.01, a maximum of 100 epochs, and a batch size of 64. To ensure the model didn’t overfit, we employed an early stopping mechanism with a patience of 5 epochs and a validation loss improvement threshold of 0.01. The Adam optimizer was chosen for optimization, paired with a cross-entropy loss function for calculating the model’s error rate. The total training time was 1h 41 mins.</p>
-<p>The training and validation perplexities are shown in <a href="#fig-rnn-training-validation-perplexity">Figure&nbsp;10</a>:</p>
+<p>The training and validation perplexities are shown in <a href="#fig-rnn-training-validation-perplexity">Figure&nbsp;13</a>:</p>
 <div id="fig-rnn-training-validation-perplexity" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/training-validation-perplexity-plot-rnn.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;10: Shows the training and validation perplexities of the RNN training process</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;13: Shows the training and validation perplexities of the RNN training process</figcaption>
 </figure>
 </div>
 <p>To evaluate the model’s effectiveness, we focused on loss and perplexity. A lower perplexity value suggests a higher predictive accuracy of the model. The model achieved a test loss of 1.6227 and a perplexity value of 5.0667, indicating a strong performance in predictive capabilities.</p>
@@ -382,6 +442,16 @@ div.csl-indent {
 </table>
 </div>
 <p>Although our model cannot yet generate cohesive stories, it’s important to recognize the success in the underlying process. The characters produced by the model consistently combine to form coherent words, an ability that demonstrates the model’s understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model’s output aligns well with the objectives of our project.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb">here</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ml-models-in-rnostupidquestions" class="level2">
 <h2 class="anchored" data-anchor-id="ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></h2>
@@ -411,12 +481,22 @@ div.csl-indent {
 </section>
 <section id="sentiment-analysis-in-rnostupidquestions" class="level3">
 <h3 class="anchored" data-anchor-id="sentiment-analysis-in-rnostupidquestions">Sentiment Analysis in <code>r/NoStupidQuestions</code></h3>
-<p>Another topic that we needed to understand in relation to the COVID-19 comments in <code>r/NoStupidQuestions</code> was the sentiment. To do this we used “yiyanghkust/finbert-tone” <span class="citation" data-cites="huang_span_2023">[<a href="#ref-huang_span_2023" role="doc-biblioref">2</a>]</span> on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in <a href="#fig-sentiment-analysis-plot">Figure&nbsp;11</a>. Additionally, this is just a small subset to show that the model worked.</p>
+<p>Another topic that we needed to understand in relation to the COVID-19 comments in <code>r/NoStupidQuestions</code> was the sentiment. To do this we used “yiyanghkust/finbert-tone” <span class="citation" data-cites="huang_span_2023">[<a href="#ref-huang_span_2023" role="doc-biblioref">2</a>]</span> on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in <a href="#fig-sentiment-analysis-plot">Figure&nbsp;14</a>. Additionally, this is just a small subset to show that the model worked.</p>
 <div id="fig-sentiment-analysis-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="img/ml-plots/sentiment_analysis_plot.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;11: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
+<p><img src="img/ml-plots/sentiment_analysis.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
 </figure>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The code used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/topic_summarization.ipynb">here</a>.</p>
+</div>
+</div>
 </div>
 
 
