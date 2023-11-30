@@ -181,17 +181,13 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link active" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#analysis-report" id="toc-analysis-report" class="nav-link" data-scroll-target="#analysis-report">Analysis Report</a>
   <ul class="collapse">
-  <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model">Baseline Model</a></li>
-  <li><a href="#random-forest-model" id="toc-random-forest-model" class="nav-link" data-scroll-target="#random-forest-model">Random Forest Model</a></li>
-  </ul></li>
+  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a></li>
   <li><a href="#flair-prediction-using-random-forest-classification" id="toc-flair-prediction-using-random-forest-classification" class="nav-link" data-scroll-target="#flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</a></li>
   <li><a href="#story-generation" id="toc-story-generation" class="nav-link" data-scroll-target="#story-generation">Story Generation</a></li>
-  <li><a href="#ml-models-in-rnostupidquestions" id="toc-ml-models-in-rnostupidquestions" class="nav-link" data-scroll-target="#ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></a>
-  <ul class="collapse">
-  <li><a href="#top-comment-summary-generation" id="toc-top-comment-summary-generation" class="nav-link" data-scroll-target="#top-comment-summary-generation">Top Comment Summary Generation</a></li>
-  <li><a href="#sentiment-analysis-in-rnostupidquestions" id="toc-sentiment-analysis-in-rnostupidquestions" class="nav-link" data-scroll-target="#sentiment-analysis-in-rnostupidquestions">Sentiment Analysis in <code>r/NoStupidQuestions</code></a></li>
+  <li><a href="#ml-models-in-rnostupidquestions" id="toc-ml-models-in-rnostupidquestions" class="nav-link" data-scroll-target="#ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -216,11 +212,22 @@ div.csl-indent {
 
 </header>
 
-<section id="subreddit-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="subreddit-prediction">Subreddit Prediction</h2>
-<section id="baseline-model" class="level3">
-<h3 class="anchored" data-anchor-id="baseline-model">Baseline Model</h3>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
+<p>This section focuses on Machine Learning (ML) methods to answer our research questions. In particular, our first two goals for this section involve identifying characteristics of a Reddit post, while our last two goals are more text-based, involving Reddit post generation and summarization.</p>
+<p>First, we focus on predicting which subreddit a post belongs to based on its text. We provide a Random Forest model for this classification task, as well as a baseline model for comparison. In doing so, we find significant improvement from the baseline model to the Random Forest model, with areas of improvement still to address.</p>
+<p>Subsequently, we attempt to predict the flairs of posts in <code>r/AmItheA\*hole</code> (<code>r/AITA</code>) using various possible predictors. We apply two Random Forest models using the text of posts in <code>r/AITA</code> and the user engagement on these posts, respectively. Similar to our first classification task, we find that these models perform better than a blind guess or baseline, but still have a lot of room for improvement.</p>
+<p>Then, we aim to create a model that can generate stories for new Reddit posts. We train a recurrent neural network (RNN) with a Long Short-Term Memory architecture on text from a mix of top stories from various subreddits and popular books. While the model successfully generates text that demonstrates an understanding of basic linguistic structures, it has yet to produce fully cohesive stories, marking a significant step towards more complex narrative generation.</p>
+<p>Lastly, we use two pre-trained models, one for summarization and one for sentiment analysis, to understand topics selected in the natural language processing portion of our project within the <code>r/NoStupidQuestions</code> subreddit. With the summarization model, we identify popular comments of interest and are able to greatly reduce the amount of text while keeping the meaning of the comment. Additionally, the sentiment analysis model is able to effectively classify the sentiment of the comments in a subreddit, furthering our understanding of the discourse in the <code>r/NoStupidQuestions</code> subreddit.</p>
+<p>Overall, these studies highlight the challenges and progress in using ML for subreddit content analysis, demonstrating advancements from simple probabilistic approaches to more sophisticated models like Random Forest and RNNs. The models have varying degrees of success, suggesting room for further improvement in these areas.</p>
+</section>
+<section id="analysis-report" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-report">Analysis Report</h2>
+<section id="subreddit-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="subreddit-prediction">Subreddit Prediction</h3>
 <p>For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the <code>r/relationship_advice</code> subreddit than any others.</p>
+<section id="baseline-model" class="level4">
+<h4 class="anchored" data-anchor-id="baseline-model">Baseline Model</h4>
 <p>Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline. Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if <code>50%</code> of our training dataset contains observations from <code>r/relationship_advice</code>, <code>30%</code> from <code>r/NoStupidQuestions</code>, and <code>20%</code> from <code>r/TrueOffMyChest</code>, our baseline model will predict that a post belongs to the subreddit <code>r/relationship_advice</code> with probability <code>0.50</code>, the subreddit <code>r/NoStupidQuestions</code> with probability <code>0.30</code>, and the subreddit <code>r/TrueOffMyChest</code> with probability <code>0.20</code>. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.</p>
 <p>Below, in <a href="#fig-baseline-training">Figure&nbsp;1</a>, we can see the results of the model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.</p>
 <div id="fig-baseline-training" class="quarto-figure quarto-figure-center anchored">
@@ -248,8 +255,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="random-forest-model" class="level3">
-<h3 class="anchored" data-anchor-id="random-forest-model">Random Forest Model</h3>
+<section id="random-forest-model" class="level4">
+<h4 class="anchored" data-anchor-id="random-forest-model">Random Forest Model</h4>
 <p>In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add rf="" explanation="" here="">.</add></p>
 <p>Below, in <a href="#fig-random-forest-training">Figure&nbsp;4</a>, we can see the results of the model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.</p>
 <div id="fig-random-forest-training" class="quarto-figure quarto-figure-center anchored">
@@ -288,8 +295,8 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="flair-prediction-using-random-forest-classification" class="level2">
-<h2 class="anchored" data-anchor-id="flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</h2>
+<section id="flair-prediction-using-random-forest-classification" class="level3">
+<h3 class="anchored" data-anchor-id="flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</h3>
 <p>In this section we attempted to predict what flair is assigned to posts in r/AmItheAsshole (r/AITA) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on r/AITA. We then compared these models with their varying predictors and compared them to a baseline model (random chance).</p>
 <p>The first RF model we applied to the r/AITA data using token counts of the five hundred most common words which were extracted using CountVectorizer in the NLP section previously. We chose fifty trees as our hyperparameter to be used across all models used in this section to allow for consistent comparisons. However, due to the imbalanced nature of the r/AITA posts (as established in the EDA section of this project), the dataset was downsampled so that none of the four primary flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here) are overrepresented to the extent that they would significantly hinder model performance. After a training and testing data split, the model was trained on the training subset and various model metrics were calculated for both the training and testing subsets via a SparkML pipeline. Measures and visualizations of this model’s efficacy are displayed below.</p>
 <div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
@@ -398,8 +405,21 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="story-generation" class="level2">
-<h2 class="anchored" data-anchor-id="story-generation">Story Generation</h2>
+<section id="story-generation" class="level3">
+<h3 class="anchored" data-anchor-id="story-generation">Story Generation</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The saved model used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth">here</a>.</p>
+</div>
+</div>
 <p>In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using <code>PySpark</code> and <code>PyTorch</code>. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.</p>
 <p>The model’s architecture is based on a Long Short-Term Memory (LSTM) layer, which captures long-term dependencies in sequential data. In our setup, we defined hyperparameters such as the input size of 128, hidden state at 256, and used a two-layer LSTM. The model has 12,766,510 trainable parameters.</p>
 <p>For the training process, we set the learning rate at 0.01, a maximum of 100 epochs, and a batch size of 64. To ensure the model didn’t overfit, we employed an early stopping mechanism with a patience of 5 epochs and a validation loss improvement threshold of 0.01. The Adam optimizer was chosen for optimization, paired with a cross-entropy loss function for calculating the model’s error rate. The total training time was 1h 41 mins.</p>
@@ -453,14 +473,14 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="ml-models-in-rnostupidquestions" class="level2">
-<h2 class="anchored" data-anchor-id="ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></h2>
-<section id="top-comment-summary-generation" class="level3">
-<h3 class="anchored" data-anchor-id="top-comment-summary-generation">Top Comment Summary Generation</h3>
+<section id="ml-models-in-rnostupidquestions" class="level3">
+<h3 class="anchored" data-anchor-id="ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></h3>
+<section id="top-comment-summary-generation" class="level4">
+<h4 class="anchored" data-anchor-id="top-comment-summary-generation">Top Comment Summary Generation</h4>
 <p>After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit <code>r/NoStupidQuestions</code>. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below.</p>
 <p>The model used to perform this summarization was a “facebook/bart-large-cnn” <span class="citation" data-cites="lewis_bart_2019">[<a href="#ref-lewis_bart_2019" role="doc-biblioref">1</a>]</span>.</p>
-<section id="before-summarization-after-stemming-and-removing-stopwords" class="level4">
-<h4 class="anchored" data-anchor-id="before-summarization-after-stemming-and-removing-stopwords">Before Summarization (After Stemming and removing StopWords):</h4>
+<section id="before-summarization-after-stemming-and-removing-stopwords" class="level5">
+<h5 class="anchored" data-anchor-id="before-summarization-after-stemming-and-removing-stopwords">Before Summarization (After Stemming and removing StopWords):</h5>
 <blockquote class="blockquote">
 <p>I can understand that frustration and getting tired of the cynicism or generation of toxic beliefs, but it should be noted that about that bit from his 1999 special about the immune system and all that, his family has outright said:</p>
 <p>Several times during the pandemic, Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased,” in which he mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio.</p>
@@ -472,15 +492,15 @@ div.csl-indent {
 <p>Kelly Carlin said her father “always took the stand that more speech is better than less speech” and would have supported Chappelle’s right to perform the special. But, she added, “if you’re a comedian, you’ve got to be funny.”</p>
 </blockquote>
 </section>
-<section id="after-summarization" class="level4">
-<h4 class="anchored" data-anchor-id="after-summarization">After Summarization:</h4>
+<section id="after-summarization" class="level5">
+<h5 class="anchored" data-anchor-id="after-summarization">After Summarization:</h5>
 <blockquote class="blockquote">
 <p>Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased.” He mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio. Some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines. “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. ’I’m like, no. My dad was pro-science,. pro-rational thinking, pro-evidence-based medicine.</p>
 </blockquote>
 </section>
 </section>
-<section id="sentiment-analysis-in-rnostupidquestions" class="level3">
-<h3 class="anchored" data-anchor-id="sentiment-analysis-in-rnostupidquestions">Sentiment Analysis in <code>r/NoStupidQuestions</code></h3>
+<section id="sentiment-analysis-in-rnostupidquestions" class="level4">
+<h4 class="anchored" data-anchor-id="sentiment-analysis-in-rnostupidquestions">Sentiment Analysis in <code>r/NoStupidQuestions</code></h4>
 <p>Another topic that we needed to understand in relation to the COVID-19 comments in <code>r/NoStupidQuestions</code> was the sentiment. To do this we used “yiyanghkust/finbert-tone” <span class="citation" data-cites="huang_span_2023">[<a href="#ref-huang_span_2023" role="doc-biblioref">2</a>]</span> on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in <a href="#fig-sentiment-analysis-plot">Figure&nbsp;14</a>. Additionally, this is just a small subset to show that the model worked.</p>
 <div id="fig-sentiment-analysis-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -503,13 +523,14 @@ div.csl-indent {
 
 </section>
 </section>
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-lewis_bart_2019" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">Lewis M, Liu Y, Goyal N, Ghazvininejad M, Mohamed A, Levy O, Stoyanov V, Zettlemoyer L. <span>BART</span>: <span>Denoising</span> <span>Sequence</span>-to-<span>Sequence</span> <span>Pre</span>-training for <span>Natural</span> <span>Language</span> <span>Generation</span>, <span>Translation</span>, and <span>Comprehension</span>. 2019 [accessed 2023 Nov 30]. <a href="https://arxiv.org/abs/1910.13461">https://arxiv.org/abs/1910.13461</a>. doi:<a href="https://doi.org/10.48550/ARXIV.1910.13461">10.48550/ARXIV.1910.13461</a></div>
 </div>
 <div id="ref-huang_span_2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Huang AH, Wang H, Yang Y. <span>&lt;</span>Span style="font-variant:small-caps;"<span>&gt;</span><span>FinBERT</span><span>&lt;</span>/span<span>&gt;</span> : <span>A</span> <span>Large</span> <span>Language</span> <span>Model</span> for <span>Extracting</span> <span>Information</span> from <span>Financial</span> <span>Text</span>*. Contemporary Accounting Research. 2023 [accessed 2023 Nov 30];40(2):806–841. <a href="https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832">https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832</a>. doi:<a href="https://doi.org/10.1111/1911-3846.12832">10.1111/1911-3846.12832</a></div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Huang AH, Wang H, Yang Y. <span>FinBERT</span>: <span>A</span> <span>Large</span> <span>Language</span> <span>Model</span> for <span>Extracting</span> <span>Information</span> from <span>Financial</span> <span>Text</span>. Contemporary Accounting Research. 2023 [accessed 2023 Nov 30];40(2):806–841. <a href="https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832">https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832</a>. doi:<a href="https://doi.org/10.1111/1911-3846.12832">10.1111/1911-3846.12832</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

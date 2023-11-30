@@ -12,11 +12,27 @@ from IPython.display import Markdown
 
 # ML
 
-## Subreddit Prediction
+## Executive Summary
 
-### Baseline Model
+This section focuses on Machine Learning (ML) methods to answer our research questions. In particular, our first two goals for this section involve identifying characteristics of a Reddit post, while our last two goals are more text-based, involving Reddit post generation and summarization.
+
+First, we focus on predicting which subreddit a post belongs to based on its text. We provide a Random Forest model for this classification task, as well as a baseline model for comparison. In doing so, we find significant improvement from the baseline model to the Random Forest model, with areas of improvement still to address.
+
+Subsequently, we attempt to predict the flairs of posts in `r/AmItheA\*hole` (`r/AITA`) using various possible predictors. We apply two Random Forest models using the text of posts in `r/AITA` and the user engagement on these posts, respectively. Similar to our first classification task, we find that these models perform better than a blind guess or baseline, but still have a lot of room for improvement. 
+
+Then, we aim to create a model that can generate stories for new Reddit posts. We train a recurrent neural network (RNN) with a Long Short-Term Memory architecture on text from a mix of top stories from various subreddits and popular books. While the model successfully generates text that demonstrates an understanding of basic linguistic structures, it has yet to produce fully cohesive stories, marking a significant step towards more complex narrative generation.
+
+Lastly, we use two pre-trained models, one for summarization and one for sentiment analysis, to understand topics selected in the natural language processing portion of our project within the `r/NoStupidQuestions` subreddit. With the summarization model, we identify popular comments of interest and are able to greatly reduce the amount of text while keeping the meaning of the comment. Additionally, the sentiment analysis model is able to effectively classify the sentiment of the comments in a subreddit, furthering our understanding of the discourse in the `r/NoStupidQuestions` subreddit.
+
+Overall, these studies highlight the challenges and progress in using ML for subreddit content analysis, demonstrating advancements from simple probabilistic approaches to more sophisticated models like Random Forest and RNNs. The models have varying degrees of success, suggesting room for further improvement in these areas.
+
+## Analysis Report
+
+### Subreddit Prediction
 
 For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the `r/relationship_advice` subreddit than any others.
+
+#### Baseline Model
 
 Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline.
 Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if `50%` of our training dataset contains observations from `r/relationship_advice`, `30%` from `r/NoStupidQuestions`, and `20%` from `r/TrueOffMyChest`, our baseline model will predict that a post belongs to the subreddit `r/relationship_advice` with probability `0.50`, the subreddit `r/NoStupidQuestions` with probability `0.30`, and the subreddit `r/TrueOffMyChest` with probability `0.20`. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.
@@ -43,7 +59,7 @@ IFrame(src='img/ml-plots/baseline-eval.html', width=width_percentage, height=500
 
 ```
 
-### Random Forest Model
+#### Random Forest Model
 
 In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add RF explanation here>.
 
@@ -73,7 +89,7 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-predicting-subreddits.ipynb).
 ::: 
 
-## Flair Prediction Using Random Forest Classification
+### Flair Prediction Using Random Forest Classification
 
 In this section we attempted to predict what flair is assigned to posts in r/AmItheAsshole (r/AITA) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on r/AITA. We then compared these models with their varying predictors and compared them to a baseline model (random chance).
 
@@ -131,7 +147,11 @@ Markdown(md)
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-aita-flair-prediction.ipynb).
 :::
 
-## Story Generation
+### Story Generation
+
+::: {.callout-note appearance="tip"}
+The saved model used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth).
+:::
 
 In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using `PySpark` and `PyTorch`. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.
 
@@ -163,9 +183,9 @@ Although our model cannot yet generate cohesive stories, it's important to recog
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb).
 :::
 
-## ML Models in `r/NoStupidQuestions`
+### ML Models in `r/NoStupidQuestions`
 
-### Top Comment Summary Generation 
+#### Top Comment Summary Generation 
 
 
 After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit `r/NoStupidQuestions`. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below. 
@@ -173,7 +193,7 @@ After all of the NLP work to identify comments that were scored high and contain
 The model used to perform this summarization was a “facebook/bart-large-cnn” [@lewis_bart_2019].
 
 
-#### Before Summarization (After Stemming and removing StopWords):
+##### Before Summarization (After Stemming and removing StopWords):
 
 > I can understand that frustration and getting tired of the cynicism or generation of toxic beliefs, but it should be noted that about that bit from his 1999 special about the immune system and all that, his family has outright said:
 >
@@ -193,13 +213,13 @@ The model used to perform this summarization was a “facebook/bart-large-cnn”
 
 
 
-#### After Summarization:
+##### After Summarization:
 
 > Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased.” He mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio. Some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines. “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. ‘I’m like, no. My dad was pro-science,. pro-rational thinking, pro-evidence-based medicine.
 
 
 
-### Sentiment Analysis in `r/NoStupidQuestions`
+#### Sentiment Analysis in `r/NoStupidQuestions`
 
 Another topic that we needed to understand in relation to the COVID-19 comments in `r/NoStupidQuestions` was the sentiment. To do this we used “yiyanghkust/finbert-tone” [@huang_span_2023] on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in @fig-sentiment-analysis-plot. Additionally, this is just a small subset to show that the model worked.
 
