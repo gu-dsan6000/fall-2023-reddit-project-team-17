@@ -122,3 +122,47 @@ We were ready to generate stories with the trained. Some examples are shown in @
 Although our model cannot yet generate cohesive stories, it's important to recognize the success in the underlying process. The characters produced by the model consistently combine to form coherent words, an ability that demonstrates the model's understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model's output aligns well with the objectives of our project.
 
 
+
+## ML Models in `r/NoStupidQuestions`
+
+### Top Comment Summary Generation 
+
+
+After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit `r/NoStupidQuestions`. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below. 
+
+The model used to perform this summarization was a “facebook/bart-large-cnn” [@lewis_bart_2019].
+
+
+#### Before Summarization (After Stemming and removing StopWords):
+
+> I can understand that frustration and getting tired of the cynicism or generation of toxic beliefs, but it should be noted that about that bit from his 1999 special about the immune system and all that, his family has outright said:
+>
+> Several times during the pandemic, Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased,” in which he mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio.
+>
+> (“In my neighborhood, no one ever got polio,” he fulminates. “No one, ever. You know why? ’Cause we swam in raw sewage. It strengthened our immune systems. The polio never had a prayer.”)
+>
+> As Kelly Carlin explained, some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines.
+>
+> “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. “And I’m like, no. My dad was pro-science, pro-rational thinking, pro-evidence-based medicine. The man was a heart patient for 30 years. When he was a kid and the polio vaccine became available, he got the polio vaccine.”
+>
+> ...
+>
+> In efforts to divine his opinion, some Carlin fans pointed to a 1990 interview he gave to Larry King, when he expressed his misgivings about the crude standup of Andrew Dice Clay: “His targets are underdogs, and comedy has traditionally picked on power — people who abuse their power,” Carlin said at the time.
+>
+> Kelly Carlin said her father “always took the stand that more speech is better than less speech” and would have supported Chappelle’s right to perform the special. But, she added, “if you’re a comedian, you’ve got to be funny.”
+
+
+
+#### After Summarization:
+
+> Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased.” He mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio. Some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines. “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. ‘I’m like, no. My dad was pro-science,. pro-rational thinking, pro-evidence-based medicine.
+
+
+
+### Sentiment Analysis in `r/NoStupidQuestions`
+
+Another topic that we needed to understand in relation to the COVID-19 comments in `r/NoStupidQuestions` was the sentiment. To do this we used “yiyanghkust/finbert-tone” [@huang_span_2023] on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in @fig-sentiment-analysis-plot. Additionally, this is just a small subset to show that the model worked.
+
+
+![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/sentiment_analysis_plot.png){#fig-sentiment-analysis-plot}
+
