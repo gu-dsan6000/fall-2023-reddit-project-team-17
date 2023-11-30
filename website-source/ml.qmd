@@ -32,7 +32,12 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 
 ```
 
-## Flair Text
+
+## Flair Prediction Using Random Forest Classification
+
+In this section we attempted to predict what flair is assigned to posts in r/AmItheAsshole (r/AITA) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on r/AITA. We then compared these models with their varying predictors and compared them to a baseline model (random chance).
+
+The first RF model we applied to the r/AITA data using token counts of the five hundred most common words which were extracted using CountVectorizer in the NLP section previously. We chose fifty trees as our hyperparameter to be used across all models used in this section to allow for consistent comparisons. However, due to the imbalanced nature of the r/AITA posts (as established in the EDA section of this project), the dataset was downsampled so that none of the four primary flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here) are overrepresented to the extent that they would significantly hinder model performance. After a training and testing data split, the model was trained on the training subset and various model metrics were calculated for both the training and testing subsets via a SparkML pipeline. Measures and visualizations of this model’s efficacy are displayed below.
 
 ![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-text-cm-train-plot.png){#fig-flair-text-train width=70%}
 
@@ -40,13 +45,52 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 
 ![Shows the evalutation metrics for the Random Forest.](img/ml-plots/flair-text-model-metrics-plot.png){#fig-flair-text-metrics width=70%}
 
-## Flair Engagement
+Based on the metrics above, this model did not predict the flairs of these posts particularly accurately, but performed better than a blind random guess, which would have a theoretical accuracy of 25% compared to our model’s ~30-40%. For both the training and testing subsets, the model did an extremely poor job at predicting “Not the A-hole posts”. This model does perform reasonably well when predicting “Everyone Sucks” and “Asshole” flaired posts, but does not predict the posts with the more positively connoted flairs (No A-holes here and Not the A-hole).
+
+Another potential set of predictors we identified were measures of user engagement, namely post “score” (number of upvotes minus number of downvotes) and the number of comments under a post. We applied a similar model using these predictors via another SparkML pipeline and compared them to the previous text-based model. The measures of model performance and confusion matrices are visualized below as such.
 
 ![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-engagement-cm-train-plot.png){#fig-flair-engagement-train width=70%}
 
 ![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/flair-engagement-cm-test-plot.png){#fig-flair-engagement-test width=70%}
 
 ![Shows the evaluation metrics for the Random Forest.](img/ml-plots/flair-engagement-model-metrics-plot.png){#fig-flair-engagement-metrics width=70%}
+
+As shown above, this model performs fairly similarly to the previous text-based model but with some slight improvements in some of the model performance metrics along with more comparative performance metrics of the model for the training and test sets. This model more effectively predicted posts with the flairs “Asshole” and “Everyone Sucks”  compared to the text-based model, but similarly struggled to correctly identify posts with more positive flairs. Ultimately, while this model does perform slightly better than the previous text-based model, especially at predicting the posts with more negative flairs attached, it still would not serve as an effective tool for accurately predicting these flairs on a larger scale. It is possible that these data are too homogeneous to be easily differentiated using a machine learning model, or using different models and/or hyperparameters may generate more accurate predictions.
+
+We also include the evaluation metrics in @tbl-flair-model-metrics-df below:
+
+
+```{python}
+#| echo: false
+#| label: tbl-flair-model-metrics-df
+#| tbl-cap-location: bottom
+#| tbl-cap: Displays the evaluation metrics of both engagement and text-based models.
+
+
+df_1 = pd.read_csv("../data/ml-data/flair-engagement-model-metrics-df.csv")
+		
+df_1 = df_1.rename(columns={"Unnamed: 0": "Metric", "training": "Engagement Training", "test": "Engagement Test"})
+
+
+df_2 = pd.read_csv("../data/ml-data/flair-text-model-metrics-df.csv")
+
+df_2 = df_2.rename(columns={"Unnamed: 0": "Metric Text", "training": "Text Training", "test": "Text Test"})
+
+joined_df = pd.concat([df_1, df_2], axis=1)
+
+joined_df = joined_df.drop('Metric Text', axis=1)
+
+
+# show
+md = tabulate(joined_df, headers='keys', tablefmt='pipe', showindex=False)
+Markdown(md)
+
+```
+
+
+
+
+
 
 
 ## Story Generation

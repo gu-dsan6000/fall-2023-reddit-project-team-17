@@ -164,8 +164,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link active" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a></li>
-  <li><a href="#flair-text" id="toc-flair-text" class="nav-link" data-scroll-target="#flair-text">Flair Text</a></li>
-  <li><a href="#flair-engagement" id="toc-flair-engagement" class="nav-link" data-scroll-target="#flair-engagement">Flair Engagement</a></li>
+  <li><a href="#flair-prediction-using-random-forest-classification" id="toc-flair-prediction-using-random-forest-classification" class="nav-link" data-scroll-target="#flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</a></li>
   <li><a href="#story-generation" id="toc-story-generation" class="nav-link" data-scroll-target="#story-generation">Story Generation</a></li>
   </ul>
 </nav>
@@ -215,8 +214,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="flair-text" class="level2">
-<h2 class="anchored" data-anchor-id="flair-text">Flair Text</h2>
+<section id="flair-prediction-using-random-forest-classification" class="level2">
+<h2 class="anchored" data-anchor-id="flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</h2>
+<p>In this section we attempted to predict what flair is assigned to posts in r/AmItheAsshole (r/AITA) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on r/AITA. We then compared these models with their varying predictors and compared them to a baseline model (random chance).</p>
+<p>The first RF model we applied to the r/AITA data using token counts of the five hundred most common words which were extracted using CountVectorizer in the NLP section previously. We chose fifty trees as our hyperparameter to be used across all models used in this section to allow for consistent comparisons. However, due to the imbalanced nature of the r/AITA posts (as established in the EDA section of this project), the dataset was downsampled so that none of the four primary flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here) are overrepresented to the extent that they would significantly hinder model performance. After a training and testing data split, the model was trained on the training subset and various model metrics were calculated for both the training and testing subsets via a SparkML pipeline. Measures and visualizations of this model’s efficacy are displayed below.</p>
 <div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
@@ -235,9 +236,8 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;6: Shows the evalutation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
-</section>
-<section id="flair-engagement" class="level2">
-<h2 class="anchored" data-anchor-id="flair-engagement">Flair Engagement</h2>
+<p>Based on the metrics above, this model did not predict the flairs of these posts particularly accurately, but performed better than a blind random guess, which would have a theoretical accuracy of 25% compared to our model’s ~30-40%. For both the training and testing subsets, the model did an extremely poor job at predicting “Not the A-hole posts”. This model does perform reasonably well when predicting “Everyone Sucks” and “Asshole” flaired posts, but does not predict the posts with the more positively connoted flairs (No A-holes here and Not the A-hole).</p>
+<p>Another potential set of predictors we identified were measures of user engagement, namely post “score” (number of upvotes minus number of downvotes) and the number of comments under a post. We applied a similar model using these predictors via another SparkML pipeline and compared them to the previous text-based model. The measures of model performance and confusion matrices are visualized below as such.</p>
 <div id="fig-flair-engagement-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
@@ -256,6 +256,62 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;9: Shows the evaluation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
+<p>As shown above, this model performs fairly similarly to the previous text-based model but with some slight improvements in some of the model performance metrics along with more comparative performance metrics of the model for the training and test sets. This model more effectively predicted posts with the flairs “Asshole” and “Everyone Sucks” compared to the text-based model, but similarly struggled to correctly identify posts with more positive flairs. Ultimately, while this model does perform slightly better than the previous text-based model, especially at predicting the posts with more negative flairs attached, it still would not serve as an effective tool for accurately predicting these flairs on a larger scale. It is possible that these data are too homogeneous to be easily differentiated using a machine learning model, or using different models and/or hyperparameters may generate more accurate predictions.</p>
+<div class="cell tbl-cap-location-bottom" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="tbl-flair-model-metrics-df" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Displays the evaluation metrics of both engagement and text-based models.</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 27%">
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Engagement Training</th>
+<th style="text-align: right;">Engagement Test</th>
+<th style="text-align: right;">Text Training</th>
+<th style="text-align: right;">Text Test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">accuracy</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">f1</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precision</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recall</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </section>
 <section id="story-generation" class="level2">
 <h2 class="anchored" data-anchor-id="story-generation">Story Generation</h2>
@@ -270,10 +326,10 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>To evaluate the model’s effectiveness, we focused on loss and perplexity. A lower perplexity value suggests a higher predictive accuracy of the model. The model achieved a test loss of 1.6227 and a perplexity value of 5.0667, indicating a strong performance in predictive capabilities.</p>
-<p>We were ready to generate stories with the trained. Some examples are shown in <a href="#tbl-rnn-generation">Table&nbsp;1</a>:</p>
+<p>We were ready to generate stories with the trained. Some examples are shown in <a href="#tbl-rnn-generation">Table&nbsp;2</a>:</p>
 <div id="tbl-rnn-generation" class="anchored">
 <table class="table">
-<caption>Table&nbsp;1: Shows the prompt and generated text by the RNN model</caption>
+<caption>Table&nbsp;2: Shows the prompt and generated text by the RNN model</caption>
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
