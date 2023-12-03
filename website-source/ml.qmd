@@ -28,7 +28,7 @@ Overall, these studies highlight the challenges and progress in using ML for sub
 
 ## Analysis Report
 
-### Subreddit Prediction
+### Subreddit Prediction {#sec-subreddit-prediction}
 
 For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the `r/relationship_advice` subreddit than any others.
 
@@ -144,7 +144,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-### Flair Prediction Using Random Forest Classification
+### Flair Prediction Using Random Forest Classification {#sec-flair-prediction}
 
 In this section we attempted to predict what flair is assigned to posts in `r/AmItheA**hole` (`r/AITA`) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on `r/AITA`. We then compared these models with their varying predictors and compared them to a baseline model (random chance).
 
@@ -202,7 +202,7 @@ Markdown(md)
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-aita-flair-prediction.ipynb).
 :::
 
-### Story Generation
+### Story Generation {#sec-story-generation}
 
 ::: {.callout-note appearance="tip"}
 The saved model used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth).
@@ -238,7 +238,7 @@ Although our model cannot yet generate cohesive stories, it's important to recog
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb).
 :::
 
-### ML Models in `r/NoStupidQuestions`
+### ML Models in `r/NoStupidQuestions` {#sec-pre-trained-models}
 
 #### Top Comment Summary Generation 
 

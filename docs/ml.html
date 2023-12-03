@@ -191,10 +191,10 @@ div.csl-indent {
   <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
   <li><a href="#analysis-report" id="toc-analysis-report" class="nav-link" data-scroll-target="#analysis-report">Analysis Report</a>
   <ul class="collapse">
-  <li><a href="#subreddit-prediction" id="toc-subreddit-prediction" class="nav-link" data-scroll-target="#subreddit-prediction">Subreddit Prediction</a></li>
-  <li><a href="#flair-prediction-using-random-forest-classification" id="toc-flair-prediction-using-random-forest-classification" class="nav-link" data-scroll-target="#flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</a></li>
-  <li><a href="#story-generation" id="toc-story-generation" class="nav-link" data-scroll-target="#story-generation">Story Generation</a></li>
-  <li><a href="#ml-models-in-rnostupidquestions" id="toc-ml-models-in-rnostupidquestions" class="nav-link" data-scroll-target="#ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></a></li>
+  <li><a href="#sec-subreddit-prediction" id="toc-sec-subreddit-prediction" class="nav-link" data-scroll-target="#sec-subreddit-prediction">Subreddit Prediction</a></li>
+  <li><a href="#sec-flair-prediction" id="toc-sec-flair-prediction" class="nav-link" data-scroll-target="#sec-flair-prediction">Flair Prediction Using Random Forest Classification</a></li>
+  <li><a href="#sec-story-generation" id="toc-sec-story-generation" class="nav-link" data-scroll-target="#sec-story-generation">Story Generation</a></li>
+  <li><a href="#sec-pre-trained-models" id="toc-sec-pre-trained-models" class="nav-link" data-scroll-target="#sec-pre-trained-models">ML Models in <code>r/NoStupidQuestions</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -230,8 +230,8 @@ div.csl-indent {
 </section>
 <section id="analysis-report" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-report">Analysis Report</h2>
-<section id="subreddit-prediction" class="level3">
-<h3 class="anchored" data-anchor-id="subreddit-prediction">Subreddit Prediction</h3>
+<section id="sec-subreddit-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="sec-subreddit-prediction">Subreddit Prediction</h3>
 <p>For our subreddit prediction task, we aim to take only the textual content of a post and classify the subreddit to which that post belongs. By using the 500 most common words across all posts, we hope to obtain important textual information that helps us determine which subreddit a post belongs to. For instance, the word “relationship” may be much more likely to appear in the <code>r/relationship_advice</code> subreddit than any others.</p>
 <section id="baseline-model" class="level4">
 <h4 class="anchored" data-anchor-id="baseline-model">Baseline Model</h4>
@@ -330,8 +330,8 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="flair-prediction-using-random-forest-classification" class="level3">
-<h3 class="anchored" data-anchor-id="flair-prediction-using-random-forest-classification">Flair Prediction Using Random Forest Classification</h3>
+<section id="sec-flair-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="sec-flair-prediction">Flair Prediction Using Random Forest Classification</h3>
 <p>In this section we attempted to predict what flair is assigned to posts in <code>r/AmItheA**hole</code> (<code>r/AITA</code>) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on <code>r/AITA</code>. We then compared these models with their varying predictors and compared them to a baseline model (random chance).</p>
 <p>The first RF model we applied to the <code>r/AITA</code> data using token counts of the five hundred most common words which were extracted using CountVectorizer in the NLP section previously. We chose fifty trees as our hyperparameter to be used across all models used in this section to allow for consistent comparisons. However, due to the imbalanced nature of the <code>r/AITA</code> posts (as established in the EDA section of this project), the dataset was downsampled so that none of the four primary flairs (A**hole, Not the A-hole, Everyone Sucks, No A-holes here) are overrepresented to the extent that they would significantly hinder model performance. After a training and testing data split, the model was trained on the training subset and various model metrics were calculated for both the training and testing subsets via a SparkML pipeline. Measures and visualizations of this model’s efficacy are displayed below.</p>
 <div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
@@ -440,8 +440,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="story-generation" class="level3">
-<h3 class="anchored" data-anchor-id="story-generation">Story Generation</h3>
+<section id="sec-story-generation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-story-generation">Story Generation</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -508,8 +508,8 @@ Note
 </div>
 </div>
 </section>
-<section id="ml-models-in-rnostupidquestions" class="level3">
-<h3 class="anchored" data-anchor-id="ml-models-in-rnostupidquestions">ML Models in <code>r/NoStupidQuestions</code></h3>
+<section id="sec-pre-trained-models" class="level3">
+<h3 class="anchored" data-anchor-id="sec-pre-trained-models">ML Models in <code>r/NoStupidQuestions</code></h3>
 <section id="top-comment-summary-generation" class="level4">
 <h4 class="anchored" data-anchor-id="top-comment-summary-generation">Top Comment Summary Generation</h4>
 <p>After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit <code>r/NoStupidQuestions</code>. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below.</p>

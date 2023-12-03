@@ -174,12 +174,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#cleaning" id="toc-cleaning" class="nav-link" data-scroll-target="#cleaning">Cleaning</a></li>
   <li><a href="#data-transformations-and-additional-variables" id="toc-data-transformations-and-additional-variables" class="nav-link" data-scroll-target="#data-transformations-and-additional-variables">Data transformations and additional variables</a></li>
   <li><a href="#regex-search-and-dummies" id="toc-regex-search-and-dummies" class="nav-link" data-scroll-target="#regex-search-and-dummies">Regex Search and Dummies</a></li>
-  <li><a href="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" id="toc-the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="nav-link" data-scroll-target="#the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</a></li>
-  <li><a href="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." id="toc-the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="nav-link" data-scroll-target="#the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
-  <li><a href="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement." id="toc-the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="nav-link" data-scroll-target="#the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</a></li>
-  <li><a href="#subreddit-community-prediction" id="toc-subreddit-community-prediction" class="nav-link" data-scroll-target="#subreddit-community-prediction">Subreddit community prediction</a></li>
-  <li><a href="#flair-prediction" id="toc-flair-prediction" class="nav-link" data-scroll-target="#flair-prediction">Flair prediction</a></li>
-  <li><a href="#nlp-eda-for-emerging-trends-and-controversial-comments" id="toc-nlp-eda-for-emerging-trends-and-controversial-comments" class="nav-link" data-scroll-target="#nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</a></li>
+  <li><a href="#sec-relationship-comments-score" id="toc-sec-relationship-comments-score" class="nav-link" data-scroll-target="#sec-relationship-comments-score">The relationship between the number of comments and the score of Reddit posts</a></li>
+  <li><a href="#sec-nsfw-content" id="toc-sec-nsfw-content" class="nav-link" data-scroll-target="#sec-nsfw-content">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
+  <li><a href="#sec-times-of-day" id="toc-sec-times-of-day" class="nav-link" data-scroll-target="#sec-times-of-day">The times of the day when posts typically receive the most engagement.</a></li>
+  <li><a href="#sec-community-prediction" id="toc-sec-community-prediction" class="nav-link" data-scroll-target="#sec-community-prediction">Subreddit community prediction</a></li>
+  <li><a href="#sec-flair-prediction" id="toc-sec-flair-prediction" class="nav-link" data-scroll-target="#sec-flair-prediction">Flair prediction</a></li>
+  <li><a href="#sec-controversial-comments" id="toc-sec-controversial-comments" class="nav-link" data-scroll-target="#sec-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</a></li>
   </ul>
 </nav>
     </div>
@@ -357,8 +357,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts" class="level2">
-<h2 class="anchored" data-anchor-id="the-relationship-between-the-number-of-comments-and-the-score-of-reddit-posts">The relationship between the number of comments and the score of Reddit posts</h2>
+<section id="sec-relationship-comments-score" class="level2">
+<h2 class="anchored" data-anchor-id="sec-relationship-comments-score">The relationship between the number of comments and the score of Reddit posts</h2>
 <p>The number of comments (<code>num_comments</code>) and the score of a post (<code>score</code>), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the <code>corr</code> function from <code>pyspark.sql.functions</code>. <a href="#tbl-correlation-by-subreddit">Table&nbsp;3</a> shows the results:</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -444,8 +444,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement." class="level2">
-<h2 class="anchored" data-anchor-id="the-impact-of-not-safe-for-work-nsfw-content-on-user-engagement.">The impact of not-safe-for-work (NSFW) content on user engagement.</h2>
+<section id="sec-nsfw-content" class="level2">
+<h2 class="anchored" data-anchor-id="sec-nsfw-content">The impact of not-safe-for-work (NSFW) content on user engagement.</h2>
 <p>To determine if not safe for work post affects user interactions, first, we filter the <code>submissions</code> dataset for where the <code>over_18</code> flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not.</p>
 <p>We can create a boxplot with this small dataset to see the distribution. Since we know from Topic 1 that the <code>interaction_score</code> is a good gauge of overall interaction, we can plot that variable as shown in <a href="#fig-boxplot-comments-and-score">Figure&nbsp;3</a>:</p>
 <div id="fig-boxplot-comments-and-score" class="quarto-figure quarto-figure-center anchored">
@@ -466,8 +466,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement." class="level2">
-<h2 class="anchored" data-anchor-id="the-times-of-the-day-when-posts-typically-receive-the-most-engagement.">The times of the day when posts typically receive the most engagement.</h2>
+<section id="sec-times-of-day" class="level2">
+<h2 class="anchored" data-anchor-id="sec-times-of-day">The times of the day when posts typically receive the most engagement.</h2>
 <p>To determine the times of day when a post typically receives the most engagement, we create two <strong>additional variables</strong>: <code>week_of_the_year</code> and <code>hour_of_the_day</code>, both coming from the <code>created_utc</code> column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the <a href="#fig-average-comments-hour-and-week">Figure&nbsp;4</a>:</p>
 <div id="fig-average-comments-hour-and-week" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -487,8 +487,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="subreddit-community-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="subreddit-community-prediction">Subreddit community prediction</h2>
+<section id="sec-community-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="sec-community-prediction">Subreddit community prediction</h2>
 <p>One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable <code>engagements</code> as the sum of submissions and comments for a particular subreddit.</p>
 <p>One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. In <a href="#fig-aita-counts-over-time">Figure&nbsp;5</a>, we can see this distribution, with many engagements coming from the <code>AmItheA\*hole</code>, <code>relationship_advice</code>, and <code>antiwork</code> subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.</p>
 <div class="cell" data-execution_count="6">
@@ -501,17 +501,14 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Tip with Title
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>Click on the bars of each Subreddit to focus them!</p>
+</div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note">
@@ -525,8 +522,8 @@ Tip with Title
 </div>
 </div>
 </section>
-<section id="flair-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="flair-prediction">Flair prediction</h2>
+<section id="sec-flair-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="sec-flair-prediction">Flair prediction</h2>
 <p>In this section we take a closer look at the subreddit r/AmItheA*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.</p>
 <p>In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: A*hole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.</p>
 <p>The number of posts that are flaired as each of the flairs in the r/AITA is show in <a href="#fig-aita-flairs-barchart">Figure&nbsp;6</a>:</p>
@@ -555,8 +552,8 @@ Tip with Title
 </div>
 </div>
 </section>
-<section id="nlp-eda-for-emerging-trends-and-controversial-comments" class="level2">
-<h2 class="anchored" data-anchor-id="nlp-eda-for-emerging-trends-and-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</h2>
+<section id="sec-controversial-comments" class="level2">
+<h2 class="anchored" data-anchor-id="sec-controversial-comments">NLP EDA for Emerging Trends and Controversial Comments</h2>
 <p><a href="#fig-current-events">Figure&nbsp;8</a> shows a regex count of the current events per Subreddit:</p>
 <div id="fig-current-events" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">

@@ -135,7 +135,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## The relationship between the number of comments and the score of Reddit posts
+## The relationship between the number of comments and the score of Reddit posts {#sec-relationship-comments-score}
 
 The number of comments (`num_comments`) and the score of a post (`score`), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the `corr` function from `pyspark.sql.functions`. @tbl-correlation-by-subreddit shows the results:
 
@@ -179,7 +179,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## The impact of not-safe-for-work (NSFW) content on user engagement.
+## The impact of not-safe-for-work (NSFW) content on user engagement. {#sec-nsfw-content}
 
 
 To determine if not safe for work post affects user interactions, first, we filter the `submissions` dataset for where the `over_18` flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not. 
@@ -199,7 +199,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-## The times of the day when posts typically receive the most engagement.
+## The times of the day when posts typically receive the most engagement. {#sec-times-of-day}
 
 To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the @fig-average-comments-hour-and-week:
 
@@ -216,7 +216,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## Subreddit community prediction
+## Subreddit community prediction {#sec-community-prediction}
 
 One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable `engagements` as the sum of submissions and comments for a particular subreddit.
 
@@ -235,8 +235,7 @@ IFrame(src='img/eda-plots/counts-over-time-new.html', width=width_percentage, he
 ```
 
 
-::: {.callout-tip}
-## Tip with Title
+::: {.callout-tip appearance="simple"}
 
 Click on the bars of each Subreddit to focus them!
 
@@ -249,7 +248,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## Flair prediction
+## Flair prediction {#sec-flair-prediction}
 
 In this section we take a closer look at the subreddit r/AmItheA\*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.
 
@@ -274,7 +273,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## NLP EDA for Emerging Trends and Controversial Comments
+## NLP EDA for Emerging Trends and Controversial Comments {#sec-controversial-comments}
 
 @fig-current-events shows a regex count of the current events per Subreddit:
 

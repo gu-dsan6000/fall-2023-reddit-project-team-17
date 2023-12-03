@@ -190,11 +190,12 @@ div.csl-indent {
   <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive summary</a></li>
   <li><a href="#analysis-report" id="toc-analysis-report" class="nav-link" data-scroll-target="#analysis-report">Analysis Report</a>
   <ul class="collapse">
-  <li><a href="#flair-sentiment-model" id="toc-flair-sentiment-model" class="nav-link" data-scroll-target="#flair-sentiment-model">Flair Sentiment Model</a></li>
-  <li><a href="#preparing-reddit-data-for-multi-class-classification" id="toc-preparing-reddit-data-for-multi-class-classification" class="nav-link" data-scroll-target="#preparing-reddit-data-for-multi-class-classification">Preparing Reddit data for multi-class classification</a></li>
-  <li><a href="#preparing-covid-19-data-in-nostupidquestions" id="toc-preparing-covid-19-data-in-nostupidquestions" class="nav-link" data-scroll-target="#preparing-covid-19-data-in-nostupidquestions">Preparing Covid-19 data in <code>NoStupidQuestions</code></a></li>
-  <li><a href="#preparing-reddit-and-external-data-for-training-an-rnn" id="toc-preparing-reddit-and-external-data-for-training-an-rnn" class="nav-link" data-scroll-target="#preparing-reddit-and-external-data-for-training-an-rnn">Preparing Reddit and External Data for Training an RNN</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#sec-flair-sentiment-model" id="toc-sec-flair-sentiment-model" class="nav-link" data-scroll-target="#sec-flair-sentiment-model">Flair Sentiment Model</a></li>
+  <li><a href="#sec-extracting-age-and-gender" id="toc-sec-extracting-age-and-gender" class="nav-link" data-scroll-target="#sec-extracting-age-and-gender">Extracting the age and gender of the author of the post</a></li>
+  <li><a href="#sec-nlp-with-countvectorizer" id="toc-sec-nlp-with-countvectorizer" class="nav-link" data-scroll-target="#sec-nlp-with-countvectorizer">NLP with <code>CountVectorizer</code></a></li>
+  <li><a href="#sec-preparing-covid-19-data" id="toc-sec-preparing-covid-19-data" class="nav-link" data-scroll-target="#sec-preparing-covid-19-data">Preparing Covid-19 data in <code>NoStupidQuestions</code></a></li>
+  <li><a href="#sec-rnn-data-preparation" id="toc-sec-rnn-data-preparation" class="nav-link" data-scroll-target="#sec-rnn-data-preparation">Preparing Reddit and External Data for Training an RNN</a></li>
+  <li><a href="#sec-data-storage" id="toc-sec-data-storage" class="nav-link" data-scroll-target="#sec-data-storage">Data Storage</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -227,8 +228,8 @@ div.csl-indent {
 </section>
 <section id="analysis-report" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-report">Analysis Report</h2>
-<section id="flair-sentiment-model" class="level3">
-<h3 class="anchored" data-anchor-id="flair-sentiment-model">Flair Sentiment Model</h3>
+<section id="sec-flair-sentiment-model" class="level3">
+<h3 class="anchored" data-anchor-id="sec-flair-sentiment-model">Flair Sentiment Model</h3>
 <p>In this section we explored the textual content of the posts of r/AmItheA*hole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (A*hole, Not the A*hole, Everybody Sucks, No A*holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a “negative” sentiment, as shown in <a href="#fig-flair-sentiments-barchart">Figure&nbsp;1</a>. This holds true across posts assigned any of the four primary flairs.</p>
 <div id="fig-flair-sentiments-barchart" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -299,8 +300,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="preparing-reddit-data-for-multi-class-classification" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-reddit-data-for-multi-class-classification">Preparing Reddit data for multi-class classification</h3>
+<section id="sec-extracting-age-and-gender" class="level3">
+<h3 class="anchored" data-anchor-id="sec-extracting-age-and-gender">Extracting the age and gender of the author of the post</h3>
 <p>In using NLP and ML techniques to predict the age and gender of the author who created a post, it’s important to observe the distribution of ages and genders as they relate to other variables of interest. In particular, it can be interesting to observe these variables as they relate to post sentiment. Note that the age and gender of the author of the post is not provided in the dataset and is instead extracted from the post itself using regex, if available.</p>
 <p>In <a href="#fig-sentiment-age">Figure&nbsp;3</a> we can see a density plot of the age of the author of a post, grouped by the categorized sentiment of the post itself. We find that there doesn’t seem to be much of a difference between the distribution of ages for each sentiment, as each seems to peak around ages between 18 and 25 years old. Furthermore, we can clearly see that the vast majority of posts contain negative sentiment - likely posts written about negative experiences and asking for advice.</p>
 <div id="fig-sentiment-age" class="quarto-figure quarto-figure-center anchored">
@@ -350,8 +351,9 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="nlp-with-countvectorizer" class="level4">
-<h4 class="anchored" data-anchor-id="nlp-with-countvectorizer">NLP with <code>CountVectorizer</code></h4>
+</section>
+<section id="sec-nlp-with-countvectorizer" class="level3">
+<h3 class="anchored" data-anchor-id="sec-nlp-with-countvectorizer">NLP with <code>CountVectorizer</code></h3>
 <p>In order to incorporate NLP-based predictors in a machine learning model, we first have to process the content of each reddit post such that it can appropriately be fed into the model. Importantly, textual data cannot be sent directly into a machine learning model - we must represent the text numerically such that it can be interpreted by the model. One way in which we do this is by identifying how many times each word is used in each post.</p>
 <p>In preparing the data for machine learning models, we first want to clean the textual data before we represent it numerically. In doing so, we opt to perform the following cleaning steps:</p>
 <ul>
@@ -548,9 +550,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-</section>
-<section id="preparing-covid-19-data-in-nostupidquestions" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-covid-19-data-in-nostupidquestions">Preparing Covid-19 data in <code>NoStupidQuestions</code></h3>
+<section id="sec-preparing-covid-19-data" class="level3">
+<h3 class="anchored" data-anchor-id="sec-preparing-covid-19-data">Preparing Covid-19 data in <code>NoStupidQuestions</code></h3>
 <p>After performing NLP on the <code>NoStupidQuestions</code> subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work. We wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From <a href="#fig-covid-nsq">Figure&nbsp;5</a>, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.</p>
 <div id="fig-covid-nsq" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -569,8 +570,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="preparing-reddit-and-external-data-for-training-an-rnn" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-reddit-and-external-data-for-training-an-rnn">Preparing Reddit and External Data for Training an RNN</h3>
+<section id="sec-rnn-data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-rnn-data-preparation">Preparing Reddit and External Data for Training an RNN</h3>
 <p>For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically <em>The Scarlet Letter</em> by Nathaniel Hawthorne <span class="citation" data-cites="hawthorne_scarlet_2008">[<a href="#ref-hawthorne_scarlet_2008" role="doc-biblioref">1</a>]</span>, <em>The Odyssey</em> by Homer <span class="citation" data-cites="homer_odyssey_1999">[<a href="#ref-homer_odyssey_1999" role="doc-biblioref">2</a>]</span>, <em>Crime and Punishment</em> by Fyodor Dostoyevsky <span class="citation" data-cites="dostoyevsky_crime_2006">[<a href="#ref-dostoyevsky_crime_2006" role="doc-biblioref">3</a>]</span>, <em>Metamorphosis</em> by Franz Kafka <span class="citation" data-cites="kafka_metamorphosis_2005">[<a href="#ref-kafka_metamorphosis_2005" role="doc-biblioref">4</a>]</span>, and <em>The Great Gatsby</em> by F. Scott Fitzgerald <span class="citation" data-cites="fitzgerald_great_2021">[<a href="#ref-fitzgerald_great_2021" role="doc-biblioref">5</a>]</span>.</p>
 <p>To prepare the Reddit data, we extracted only the relevant information from the parquets, such as <code>subreddit</code>, <code>title</code>, <code>selftext</code>, <code>score</code>, and <code>URL</code>, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any “Edit:” sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn’t have at least 4,500 characters (around 750 words). Then, we filtered for only stored with <code>score</code> in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.</p>
 <p>We then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in <a href="#fig-token-frequency-plot">Figure&nbsp;6</a>. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling.</p>
@@ -659,8 +660,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<section id="sec-data-storage" class="level3">
+<h3 class="anchored" data-anchor-id="sec-data-storage">Data Storage</h3>
 <p>Outputs of the NLP cleaning procedures are stored in <code>.parquet</code> the team bucket <code>s3a://project17-bucket-alex/</code> for ease of use with ML models.</p>
 
 

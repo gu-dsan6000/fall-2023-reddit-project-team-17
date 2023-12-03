@@ -26,7 +26,7 @@ All sections used johnsnowlabs `sparkNLP` to perform the text analysis. Please s
 ## Analysis Report
 
 
-### Flair Sentiment Model
+### Flair Sentiment Model {#sec-flair-sentiment-model}
 
 
 In this section we explored the textual content of the posts of r/AmItheA\*hole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (A\*hole, Not the A\*hole, Everybody Sucks, No A\*holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a "negative" sentiment, as shown in @fig-flair-sentiments-barchart. This holds true across posts assigned any of the four primary flairs.
@@ -76,7 +76,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-### Preparing Reddit data for multi-class classification
+### Extracting the age and gender of the author of the post {#sec-extracting-age-and-gender}
 
 In using NLP and ML techniques to predict the age and gender of the author who created a post, it’s important to observe the distribution of ages and genders as they relate to other variables of interest. In particular, it can be interesting to observe these variables as they relate to post sentiment. Note that the age and gender of the author of the post is not provided in the dataset and is instead extracted from the post itself using regex, if available.
 
@@ -119,7 +119,7 @@ Markdown(md)
 
 
 
-#### NLP with `CountVectorizer`
+### NLP with `CountVectorizer` {#sec-nlp-with-countvectorizer}
 
 In order to incorporate NLP-based predictors in a machine learning model, we first have to process the content of each reddit post such that it can appropriately be fed into the model. Importantly, textual data cannot be sent directly into a machine learning model - we must represent the text numerically such that it can be interpreted by the model. One way in which we do this is by identifying how many times each word is used in each post.
 
@@ -169,7 +169,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-### Preparing Covid-19 data in `NoStupidQuestions`
+### Preparing Covid-19 data in `NoStupidQuestions` {#sec-preparing-covid-19-data}
 
 
 After performing NLP on the `NoStupidQuestions` subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work. We wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From @fig-covid-nsq, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.
@@ -184,7 +184,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-### Preparing Reddit and External Data for Training an RNN 
+### Preparing Reddit and External Data for Training an RNN {#sec-rnn-data-preparation}
 
 For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically _The Scarlet Letter_ by Nathaniel Hawthorne [@hawthorne_scarlet_2008], _The Odyssey_ by Homer [@homer_odyssey_1999], _Crime and Punishment_ by Fyodor Dostoyevsky [@dostoyevsky_crime_2006], _Metamorphosis_ by Franz Kafka [@kafka_metamorphosis_2005], and _The Great Gatsby_ by F. Scott Fitzgerald [@fitzgerald_great_2021].
 
@@ -236,6 +236,6 @@ The external data is available [here](https://github.com/gu-dsan6000/fall-2023-r
 ::: 
 
 
-### Outputs
+### Data Storage {#sec-data-storage}
 
 Outputs of the NLP cleaning procedures are stored in `.parquet` the team bucket `s3a://project17-bucket-alex/` for ease of use with ML models.
