@@ -514,6 +514,12 @@ Note
 <h4 class="anchored" data-anchor-id="top-comment-summary-generation">Top Comment Summary Generation</h4>
 <p>After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit <code>r/NoStupidQuestions</code>. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below.</p>
 <p>The model used to perform this summarization was a “facebook/bart-large-cnn” <span class="citation" data-cites="lewis_bart_2019">[<a href="#ref-lewis_bart_2019" role="doc-biblioref">1</a>]</span>.</p>
+<div id="fig-rouge-scores-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/ml-plots/rouge-scores-plot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
+</figure>
+</div>
 <section id="before-summarization-after-stemming-and-removing-stopwords" class="level5">
 <h5 class="anchored" data-anchor-id="before-summarization-after-stemming-and-removing-stopwords">Before Summarization (After Stemming and removing StopWords):</h5>
 <blockquote class="blockquote">
@@ -532,17 +538,6 @@ Note
 <blockquote class="blockquote">
 <p>Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased.” He mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio. Some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines. “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. ’I’m like, no. My dad was pro-science,. pro-rational thinking, pro-evidence-based medicine.</p>
 </blockquote>
-</section>
-</section>
-<section id="sentiment-analysis-in-rnostupidquestions" class="level4">
-<h4 class="anchored" data-anchor-id="sentiment-analysis-in-rnostupidquestions">Sentiment Analysis in <code>r/NoStupidQuestions</code></h4>
-<p>Another topic that we needed to understand in relation to the COVID-19 comments in <code>r/NoStupidQuestions</code> was the sentiment. To do this we used “yiyanghkust/finbert-tone” <span class="citation" data-cites="huang_span_2023">[<a href="#ref-huang_span_2023" role="doc-biblioref">2</a>]</span> on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in <a href="#fig-sentiment-analysis-plot">Figure&nbsp;16</a>. Additionally, this is just a small subset to show that the model worked.</p>
-<div id="fig-sentiment-analysis-plot" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="img/ml-plots/sentiment_analysis.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;16: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
-</figure>
-</div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -559,13 +554,11 @@ Note
 </section>
 </section>
 </section>
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-lewis_bart_2019" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">Lewis M, Liu Y, Goyal N, Ghazvininejad M, Mohamed A, Levy O, Stoyanov V, Zettlemoyer L. <span>BART</span>: <span>Denoising</span> <span>Sequence</span>-to-<span>Sequence</span> <span>Pre</span>-training for <span>Natural</span> <span>Language</span> <span>Generation</span>, <span>Translation</span>, and <span>Comprehension</span>. 2019 [accessed 2023 Nov 30]. <a href="https://arxiv.org/abs/1910.13461">https://arxiv.org/abs/1910.13461</a>. doi:<a href="https://doi.org/10.48550/ARXIV.1910.13461">10.48550/ARXIV.1910.13461</a></div>
-</div>
-<div id="ref-huang_span_2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Huang AH, Wang H, Yang Y. <span>FinBERT</span>: <span>A</span> <span>Large</span> <span>Language</span> <span>Model</span> for <span>Extracting</span> <span>Information</span> from <span>Financial</span> <span>Text</span>. Contemporary Accounting Research. 2023 [accessed 2023 Nov 30];40(2):806–841. <a href="https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832">https://onlinelibrary.wiley.com/doi/10.1111/1911-3846.12832</a>. doi:<a href="https://doi.org/10.1111/1911-3846.12832">10.1111/1911-3846.12832</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

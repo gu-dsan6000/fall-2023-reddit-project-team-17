@@ -238,14 +238,16 @@ Although our model cannot yet generate cohesive stories, it's important to recog
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb).
 :::
 
-### ML Models in `r/NoStupidQuestions` {#sec-pre-trained-models}
 
-#### Top Comment Summary Generation 
 
+#### Top Comment Summary Generation  {#sec-pre-trained-models}
 
 After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit `r/NoStupidQuestions`. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below. 
 
 The model used to perform this summarization was a “facebook/bart-large-cnn” [@lewis_bart_2019].
+
+
+![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/rouge-scores-plot.png){#fig-rouge-scores-plot}
 
 
 ##### Before Summarization (After Stemming and removing StopWords):
@@ -274,14 +276,12 @@ The model used to perform this summarization was a “facebook/bart-large-cnn”
 
 
 
-#### Sentiment Analysis in `r/NoStupidQuestions`
 
-Another topic that we needed to understand in relation to the COVID-19 comments in `r/NoStupidQuestions` was the sentiment. To do this we used “yiyanghkust/finbert-tone” [@huang_span_2023] on HuggingFace. This gave us a better understanding of the subreddit with regard to our topic. The results of which are visualized in @fig-sentiment-analysis-plot. Additionally, this is just a small subset to show that the model worked.
-
-
-![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/sentiment_analysis.png){#fig-sentiment-analysis-plot}
 
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/topic_summarization.ipynb).
 :::
+
+
+
 
