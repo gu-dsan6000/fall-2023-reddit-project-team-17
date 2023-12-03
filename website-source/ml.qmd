@@ -85,9 +85,64 @@ IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, heigh
 
 ```
 
+
+
+#### Random Forest Model - Balanced Classes
+
+![Shows ](img/ml-plots/random-forest-cv-train-cm-balanced.png){#fig-random-forest-cv-train-cm-balanced width=70%}
+![Shows ](img/ml-plots/random-forest-cv-test-cm-balanced.png){#fig-random-forest-cv-test-cm-balanced width=70%}
+
+```{python}
+#| echo: false
+#| label: fig-random-forest-eval-balanced.html
+#| fig-cap: "Shows "
+
+
+width_percentage = "100%"
+IFrame(src='img/ml-plots/random-forest-eval-balanced.html', width=width_percentage, height=500)
+
+
+```
+
+
+
+
+
+
+#### Random Forest Model - Class Subset
+
+![Shows ](img/ml-plots/random-forest-cv-train-cm-subset.png){#fig-random-forest-cv-train-cm-subset width=70%}
+![Shows ](img/ml-plots/random-forest-cv-test-cm-subset.png){#fig-random-forest-cv-test-cm-subset width=70%}
+
+
+```{python}
+#| echo: false
+#| label: fig-random-forest-eval-subset.html
+#| fig-cap: "Shows "
+
+
+width_percentage = "100%"
+IFrame(src='img/ml-plots/random-forest-eval-subset.html', width=width_percentage, height=500)
+
+
+```
+
+
+
+
+
+
+
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-predicting-subreddits.ipynb).
 ::: 
+
+
+
+
+
+
+
 
 ### Flair Prediction Using Random Forest Classification
 

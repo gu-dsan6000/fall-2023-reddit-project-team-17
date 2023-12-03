@@ -1,0 +1,50 @@
+# Feedback Discussion
+
+
+## Project plans
+
+### Peer Feedback
+
+> _The business goals do not clearly articulate the purpose and rationale for undertaking the project._
+
+> _Additionally, the business goals include some technical terms, focusing more on how to address the question rather than fully connecting with what the audience can gain from it. The technical approach, on the other hand, is clearly directed towards a technical audience, employing technical language to explain the implementation._ 
+
+> _A brief discussion about the external dataset and its relevance to project goals would enhance the project plan's completeness._
+
+
+## EDA work
+
+### Peer Feedback
+
+> _The data quality checks need to be explicitly mentioned on the website, ensuring basic checks like missing values, outliers, and data distributions are performed. Suggest including a section on data quality checks and potential issues identified._
+
+Answer
+
+> _For the plot in data cleaning, consider replacing “Validity” with the name of the subreddit for clarity._
+
+Answer
+
+
+## NLP work
+
+Non received.
+
+
+## ML work
+
+Non received.
+
+
+## Website/results
+
+> _The inability to view code on the website is a significant issue (We saw that you sent the code and data file separately by email, but it is better to be available on the website). Ensure that all notebooks are accessible to the audience in the later submission, as transparency in the coding process is crucial._
+
+Answer
+
+> _Be cautious about the professor's advice on using only 10,000 rows in plotting; it seems that most graphs and tables contain over 10,000 data points._
+
+Answer
+
+
+
+## Appendix - updates made since intermediate deliverables not included in feedback

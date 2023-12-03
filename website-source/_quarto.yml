@@ -31,7 +31,8 @@ website:
       - eda.qmd
       - nlp.qmd
       - ml.qmd
-      - summary.qmd
+      - conclusion.qmd
+      - discussion.qmd
 
 
 format:

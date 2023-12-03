@@ -1,14 +1,39 @@
-# Overview
+# Introduction
+
+![Image generated with OpenAI DALL·E 3 with prompt "a group of four friends around a campfire sharing stories in modern digital illustration style"](img/website-images/front-image.png){#fig-front-image width=70%}
+
+
+
+## The Project
 
 In this project, we dive into the intersection of story telling in Reddit and machine learning (ML). Our exploration spans various aspects from classifying posts into specific subreddits to predicting the age and gender of posters based on their language. We're also examining the influence of NSFW posts on user engagement and the correlation between post score and its comments. The project will utilize advanced Natural Language Processing (NLP) techniques to unearth trends within communities, predict post flairs, and delve into the sentiment analysis of subreddit posts. We also aim to use ML to distill meaningful insights from vast quantities of data.
 
-![Image generated with OpenAI DALL·E 3 with prompt "a group of four friends around a campfire sharing stories in modern digital illustration style"](img/website-images/front-image.png){width=70%}
 
-## Appendix
+
+![Shows the banner of the twelve subreddits chosen for the projects"](img/website-images/subreddit-banners.png){#fig-subreddit-banners width=100%}
+
+
+
+## Project Goals
+
+For a complete list of analytical goals and technical proposals, see @sec-appendix-a
+
+
+## Why It Matters
+
+
+* Image 2
+* Image 3
+* Image 4
+* Image 5
+
+
+
+## Appendix A: Analytical Goals and Technical Proposals {#sec-appendix-a}
 
 ### Topics
 
-The questions we will address in this work are:
+The questions we address in this work are:
 
 **Idea 1**
 
@@ -71,3 +96,7 @@ The questions we will address in this work are:
 * `Business goal`: Summarise a reddit comment.
 * `Technical approach`: Use a pretrained machine learning model to summarize the contents within a comment. 
 
+**Idea 13**
+
+* `Business goal`: Can an ML model learn to output new stories for posting on Reddit.
+* `Technical approach`: 
