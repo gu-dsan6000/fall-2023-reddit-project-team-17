@@ -38,6 +38,22 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 ## Primary Section 3: `project-ml`
 
+* `project-ml-aita-flair-prediction-viz.ipynb`: In this notebook, visualizations of model performance are generated based on the Random Forest models constructed and fitted in the notebook `project-ml-aita-flair-prediction.ipynb`. Two bar charts and four confusion matrices are created and then subsequently saved in the `website-source/img/ml-plots` folder.
+
+* `project-ml-aita-flair-prediction.ipynb`: In this notebook, multiple random forest models are applied to posts from `r/AmItheAsshole` created in 2022. These are generated using various predictors and several performance metrics (accuracy , f1, recall, precision) are calculated and saved into the `data/ml-data` directory along with confusion matrices.
+
+* `project-ml-predicting-subreddits-vis.ipynb`: Within this notebook, several visualizations concerning the random forest models generated in `project-ml-predicting-subreddits.ipynb` are constructed. These are saved off and presented on the project website.
+
+* `project-ml-predicting-subreddits.ipynb`: Various predictors and sampling techniques were applied to all "valid" (non-empty) posts of the 12 subreddits of interest created in 2022 to construct random forest models. Various performance metrics were calculated and confusion matrices constructed, all of which were saved to the `data/ml-data` directory.
+
+* `project-nlp-posts-and-books-model.ipynb`: Victor fill this in
+
+* `project-nlp-posts-and-books-use-trained.ipynb`: Victor fill this in
+
+* `topic-summarization-and-sentiment.ipynb`: ROUGE scores associated with the summarization model established in `topic_summarization.ipynb` are calculated and then visualized (in the form of a violin plot)
+
+* `topic_summarization.ipynb`: 
+
 ## Secondary Section 1: `filtering-jobs`
 
 This folder contains the notebook `filtering-jobs.ipynb` and accompanying script `process.py`. The former is where the data acquisition for this project occurred. In this notebook, a script that accesses the overall Reddit dataset, filters for the 12 subreddits of interest, and saves the resulting parquet files in an Amazon S3 bucket on Alex Pattarini's AWS account. The script that serves as the basis for these jobs is the `process.py` script, which is automatically created when running the `filtering-jobs.ipynb` notebook.
