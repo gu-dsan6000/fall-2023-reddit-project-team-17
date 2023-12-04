@@ -110,8 +110,8 @@ EDA
 
 **Idea 11**
 
-* `Business goal`: Use pre-trained models to summarize and analyze long text posts related to world events.
-* `Technical approach`: Identify available pre-trained models in the realm of NLP and what they are trained to extract from textual data. Use a pre-trained model, or models, to perform NLP tasks for downstream tasks. For instance, use a pre-trained model to obtain word embeddings (vector representations of words) that can be used as features in a subsequent ML model.
+* `Business goal`: Summarize top comments of interest for a particular topic using a pre-trained model
+* `Technical approach`: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don't want to label summaries by hand and accuracy can be subjective, we are using an API call to GPT-4 to get reference summaries, and then with those summaries, we generate rouge 1, 2, and L scores to evaluate the model. Hyperparameters are tuned to keep both summaries close to 25% of the original text.
 * For more on this goal, click [here](ml.qmd#sec-pre-trained-models).
 
 
