@@ -50,9 +50,9 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 * `project-nlp-posts-and-books-use-trained.ipynb`: Victor fill this in
 
-* `topic-summarization-and-sentiment.ipynb`: ROUGE scores associated with the summarization model established in `topic_summarization.ipynb` are calculated and then visualized (in the form of a violin plot)
+* `topic-summarization-and-sentiment.ipynb`: Landon fill this in
 
-* `topic_summarization.ipynb`: 
+* `topic_summarization.ipynb`: Landon fill this in
 
 ## Secondary Section 1: `filtering-jobs`
 
