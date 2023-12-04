@@ -169,11 +169,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-data-subset" id="toc-the-data-subset" class="nav-link active" data-scroll-target="#the-data-subset">The Data Subset</a></li>
-  <li><a href="#external-data" id="toc-external-data" class="nav-link" data-scroll-target="#external-data">External Data</a></li>
-  <li><a href="#cleaning" id="toc-cleaning" class="nav-link" data-scroll-target="#cleaning">Cleaning</a></li>
-  <li><a href="#data-transformations-and-additional-variables" id="toc-data-transformations-and-additional-variables" class="nav-link" data-scroll-target="#data-transformations-and-additional-variables">Data transformations and additional variables</a></li>
-  <li><a href="#regex-search-and-dummies" id="toc-regex-search-and-dummies" class="nav-link" data-scroll-target="#regex-search-and-dummies">Regex Search and Dummies</a></li>
+  <li><a href="#sec-data-subset" id="toc-sec-data-subset" class="nav-link active" data-scroll-target="#sec-data-subset">The Data Subset</a></li>
+  <li><a href="#sec-cleaning-and-checks" id="toc-sec-cleaning-and-checks" class="nav-link" data-scroll-target="#sec-cleaning-and-checks">Cleaning and Checks</a></li>
+  <li><a href="#sec-data-transformations" id="toc-sec-data-transformations" class="nav-link" data-scroll-target="#sec-data-transformations">Data transformations and additional variables</a></li>
+  <li><a href="#sec-regex-search" id="toc-sec-regex-search" class="nav-link" data-scroll-target="#sec-regex-search">Regex Search and Dummies</a></li>
+  <li><a href="#sec-external-data" id="toc-sec-external-data" class="nav-link" data-scroll-target="#sec-external-data">External Data</a></li>
   <li><a href="#sec-relationship-comments-score" id="toc-sec-relationship-comments-score" class="nav-link" data-scroll-target="#sec-relationship-comments-score">The relationship between the number of comments and the score of Reddit posts</a></li>
   <li><a href="#sec-nsfw-content" id="toc-sec-nsfw-content" class="nav-link" data-scroll-target="#sec-nsfw-content">The impact of not-safe-for-work (NSFW) content on user engagement.</a></li>
   <li><a href="#sec-times-of-day" id="toc-sec-times-of-day" class="nav-link" data-scroll-target="#sec-times-of-day">The times of the day when posts typically receive the most engagement.</a></li>
@@ -203,17 +203,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="the-data-subset" class="level2">
-<h2 class="anchored" data-anchor-id="the-data-subset">The Data Subset</h2>
+<section id="sec-data-subset" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-subset">The Data Subset</h2>
 <p>We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits <code>AITA</code>, <code>AskMen</code>, <code>AskWomen</code>, <code>TrueOffMyChest</code>, <code>unpopularopinion</code>, <code>tifu</code>, <code>socialskills</code>, <code>antiwork</code>, <code>relationship_advice</code>, <code>explainlikeimfive</code>, <code>OutOfTheLoop</code>, and <code>NoStupidQuestions</code>. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.</p>
 </section>
-<section id="external-data" class="level2">
-<h2 class="anchored" data-anchor-id="external-data">External Data</h2>
-<p>We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we’ll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data">here</a>.</p>
-</section>
-<section id="cleaning" class="level2">
-<h2 class="anchored" data-anchor-id="cleaning">Cleaning</h2>
-<p>Our cleaning process includes removing from the <code>comments</code> database both datasets the columns that are not needed for each particular set of analyses. Also, in the <code>comments</code> table, we remove the rows where the <code>body</code> has been either removed or deleted. In the <code>submissions</code> table, we also remove where the <code>selftext</code> has been removed or deleted. The resulting rows are 977,181 for the <code>submissions</code> table and 70,594,314 for the <code>comments</code> table.</p>
+<section id="sec-cleaning-and-checks" class="level2">
+<h2 class="anchored" data-anchor-id="sec-cleaning-and-checks">Cleaning and Checks</h2>
+<p>Our cleaning process includes removing from both datasets the columns that are not needed for each particular set of analyses. Also, in the <code>comments</code> table, we remove the rows where the <code>body</code> has been either removed, deleted, or is empty. In the <code>submissions</code> table, we also remove where the <code>selftext</code> has been removed, deleted, or is empty. The resulting rows are 977,181 for the <code>submissions</code> table and 70,594,314 for the <code>comments</code> table. We also performed datachecks after this steps to make sure that there were no missing values in the processed dataset.</p>
 <p>The count of posts per each subreddit is detailed in <a href="#tbl-subreddit-counts">Table&nbsp;1</a>:</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -302,8 +298,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="data-transformations-and-additional-variables" class="level2">
-<h2 class="anchored" data-anchor-id="data-transformations-and-additional-variables">Data transformations and additional variables</h2>
+<section id="sec-data-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-transformations">Data transformations and additional variables</h2>
 <p>Although we summarize the new variables below, they are are described within the EDA sections below.</p>
 <ul>
 <li><code>engagements</code>: the sum of submissions and comments for a particular subreddit.</li>
@@ -312,8 +308,8 @@ ul.task-list li input[type="checkbox"] {
 <li><code>hour_of_the_day</code>: created from the <code>created_utc</code> column, it describes the hour of the day corresponding to the particular post’s date.</li>
 </ul>
 </section>
-<section id="regex-search-and-dummies" class="level2">
-<h2 class="anchored" data-anchor-id="regex-search-and-dummies">Regex Search and Dummies</h2>
+<section id="sec-regex-search" class="level2">
+<h2 class="anchored" data-anchor-id="sec-regex-search">Regex Search and Dummies</h2>
 <p>To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words ‘fascinating,’ ‘entertaining,’ and ‘boring’ appear on a post. We then aggregated them, with the results shown in <a href="#tbl-keyword-counts">Table&nbsp;2</a>:</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -356,6 +352,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="sec-external-data" class="level2">
+<h2 class="anchored" data-anchor-id="sec-external-data">External Data</h2>
+<p>We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we’ll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data">here</a>.</p>
 </section>
 <section id="sec-relationship-comments-score" class="level2">
 <h2 class="anchored" data-anchor-id="sec-relationship-comments-score">The relationship between the number of comments and the score of Reddit posts</h2>

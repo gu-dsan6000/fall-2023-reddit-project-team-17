@@ -170,7 +170,6 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#the-project" id="toc-the-project" class="nav-link" data-scroll-target="#the-project">The Project</a></li>
   <li><a href="#project-goals" id="toc-project-goals" class="nav-link" data-scroll-target="#project-goals">Project Goals</a></li>
-  <li><a href="#why-it-matters" id="toc-why-it-matters" class="nav-link" data-scroll-target="#why-it-matters">Why It Matters</a></li>
   <li><a href="#sec-appendix-a" id="toc-sec-appendix-a" class="nav-link" data-scroll-target="#sec-appendix-a">Appendix A: Analytical Goals and Technical Proposals</a>
   <ul class="collapse">
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
@@ -194,7 +193,70 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="the-project" class="level2">
 <h2 class="anchored" data-anchor-id="the-project">The Project</h2>
+<p>Society in the social media era generates vast amounts of data and potential insights. Reddit, with its large following, candid discourse, and strong communities provides an espceially substantial opportunity to make sense of valuable data. However, understanding such a large amount of data creates a challenge because of the nuanced posts and niche communities. Our exploratory data analysis, natural language processing, and machine learning models will take multiple approaches to manage this large amount of data and generate powerful insights in the most digestible manner possible.</p>
 <p>In this project, we dive into the intersection of story telling in Reddit and machine learning (ML). Our exploration spans various aspects from classifying posts into specific subreddits to predicting the age and gender of posters based on their language. We’re also examining the influence of NSFW posts on user engagement and the correlation between post score and its comments. The project will utilize advanced Natural Language Processing (NLP) techniques to unearth trends within communities, predict post flairs, and delve into the sentiment analysis of subreddit posts. We also aim to use ML to distill meaningful insights from vast quantities of data.</p>
+<p>We selected the following subreddits for the project:</p>
+<div id="tbl-subrredits-and-members" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Shows the subreddits chosen for the projects, as well as the number of members on each as of November 23, 2023.</caption>
+<thead>
+<tr class="header">
+<th>Subreddit</th>
+<th>Members</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>r/relationship_advice</code></td>
+<td>10,380,573</td>
+</tr>
+<tr class="even">
+<td><code>r/socialskills</code></td>
+<td>3,823,567</td>
+</tr>
+<tr class="odd">
+<td><code>r/NoStupidQuestions</code></td>
+<td>4,066,116</td>
+</tr>
+<tr class="even">
+<td><code>r/AskMen</code></td>
+<td>5,763,889</td>
+</tr>
+<tr class="odd">
+<td><code>r/TrueOffMyChest</code></td>
+<td>2,198,361</td>
+</tr>
+<tr class="even">
+<td><code>r/explainlikeimfive</code></td>
+<td>22,635,152</td>
+</tr>
+<tr class="odd">
+<td><code>r/AITA</code></td>
+<td>11,969,361</td>
+</tr>
+<tr class="even">
+<td><code>r/tifu</code></td>
+<td>18,480,872</td>
+</tr>
+<tr class="odd">
+<td><code>r/antiwork</code></td>
+<td>2,775,125</td>
+</tr>
+<tr class="even">
+<td><code>r/OutOfTheLoop</code></td>
+<td>3,234,415</td>
+</tr>
+<tr class="odd">
+<td><code>r/unpopularopinion</code></td>
+<td>4,002,725</td>
+</tr>
+<tr class="even">
+<td><code>r/AskWomen</code></td>
+<td>5,519,321</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="fig-subreddit-banners" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/website-images/subreddit-banners.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -204,16 +266,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="project-goals" class="level2">
 <h2 class="anchored" data-anchor-id="project-goals">Project Goals</h2>
-<p>For a complete list of analytical goals and technical proposals, see <a href="#sec-appendix-a">Section&nbsp;1.4</a></p>
-</section>
-<section id="why-it-matters" class="level2">
-<h2 class="anchored" data-anchor-id="why-it-matters">Why It Matters</h2>
-<ul>
-<li>Image 2</li>
-<li>Image 3</li>
-<li>Image 4</li>
-<li>Image 5</li>
-</ul>
+<p>For a complete list of analytical goals and technical proposals, see <a href="#sec-appendix-a">Section&nbsp;1.3</a></p>
 </section>
 <section id="sec-appendix-a" class="level2">
 <h2 class="anchored" data-anchor-id="sec-appendix-a">Appendix A: Analytical Goals and Technical Proposals</h2>
@@ -277,14 +330,14 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><strong>Idea 10</strong></p>
 <ul>
-<li><code>Business goal</code>: Can an ML model learn to output new stories for posting on Reddit.</li>
-<li><code>Technical approach</code>:</li>
+<li><code>Business goal</code>: For a provided input prompt, generate a the text of story that can posted on Reddit.</li>
+<li><code>Technical approach</code>: We will subset, preprocess, and tokenize both Reddit stories and content from externally sourced books, preparing them to be fed into a Recurrent Neural Network. Utilizing Pytorch, we aim to train the model by minimizing loss and perplexity as accuracy measures. The trained model should be capable of accepting an input prompt and generating a new story text accordingly.</li>
 <li>For more on this goal, click <a href="./ml.html#sec-story-generation">here</a>.</li>
 </ul>
 <p><strong>Idea 11</strong></p>
 <ul>
-<li><code>Business goal</code>: Use pre-trained models to summarize and analyze long text posts related to world events.</li>
-<li><code>Technical approach</code>: Identify available pre-trained models in the realm of NLP and what they are trained to extract from textual data. Use a pre-trained model, or models, to perform NLP tasks for downstream tasks. For instance, use a pre-trained model to obtain word embeddings (vector representations of words) that can be used as features in a subsequent ML model.</li>
+<li><code>Business goal</code>: Summarize top comments of interest for a particular topic using a pre-trained model</li>
+<li><code>Technical approach</code>: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don’t want to label summaries by hand and accuracy can be subjective, we are using an API call to GPT-4 to get reference summaries, and then with those summaries, we generate rouge 1, 2, and L scores to evaluate the model. Hyperparameters are tuned to keep both summaries close to 25% of the original text.</li>
 <li>For more on this goal, click <a href="./ml.html#sec-pre-trained-models">here</a>.</li>
 </ul>
 

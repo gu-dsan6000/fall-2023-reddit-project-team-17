@@ -12,18 +12,14 @@ from IPython.display import Markdown
 
 # EDA
 
-## The Data Subset
+## The Data Subset {#sec-data-subset}
 
 We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop`, and `NoStupidQuestions`. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
 
-## External Data
 
-We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we'll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data).
+## Cleaning and Checks {#sec-cleaning-and-checks}
 
-## Cleaning 
-
-
-Our cleaning process includes removing from the `comments` database both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed or deleted. In the `submissions` table, we also remove where the `selftext` has been removed or deleted. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. 
+Our cleaning process includes removing from both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed, deleted, or is empty. In the `submissions` table, we also remove where the `selftext` has been removed, deleted, or is empty. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. We also performed datachecks after this steps to make sure that there were no missing values in the processed dataset.
 
 The count of posts per each subreddit is detailed in @tbl-subreddit-counts:
 
@@ -72,7 +68,9 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-## Data transformations and additional variables 
+
+
+## Data transformations and additional variables  {#sec-data-transformations}
 
 Although we summarize the new variables below, they are are described within the EDA sections below.
 
@@ -84,7 +82,7 @@ Although we summarize the new variables below, they are are described within the
 
 
 
-## Regex Search and Dummies
+## Regex Search and Dummies {#sec-regex-search}
 
 To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in @tbl-keyword-counts:
 
@@ -133,6 +131,9 @@ Markdown(md)
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
+## External Data {#sec-external-data}
+
+We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we'll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data).
 
 
 ## The relationship between the number of comments and the score of Reddit posts {#sec-relationship-comments-score}

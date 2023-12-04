@@ -194,7 +194,7 @@ div.csl-indent {
   <li><a href="#sec-subreddit-prediction" id="toc-sec-subreddit-prediction" class="nav-link" data-scroll-target="#sec-subreddit-prediction">Subreddit Prediction</a></li>
   <li><a href="#sec-flair-prediction" id="toc-sec-flair-prediction" class="nav-link" data-scroll-target="#sec-flair-prediction">Flair Prediction Using Random Forest Classification</a></li>
   <li><a href="#sec-story-generation" id="toc-sec-story-generation" class="nav-link" data-scroll-target="#sec-story-generation">Story Generation</a></li>
-  <li><a href="#sec-pre-trained-models" id="toc-sec-pre-trained-models" class="nav-link" data-scroll-target="#sec-pre-trained-models">ML Models in <code>r/NoStupidQuestions</code></a></li>
+  <li><a href="#sec-pre-trained-models" id="toc-sec-pre-trained-models" class="nav-link" data-scroll-target="#sec-pre-trained-models">Top Comment Summary Generation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -509,9 +509,7 @@ Note
 </div>
 </section>
 <section id="sec-pre-trained-models" class="level3">
-<h3 class="anchored" data-anchor-id="sec-pre-trained-models">ML Models in <code>r/NoStupidQuestions</code></h3>
-<section id="top-comment-summary-generation" class="level4">
-<h4 class="anchored" data-anchor-id="top-comment-summary-generation">Top Comment Summary Generation</h4>
+<h3 class="anchored" data-anchor-id="sec-pre-trained-models">Top Comment Summary Generation</h3>
 <p>After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit <code>r/NoStupidQuestions</code>. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below.</p>
 <p>The model used to perform this summarization was a “facebook/bart-large-cnn” <span class="citation" data-cites="lewis_bart_2019">[<a href="#ref-lewis_bart_2019" role="doc-biblioref">1</a>]</span>.</p>
 <div id="fig-rouge-scores-plot" class="quarto-figure quarto-figure-center anchored">
@@ -551,7 +549,6 @@ Note
 
 
 
-</section>
 </section>
 </section>
 </section>

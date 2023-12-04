@@ -240,7 +240,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-#### Top Comment Summary Generation  {#sec-pre-trained-models}
+### Top Comment Summary Generation  {#sec-pre-trained-models}
 
 After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case comments related to COVID-19 in the subreddit `r/NoStupidQuestions`. We were successfully able to identify comments that we would be useful to summarize to better gain an understanding of the narrative in a particular subreddit. One example of this is below. 
 
