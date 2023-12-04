@@ -2,7 +2,7 @@
 
 ## Code
 
-All the code used in this project is available on [Github](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17).
+All the code used in this project is available on [Github](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17). For a description of the code folders, click [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/README.md).
 
 ## Data
 

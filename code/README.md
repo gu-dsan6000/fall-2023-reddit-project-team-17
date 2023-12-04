@@ -50,9 +50,9 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 * `project-nlp-posts-and-books-use-trained.ipynb`: Victor fill this in
 
-* `topic-summarization-local.ipynb`: Landon fill this in
+* `topic-summarization.ipynb`: In this notebook, we took the work that had been done in the topics-nlp.ipynb to identify topics of interst and used spark to further reduce the data before being passed into our ML model in topic-summarization-local.ipynb.
 
-* `topic_summarization.ipynb`: Landon fill this in
+* `topic-summarization-local.ipynb`: In this notebook we took the top comments related to our topics of interest and fed it into an open source model to generate summaries and an api for gpt-4 to create refrence summaries to evaluate the summaries from the open source module.
 
 ## Secondary Section 1: `filtering-jobs`
 
