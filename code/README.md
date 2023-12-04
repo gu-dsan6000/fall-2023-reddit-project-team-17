@@ -24,9 +24,9 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 * `flairs-nlp.ipynb`: This notebook contains the application of a sentiment model to the subset of data pertaining to `r/AmItheAsshole`. Additionally, we created visualizations and tables that are presented in the `NLP` section of the project website. We also analyzed the sentiment model with respect to the number of engagements (as the number of comments) by assigned flair in this notebook.
 
-* `project-nlp-posts-and-books-generate.ipynb`: Victor fill this in
+* `project-nlp-posts-and-books-generate.ipynb`: This notebook uses Spark to process the submissions data collected during the initial cleaning phase and performs further preprocessing to prepare the data for the RNN. For Reddit posts, stories in the top 15% of popularity and at least 4,500 characters are chosen and combined with books from external sources. The text is passed through an NLP pipeline, tokenized, and then stored in the bucket.
 
-* `project-nlp-posts-and-books-vis.ipynb`: Victor fill this in
+* `project-nlp-posts-and-books-vis.ipynb`: This notebook generates visualizations and tables for the data generated in the `project-nlp-posts-and-books-generate.ipynb` notebook.
 
 * `project-nlp-predicting-subreddits-cv.ipynb`: This notebook includes a sentiment analysis of the posts in the 12 subreddits of interest and the application of spark-NLP's CountVectorizer to all valid (i.e., non-empty) text posts from all subreddits of interest. The application of NLP techniques are performed in two iterations: one specific to `r/relationship_advice` and one related to all subreddits of interest to generate data for use in the `ML` portion of this project. The NLP processing techniques used in this notebook derive from johnsnowlabs' `spark-nlp` in the form of a pipeline. The CountVectorized form of the valid text posts were saved to the project bucket on AWS.
 
@@ -46,9 +46,9 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 * `project-ml-predicting-subreddits.ipynb`: Various predictors and sampling techniques were applied to all "valid" (non-empty) posts of the 12 subreddits of interest created in 2022 to construct random forest models. Various performance metrics were calculated and confusion matrices constructed, all of which were saved to the `data/ml-data` directory.
 
-* `project-nlp-posts-and-books-model.ipynb`: Victor fill this in
+* `project-nlp-posts-and-books-model.ipynb`: This notebook uses Pytorch and CUDA to train an RNN on the data generated during the NLP stage. Includes hyperparameter setting and error measurement.
 
-* `project-nlp-posts-and-books-use-trained.ipynb`: Victor fill this in
+* `project-nlp-posts-and-books-use-trained.ipynb`: This notebook loads the stored trained RNN model and generates new text.
 
 * `topic-summarization.ipynb`: In this notebook, we took the work that had been done in the topics-nlp.ipynb to identify topics of interst and used spark to further reduce the data before being passed into our ML model in topic-summarization-local.ipynb.
 
@@ -61,3 +61,4 @@ This folder contains the notebook `filtering-jobs.ipynb` and accompanying script
 ## Secondary Section 2: `starter-jobs`
 
 This section contains the starter code provided to us by Professors Marck Vaisman, Abhijit Dasgupta, Amit Arora, and Anderson Monken. These files aided us in creating in both the data acquisition performed in the `filtering-jobs` section and the data processing/analysis performed in other sections.
+

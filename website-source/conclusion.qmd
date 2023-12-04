@@ -1,6 +1,8 @@
 # Conclusion
 
-At a very high level, we sought to take only the textual content of a post and classify the subreddit to which that post belongs. To do so, we used frequency counts of the 500 most common words used across *all* posts as predictors to a multi-class classification model in order to classify posts as belonging to a single subreddit. Through this analysis, we found that using these frequency counts, based on the textual contents of a post alone, we were able to classify posts as belonging to the correct subreddit with success that outperformed naïve benchmark methods. However, with such a large class imbalance present in the data, we also found that it can be difficult to extract the unique features of posts belonging to subreddits that are less frequently used.
+By analyzing a vast collection of storytelling subreddits, we were able to extract rich information that gave us a better understanding of the details and characteristics of posts on Reddit. In doing so, we explored several different avenues related to storytelling on Reddit, providing us with a well-rounded understanding of both textual content and other features of Reddit posts.
+
+First, we sought to take only the textual content of a post and classify the subreddit to which that post belongs. To do so, we used frequency counts of the 500 most common words used across *all* posts as predictors to a multi-class classification model in order to classify posts as belonging to a single subreddit. Through this analysis, we found that using these frequency counts, based on the textual contents of a post alone, we were able to classify posts as belonging to the correct subreddit with success that outperformed naïve benchmark methods. However, with such a large class imbalance present in the data, we also found that it can be difficult to extract the unique features of posts belonging to subreddits that are less frequently used.
 
 Furthermore, we performed a deep dive into the subreddit `r/AmItheAsshole` with a particular focus on the flairs assigned to each post. We focused on four “primary flairs,” which were “Asshole,” “Not the A-hole,” “Everyone Sucks,” and “No A-holes here,” and performed exploratory analysis, natural language processing, sentiment analysis, and applied machine learning models. Through these analyses, we concluded that it is very difficult to accurately predict how Redditors will judge these stories according to these flairs. It is apparent that the overall manner in which Redditors judge one another may be more complex than purely the content of their posts. Additionally we found that the more positive the text of a post is, the more engagement it seemingly receives from other Reddit users, at least for this particular subreddit.
 
@@ -8,9 +10,9 @@ Next, we prepared a dataset for training a Recurrent Neural Network (RNN) to gen
 
 Finally, because one of the best ways to gain an understanding of a topic in a subreddit is simply to read the most popular comments, we wanted to reduce that workload as much as possible. To do this we performed performed exploratory data analysis and natural language processing to identify our topics of interest. We then found an open source model that could accurately summarize a comment to roughly a fourth of its previous size. This could greatly reduce the necessary time for someone to gain a strong understanding of the discourse happening related to a topic within a particular subreddit.
 
-
-
 ## Future Work
+
+Having explored many different avenues regarding storytelling through Reddit, we still feel that there are many opportunities for improving our understanding of these posts even further.
 
 With regard to predicting the subreddit to which a post belongs, we would like to explore additional types of multi-class classification models that are capable of ourperforming our existing model. Furthermore, to address the vast class imbalance in the dataset, we wish to employ sampling techniques that can allow us to gather a more representative and balanced dataset without the steep cost of downsampling to the least common class.
 
