@@ -6,7 +6,7 @@ This document details the various scripts and notebooks created to complete this
 
 This folder contains all of the notebooks and scripts that comprise the Exploratory Data Analysis (EDA) portion of our project, excluding data acquisition which is performed in the `filtering_jobs` section. Within the `project-eda` folder are the following files (sorted alphabetically):
 
-* `engagement_sentiment_corr.ipynb`:
+* `engagement_sentiment_corr.ipynb`: After ingesting the data and performing some cleaning, we wanted to explore the effect that the "controversial" metric had on the other metrics of a post. Our expectation was that posts that were considered controversial might generate more engagement. However, the we found that the opposite was true. In this notebook, multiple plots were created to visualize this relationship and further exploration made it clear that this metric was not as usefule as we had initially hoped.
 
 * `project-eda-aita-texts.ipynb`: This notebook consists of an initial exploration of the data from a preliminary subset of the overall Reddit data set to the 12 subreddits of interest. Multiple plots are created in this section of the notebook including a bar chart showing the counts of valid text posts from each of the 12 subreddits and a scatterplot comparing the mean post scores and number of comments per valid post. Additionally, there is an initial exploration r/AmItheAsshole in relation to the flair prediction task. The data are subsetted to this subreddit and the number of occurrences of each of these flairs is visualized in a bar chart and treemap as can be seen in the `EDA` section of the website.
 
@@ -50,7 +50,7 @@ This folder contains all of the notebooks and scripts that comprise the Explorat
 
 * `project-nlp-posts-and-books-use-trained.ipynb`: Victor fill this in
 
-* `topic-summarization-and-sentiment.ipynb`: Landon fill this in
+* `topic-summarization-local.ipynb`: Landon fill this in
 
 * `topic_summarization.ipynb`: Landon fill this in
 

@@ -38,6 +38,8 @@ We selected the following subreddits for the project:
 
 ## Project Goals
 
+In this work, we explore various ideas centered around storytelling on Reddit. We subset our data only to contain high-membership storytelling subreddits detailed in @tbl-subrredits-and-members. First, we perform EDA on the data. Our first idea is to develop a new engagement metric by correlating the number of comments with post scores. Next, we compare NSFW and non-NSFW posts to assess how not-safe-for-work content affects user engagement. Another goal is to identify peak engagement times by analyzing the temporal patterns of posts. We also investigate the link between engagement and the controversial nature of comments. We then use NLP to determine the age and gender of post authors and analyze sentiments of posts in specific subreddits, like `r/AmItheA**hole`, correlating them with user engagement and post flairs. We also create feature sets using NLP for ML tasks such as predicting the subreddit a post belongs to, determining post flairs based on text content, and generating Reddit-style stories from given prompts. Finally, we summarize top comments on specific topics using a pre-trained model, evaluating the summaries with accuracy metrics.
+
 For a complete list of analytical goals and technical proposals, see @sec-appendix-a
 
 
