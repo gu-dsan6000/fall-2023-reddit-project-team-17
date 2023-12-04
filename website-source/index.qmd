@@ -103,8 +103,8 @@ EDA
 
 **Idea 10**
 
-* `Business goal`: Can an ML model learn to output new stories for posting on Reddit.
-* `Technical approach`: 
+* `Business goal`: For a provided input prompt, generate a the text of story that can posted on Reddit.
+* `Technical approach`: We will subset, preprocess, and tokenize both Reddit stories and content from externally sourced books, preparing them to be fed into a Recurrent Neural Network. Utilizing Pytorch, we aim to train the model by minimizing loss and perplexity as accuracy measures. The trained model should be capable of accepting an input prompt and generating a new story text accordingly.
 * For more on this goal, click [here](ml.qmd#sec-story-generation).
 
 
