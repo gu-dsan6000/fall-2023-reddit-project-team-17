@@ -235,85 +235,67 @@ div.csl-indent {
 <section id="baseline-model" class="level4">
 <h4 class="anchored" data-anchor-id="baseline-model">Baseline Model</h4>
 <p>Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline. Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if <code>50%</code> of our training dataset contains observations from <code>r/relationship_advice</code>, <code>30%</code> from <code>r/NoStupidQuestions</code>, and <code>20%</code> from <code>r/TrueOffMyChest</code>, our baseline model will predict that a post belongs to the subreddit <code>r/relationship_advice</code> with probability <code>0.50</code>, the subreddit <code>r/NoStupidQuestions</code> with probability <code>0.30</code>, and the subreddit <code>r/TrueOffMyChest</code> with probability <code>0.20</code>. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.</p>
-<p>Below, in <a href="#fig-baseline-training">Figure&nbsp;1</a>, we can see the results of the model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.</p>
+</section>
+<section id="random-forest-model---full-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="random-forest-model---full-dataset">Random Forest Model - Full Dataset</h4>
+<p>In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. The Random Forest model is an ensemble method that constructs multiple “weak” classifiers, known as Decision Trees, and aggregates them to make decisions on the data provided.</p>
+<p>In our case, we seek to construct a Random Forest that analyzes the word usage in a given Reddit post in order to decide to which subreddit that post belongs. For instance, the Random Forest may decide that, if a post mentions the word “relationship” more than three times, it belongs to the <code>r/relationship_advice</code> subreddit. Similarly, it might decide that a combination of the use of the words “work”, “job”, and “hate” in a post indicates that the post belongs to the <code>r/antiwork</code> subreddit. Note that the Random Forest model <em>does</em> consider the information present in the dataset, unlike the baseline, because it uses all present data to inform its decisions, rather than simply making a random guess.</p>
+</section>
+<section id="random-forest-model---balanced-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="random-forest-model---balanced-dataset">Random Forest Model - Balanced Dataset</h4>
+<p>Although the Random Forest model is a promising prospect for classifying the subreddit to which each of our Reddit posts belong, there are some concerns that may arise. Given the vast class imbalance present in the dataset - for example, <code>r/relationship_advice</code> having approximately 100 times as many posts as <code>r/AskWomen</code> - we fear that the Random Forest model might just learn to predict the more prevalent classes and ignore the less prevalent ones. For this reason, we seek to employ a technique that can help address the imblance of subreddit classes.</p>
+<p>Here, we decide to build a Random Forest model that is built upon a <em>balanced</em> representation of our dataset. To do so, we sample posts from each subreddit such that the number of posts in our dataset from each subreddit is roughly equivalent to the presence of the least common subreddit. Balancing the dataset in this way allows us to build a model that is not biased toward the overwhelming presence of one subreddit or another. However, it should be noted that this downsampling techniques forces us to set aside a considerable portion of our data in order to adhere to the least prevalent subreddit.</p>
+</section>
+<section id="results" class="level4">
+<h4 class="anchored" data-anchor-id="results">Results</h4>
+<p>Here, we explore the results of our collection of models in performing the subreddit prediction task.</p>
+<section id="results---baseline-model" class="level5">
+<h5 class="anchored" data-anchor-id="results---baseline-model">Results - Baseline Model</h5>
+<p>Below, in <a href="#fig-baseline-training">Figure&nbsp;1</a>, we can see the results of the baseline model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.</p>
 <div id="fig-baseline-training" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/baseline-cv-train-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Shows the confusion matrix for the Baseline Model, evaluated on the training data.</figcaption>
 </figure>
 </div>
-<p>Below, in <a href="#fig-baseline-testing">Figure&nbsp;2</a>, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing quite poorly.</p>
-<div id="fig-baseline-testing" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="img/ml-plots/baseline-cv-test-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Shows the confusion matrix for the Baseline Model, evaluated on the testing data.</figcaption>
-</figure>
-</div>
-<p>Below, in <a href="#fig-baseline-eval">Figure&nbsp;3</a>, is a summary table of the performance metrics for the baseline model on both the training and testing sets. Each metric reports values of approximately 0.20, which is to be expected with such a simple model. We look to improve this performance with a Random Forest model below.</p>
-<div class="cell" data-execution_count="2">
-<div id="fig-baseline-eval" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-
-        <iframe width="100%" height="500" src="img/ml-plots/baseline-eval.html" frameborder="0" allowfullscreen=""></iframe>
-        
-<figcaption class="figure-caption">Figure&nbsp;3: Shows the evaluation metrics for the Baseline Model Classifier.</figcaption>
-</figure>
-</div>
-</div>
 </section>
-<section id="random-forest-model" class="level4">
-<h4 class="anchored" data-anchor-id="random-forest-model">Random Forest Model</h4>
-<p>In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add rf="" explanation="" here="">.</add></p>
-<p>Below, in <a href="#fig-random-forest-training">Figure&nbsp;4</a>, we can see the results of the model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.</p>
+<section id="results---random-forest-model---full-dataset" class="level5">
+<h5 class="anchored" data-anchor-id="results---random-forest-model---full-dataset">Results - Random Forest Model - Full Dataset</h5>
+<p>Below, in <a href="#fig-random-forest-training">Figure&nbsp;2</a>, we can see the results of the Random Forest model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, <code>r/relationship_advice</code> and <code>r/NoStupidQuestions</code>, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.</p>
 <div id="fig-random-forest-training" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/random-forest-cv-train-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: Shows the confusion matrix for the Random Forest, evaluated on the full, unbalanced training data.</figcaption>
 </figure>
-</div>
-<p>Below, in <a href="#fig-random-forest-testing">Figure&nbsp;5</a>, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing well in some aspects, but with plenty of room for improvement.</p>
-<div id="fig-random-forest-testing" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="img/ml-plots/random-forest-cv-test-cm.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
-</figure>
-</div>
-<p>Below, in <a href="#fig-random-forest-eval">Figure&nbsp;6</a>, is a summary table of the performance metrics for the Random Forest model on both the training and testing sets. Each metric reports values of approximately 0.50, which is a great improvement over the baseline model. However, we feel that further improvements can be made in order to achieve higher performance on our subreddit prediction task.</p>
-<div class="cell" data-execution_count="3">
-<div id="fig-random-forest-eval" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-
-        <iframe width="100%" height="500" src="img/ml-plots/random-forest-eval.html" frameborder="0" allowfullscreen=""></iframe>
-        
-<figcaption class="figure-caption">Figure&nbsp;6: Shows the evaluation metrics for the Random Forest Classifier.</figcaption>
-</figure>
-</div>
 </div>
 </section>
-<section id="random-forest-model---balanced-classes" class="level4">
-<h4 class="anchored" data-anchor-id="random-forest-model---balanced-classes">Random Forest Model - Balanced Classes</h4>
-<p><img src="img/ml-plots/random-forest-cv-train-cm-balanced.png" id="fig-random-forest-cv-train-cm-balanced" class="img-fluid" style="width:70.0%" alt="Shows"> <img src="img/ml-plots/random-forest-cv-test-cm-balanced.png" id="fig-random-forest-cv-test-cm-balanced" class="img-fluid" style="width:70.0%" alt="Shows"></p>
-<div class="cell" data-execution_count="4">
-<div id="fig-random-forest-eval-balanced.html" class="quarto-figure quarto-figure-center anchored">
+<section id="results---random-forest-model---balanced-dataset" class="level5">
+<h5 class="anchored" data-anchor-id="results---random-forest-model---balanced-dataset">Results - Random Forest Model - Balanced Dataset</h5>
+<p>Below, in <a href="#fig-random-forest-cv-train-cm-balanced">Figure&nbsp;3</a>, we can see the results of the Random Forest model predictions on the downsampled, balanced training data. Here, we find that the model actually predicts each subreddit some number of times, without really avoiding any of them, like it did with the full, unbalanced dataset. For the vast majority of subreddits, it appears that the model correctly predicts the subreddit the majority of the time. However, there are still a lot of instances where the model predicts incorrectly, especially in cases of subreddits like <code>r/AskMen</code> and <code>r/NoStupidQuestions</code>.</p>
+<div id="fig-random-forest-cv-train-cm-balanced" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-
-        <iframe width="100%" height="500" src="img/ml-plots/random-forest-eval-balanced.html" frameborder="0" allowfullscreen=""></iframe>
-        
-<figcaption class="figure-caption">Figure&nbsp;7: Shows</figcaption>
+<p><img src="img/ml-plots/random-forest-cv-train-cm-balanced.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Shows the confusion matrix for the Random Forest, evaluated on the downsampled, balanced training data.</figcaption>
 </figure>
 </div>
-</div>
 </section>
-<section id="random-forest-model---class-subset" class="level4">
-<h4 class="anchored" data-anchor-id="random-forest-model---class-subset">Random Forest Model - Class Subset</h4>
-<p><img src="img/ml-plots/random-forest-cv-train-cm-subset.png" id="fig-random-forest-cv-train-cm-subset" class="img-fluid" style="width:70.0%" alt="Shows"> <img src="img/ml-plots/random-forest-cv-test-cm-subset.png" id="fig-random-forest-cv-test-cm-subset" class="img-fluid" style="width:70.0%" alt="Shows"></p>
-<div class="cell" data-execution_count="5">
-<div id="fig-random-forest-eval-subset.html" class="quarto-figure quarto-figure-center anchored">
+<section id="results---evaluation-metrics" class="level5">
+<h5 class="anchored" data-anchor-id="results---evaluation-metrics">Results - Evaluation Metrics</h5>
+<p>Below, in <a href="#fig-subreddits-eval">Figure&nbsp;4</a>, we can see the evaluation metrics for the three multi-class classification models described above. These metrics include:</p>
+<ul>
+<li><strong>Accuracy</strong>: a measure of how often the model correctly classified the subreddit to which a post belongs</li>
+<li><strong>F1-Score</strong>: the harmonic mean between the precision and recall scores (below)</li>
+<li><strong>Weighted Precision</strong>: a weighted measure of how often the model correctly classified the subreddit to which a post belongs, given that it predicted a particular subreddit</li>
+<li><strong>Weighted Recall</strong>: a weighted measure of how often the model correctly classified the subreddit to which a post belongs, given that the post belongs to particular subreddit</li>
+</ul>
+<p>By comparing each model type, we find that the baseline model vastly underperforms when compared to the Random Forest models. However, almost surprisingly, we find that the Random Forest Model that was trained on the full, unbalanced dataset outperforms that of the downsampled, balanced dataset by as much as 10% across all evaluation metrics. It is likely that the balanced dataset exhibits a trade-off between the amount of data and the balance of subreddit classes that did not pay off. In any case, it is great to see that our Machine Learning models greatly outperform the baseline model for this task. However, we would like to see further improvement of this model while still maintaining all twelve storytelling subreddits.</p>
+<div class="cell" data-execution_count="2">
+<div id="fig-subreddits-eval" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-        <iframe width="100%" height="500" src="img/ml-plots/random-forest-eval-subset.html" frameborder="0" allowfullscreen=""></iframe>
+        <iframe width="100%" height="500" src="img/ml-plots/subreddits-eval.html" frameborder="0" allowfullscreen=""></iframe>
         
-<figcaption class="figure-caption">Figure&nbsp;8: Shows</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4: Shows the evaluation metrics for the multi-class classification models above.</figcaption>
 </figure>
 </div>
 </div>
@@ -329,6 +311,7 @@ div.csl-indent {
 </div>
 </section>
 </section>
+</section>
 <section id="sec-flair-prediction" class="level3">
 <h3 class="anchored" data-anchor-id="sec-flair-prediction">Flair Prediction Using Random Forest Classification</h3>
 <p>In this section we attempted to predict what flair is assigned to posts in <code>r/AmItheA**hole</code> (<code>r/AITA</code>) based on various different predictors using a Random Forest (RF) model to attempt to predict how Redditors “judge” these stories posted on <code>r/AITA</code>. We then compared these models with their varying predictors and compared them to a baseline model (random chance).</p>
@@ -336,19 +319,19 @@ div.csl-indent {
 <div id="fig-flair-text-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-text-test" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;10: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: Shows the confusion matrix for the Random Forest, evaluated on the testing data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-text-metrics" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-text-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;11: Shows the evalutation metrics for the Random Forest.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Shows the evalutation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
 <p>Based on the metrics above, this model did not predict the flairs of these posts particularly accurately, but performed better than a blind random guess, which would have a theoretical accuracy of 25% compared to our model’s ~30-40%. For both the training and testing subsets, the model did an extremely poor job at predicting “Not the A-hole posts”. This model does perform reasonably well when predicting “Everyone Sucks” and “Asshole” flaired posts, but does not predict the posts with the more positively connoted flairs (No A-holes here and Not the A-hole).</p>
@@ -356,25 +339,25 @@ div.csl-indent {
 <div id="fig-flair-engagement-train" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-cm-train-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;12: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-engagement-test" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-cm-test-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;13: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Shows the confusion matrix for the Random Forest, evaluated on the training data.</figcaption>
 </figure>
 </div>
 <div id="fig-flair-engagement-metrics" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/flair-engagement-model-metrics-plot.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;14: Shows the evaluation metrics for the Random Forest.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;10: Shows the evaluation metrics for the Random Forest.</figcaption>
 </figure>
 </div>
 <p>As shown above, this model performs fairly similarly to the previous text-based model but with some slight improvements in some of the model performance metrics along with more comparative performance metrics of the model for the training and test sets. This model more effectively predicted posts with the flairs “Asshole” and “Everyone Sucks” compared to the text-based model, but similarly struggled to correctly identify posts with more positive flairs. Ultimately, while this model does perform slightly better than the previous text-based model, especially at predicting the posts with more negative flairs attached, it still would not serve as an effective tool for accurately predicting these flairs on a larger scale. It is possible that these data are too homogeneous to be easily differentiated using a machine learning model, or using different models and/or hyperparameters may generate more accurate predictions.</p>
 <p>We also include the evaluation metrics in <a href="#tbl-flair-model-metrics-df">Table&nbsp;1</a> below:</p>
-<div class="cell tbl-cap-location-bottom" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell tbl-cap-location-bottom" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div id="tbl-flair-model-metrics-df" class="anchored">
 <table class="table table-sm table-striped small">
 <caption>Table&nbsp;1: Displays the evaluation metrics of both engagement and text-based models.</caption>
@@ -457,11 +440,11 @@ Note
 <p>In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using <code>PySpark</code> and <code>PyTorch</code>. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.</p>
 <p>The model’s architecture is based on a Long Short-Term Memory (LSTM) layer, which captures long-term dependencies in sequential data. In our setup, we defined hyperparameters such as the input size of 128, hidden state at 256, and used a two-layer LSTM. The model has 12,766,510 trainable parameters.</p>
 <p>For the training process, we set the learning rate at 0.01, a maximum of 100 epochs, and a batch size of 64. To ensure the model didn’t overfit, we employed an early stopping mechanism with a patience of 5 epochs and a validation loss improvement threshold of 0.01. The Adam optimizer was chosen for optimization, paired with a cross-entropy loss function for calculating the model’s error rate. The total training time was 1h 41 mins.</p>
-<p>The training and validation perplexities are shown in <a href="#fig-rnn-training-validation-perplexity">Figure&nbsp;15</a>:</p>
+<p>The training and validation perplexities are shown in <a href="#fig-rnn-training-validation-perplexity">Figure&nbsp;11</a>:</p>
 <div id="fig-rnn-training-validation-perplexity" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/training-validation-perplexity-plot-rnn.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;15: Shows the training and validation perplexities of the RNN training process</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11: Shows the training and validation perplexities of the RNN training process</figcaption>
 </figure>
 </div>
 <p>To evaluate the model’s effectiveness, we focused on loss and perplexity. A lower perplexity value suggests a higher predictive accuracy of the model. The model achieved a test loss of 1.6227 and a perplexity value of 5.0667, indicating a strong performance in predictive capabilities.</p>
@@ -514,7 +497,7 @@ Note
 <div id="fig-rouge-scores-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/rouge-scores-plot.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;16: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;12: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
 </figure>
 </div>
 <section id="before-summarization-after-stemming-and-removing-stopwords" class="level5">

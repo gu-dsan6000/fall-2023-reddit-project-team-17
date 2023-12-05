@@ -37,109 +37,66 @@ For our subreddit prediction task, we aim to take only the textual content of a 
 Before we dive into complex Machine Learning models, though, we start with a baseline model. The baseline model provides us with a point of comparison for our more complex Machine Learning models, allowing us to evaluate the performance of those models in comparison to the simple baseline.
 Our baseline model is very naïve - it simply predicts subreddits with probability equal to the proportion with which they make up the training dataset. For instance, if `50%` of our training dataset contains observations from `r/relationship_advice`, `30%` from `r/NoStupidQuestions`, and `20%` from `r/TrueOffMyChest`, our baseline model will predict that a post belongs to the subreddit `r/relationship_advice` with probability `0.50`, the subreddit `r/NoStupidQuestions` with probability `0.30`, and the subreddit `r/TrueOffMyChest` with probability `0.20`. In this case, of course, the model has 12 subreddits to choose from, each with their own associated probabilities. Note that the baseline model does not consider additional information, such as the textual content of the post, because it is so simple.
 
-Below, in @fig-baseline-training, we can see the results of the model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as `r/relationship_advice` and `r/NoStupidQuestions`, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.
+#### Random Forest Model - Full Dataset
+
+In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. The Random Forest model is an ensemble method that constructs multiple "weak" classifiers, known as Decision Trees, and aggregates them to make decisions on the data provided.
+
+In our case, we seek to construct a Random Forest that analyzes the word usage in a given Reddit post in order to decide to which subreddit that post belongs. For instance, the Random Forest may decide that, if a post mentions the word "relationship" more than three times, it belongs to the `r/relationship_advice` subreddit. Similarly, it might decide that a combination of the use of the words "work", "job", and "hate" in a post indicates that the post belongs to the `r/antiwork` subreddit. Note that the Random Forest model *does* consider the information present in the dataset, unlike the baseline, because it uses all present data to inform its decisions, rather than simply making a random guess.
+
+#### Random Forest Model - Balanced Dataset
+
+Although the Random Forest model is a promising prospect for classifying the subreddit to which each of our Reddit posts belong, there are some concerns that may arise. Given the vast class imbalance present in the dataset - for example, `r/relationship_advice` having approximately 100 times as many posts as `r/AskWomen` - we fear that the Random Forest model might just learn to predict the more prevalent classes and ignore the less prevalent ones. For this reason, we seek to employ a technique that can help address the imblance of subreddit classes.
+
+Here, we decide to build a Random Forest model that is built upon a *balanced* representation of our dataset. To do so, we sample posts from each subreddit such that the number of posts in our dataset from each subreddit is roughly equivalent to the presence of the least common subreddit. Balancing the dataset in this way allows us to build a model that is not biased toward the overwhelming presence of one subreddit or another. However, it should be noted that this downsampling techniques forces us to set aside a considerable portion of our data in order to adhere to the least prevalent subreddit.
+
+#### Results
+
+Here, we explore the results of our collection of models in performing the subreddit prediction task.
+
+##### Results - Baseline Model
+
+Below, in @fig-baseline-training, we can see the results of the baseline model predictions on the training data. As expected, the model predicts the more prevalent subreddits, such as `r/relationship_advice` and `r/NoStupidQuestions`, more often. Since the model only predicts subreddits proportionally to how they appear in the training data, it does not do a good job of actually identifying these subreddits correctly. In fact, its expected classification accuracy is equal to the sum of the squares of the probabilities with which each subreddit occurs, which amounts to approximately 0.20.
 
 ![Shows the confusion matrix for the Baseline Model, evaluated on the training data.](img/ml-plots/baseline-cv-train-cm.png){#fig-baseline-training width=70%}
 
-Below, in @fig-baseline-testing, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing quite poorly.
+##### Results - Random Forest Model - Full Dataset
 
-![Shows the confusion matrix for the Baseline Model, evaluated on the testing data.](img/ml-plots/baseline-cv-test-cm.png){#fig-baseline-testing width=70%}
+Below, in @fig-random-forest-training, we can see the results of the Random Forest model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, `r/relationship_advice` and `r/NoStupidQuestions`, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.
 
-Below, in @fig-baseline-eval, is a summary table of the performance metrics for the baseline model on both the training and testing sets. Each metric reports values of approximately 0.20, which is to be expected with such a simple model. We look to improve this performance with a Random Forest model below.
+![Shows the confusion matrix for the Random Forest, evaluated on the full, unbalanced training data.](img/ml-plots/random-forest-cv-train-cm.png){#fig-random-forest-training width=70%}
 
-```{python}
-#| echo: false
-#| label: fig-baseline-eval
-#| fig-cap: "Shows the evaluation metrics for the Baseline Model Classifier."
+##### Results - Random Forest Model - Balanced Dataset
 
+Below, in @fig-random-forest-cv-train-cm-balanced, we can see the results of the Random Forest model predictions on the downsampled, balanced training data. Here, we find that the model actually predicts each subreddit some number of times, without really avoiding any of them, like it did with the full, unbalanced dataset. For the vast majority of subreddits, it appears that the model correctly predicts the subreddit the majority of the time. However, there are still a lot of instances where the model predicts incorrectly, especially in cases of subreddits like `r/AskMen` and `r/NoStupidQuestions`.
 
-width_percentage = "100%"
-IFrame(src='img/ml-plots/baseline-eval.html', width=width_percentage, height=500)
+![Shows the confusion matrix for the Random Forest, evaluated on the downsampled, balanced training data.](img/ml-plots/random-forest-cv-train-cm-balanced.png){#fig-random-forest-cv-train-cm-balanced width=70%}
 
+##### Results - Evaluation Metrics
 
-```
+Below, in @fig-subreddits-eval, we can see the evaluation metrics for the three multi-class classification models described above. These metrics include:
 
-#### Random Forest Model
+* **Accuracy**: a measure of how often the model correctly classified the subreddit to which a post belongs
+* **F1-Score**: the harmonic mean between the precision and recall scores (below)
+* **Weighted Precision**: a weighted measure of how often the model correctly classified the subreddit to which a post belongs, given that it predicted a particular subreddit
+* **Weighted Recall**: a weighted measure of how often the model correctly classified the subreddit to which a post belongs, given that the post belongs to particular subreddit
 
-In order to predict the subreddit to which a post belongs more effectively, we turn to the Random Forest. <add RF explanation here>.
-
-Below, in @fig-random-forest-training, we can see the results of the model predictions on the training data. Here, we find that the performance of the model seems to outperform that of the baseline model, but still has its downfalls. The model predicts the two most prevalent subreddits, `r/relationship_advice` and `r/NoStupidQuestions`, nearly every time, failing to predict any of the less prevalent subreddits. In this sense, the model is vastly underperforming, as it is heavily biased to the subreddits that it has seen more often.
-
-![Shows the confusion matrix for the Random Forest, evaluated on the training data.](img/ml-plots/random-forest-cv-train-cm.png){#fig-random-forest-training width=70%}
-
-Below, in @fig-random-forest-testing, we can see the results of the model predictions on the testing data. As expected, the model’s performance on the testing set is no different than on the training set. We find the same characteristics, with the model performing well in some aspects, but with plenty of room for improvement.
-
-![Shows the confusion matrix for the Random Forest, evaluated on the testing data.](img/ml-plots/random-forest-cv-test-cm.png){#fig-random-forest-testing width=70%}
-
-Below, in @fig-random-forest-eval, is a summary table of the performance metrics for the Random Forest model on both the training and testing sets. Each metric reports values of approximately 0.50, which is a great improvement over the baseline model. However, we feel that further improvements can be made in order to achieve higher performance on our subreddit prediction task.
+By comparing each model type, we find that the baseline model vastly underperforms when compared to the Random Forest models. However, almost surprisingly, we find that the Random Forest Model that was trained on the full, unbalanced dataset outperforms that of the downsampled, balanced dataset by as much as 10% across all evaluation metrics. It is likely that the balanced dataset exhibits a trade-off between the amount of data and the balance of subreddit classes that did not pay off. In any case, it is great to see that our Machine Learning models greatly outperform the baseline model for this task. However, we would like to see further improvement of this model while still maintaining all twelve storytelling subreddits.
 
 ```{python}
 #| echo: false
-#| label: fig-random-forest-eval
-#| fig-cap: "Shows the evaluation metrics for the Random Forest Classifier."
+#| label: fig-subreddits-eval
+#| fig-cap: "Shows the evaluation metrics for the multi-class classification models above."
 
 
 width_percentage = "100%"
-IFrame(src='img/ml-plots/random-forest-eval.html', width=width_percentage, height=500)
+IFrame(src='img/ml-plots/subreddits-eval.html', width=width_percentage, height=500)
 
 
 ```
-
-
-
-#### Random Forest Model - Balanced Classes
-
-![Shows ](img/ml-plots/random-forest-cv-train-cm-balanced.png){#fig-random-forest-cv-train-cm-balanced width=70%}
-![Shows ](img/ml-plots/random-forest-cv-test-cm-balanced.png){#fig-random-forest-cv-test-cm-balanced width=70%}
-
-```{python}
-#| echo: false
-#| label: fig-random-forest-eval-balanced.html
-#| fig-cap: "Shows "
-
-
-width_percentage = "100%"
-IFrame(src='img/ml-plots/random-forest-eval-balanced.html', width=width_percentage, height=500)
-
-
-```
-
-
-
-
-
-
-#### Random Forest Model - Class Subset
-
-![Shows ](img/ml-plots/random-forest-cv-train-cm-subset.png){#fig-random-forest-cv-train-cm-subset width=70%}
-![Shows ](img/ml-plots/random-forest-cv-test-cm-subset.png){#fig-random-forest-cv-test-cm-subset width=70%}
-
-
-```{python}
-#| echo: false
-#| label: fig-random-forest-eval-subset.html
-#| fig-cap: "Shows "
-
-
-width_percentage = "100%"
-IFrame(src='img/ml-plots/random-forest-eval-subset.html', width=width_percentage, height=500)
-
-
-```
-
-
-
-
-
-
 
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-ml-predicting-subreddits.ipynb).
 ::: 
-
-
-
-
 
 
 
