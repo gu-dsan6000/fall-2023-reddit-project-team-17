@@ -14,14 +14,15 @@ from IPython.display import Markdown
 
 ## The Data Subset {#sec-data-subset}
 
-We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop`, and `NoStupidQuestions`. The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
+We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `r/AITA`, `r/AskMen`, `r/AskWomen`, `r/TrueOffMyChest`, `r/unpopularopinion`, `r/tifu`, `r/socialskills`, `r/antiwork`, `r/relationship_advice`, `r/explainlikeimfive`, `r/OutOfTheLoop`, and `r/NoStupidQuestions`. 
 
+Using PySpark, we processed the `.parquet` files provided for the project in the `s3://bigdatateaching/reddit-parquet/` bucket by subseting it only to the subreddits of interest. We read the comments and submissions data, filtered them based on the subreddits list, and wrote the results to our own group S3 directory we created for the project. We ran this procedure as a `PySparkProcessor` job using Amazon SageMaker. We used 8 `ml.m5.xlarge` instances. The code for this procedures is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/filtering-jobs/filtering-jobs.ipynb). The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
 
 ## Cleaning and Checks {#sec-cleaning-and-checks}
 
-Our cleaning process includes removing from both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed, deleted, or is empty. In the `submissions` table, we also remove where the `selftext` has been removed, deleted, or is empty. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. We also performed datachecks after this steps to make sure that there were no missing values in the processed dataset.
+Our cleaning process includes removing from both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed, deleted, or is empty. In the `submissions` table, we also remove where the `selftext` has been removed, deleted, or is empty. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. We also performed data checks after these steps to ensure no missing values were in the processed dataset. Beyond this initial cleaning, every analysis required its own cleaning, which we detailed in each corresponding section.
 
-The count of posts per each subreddit is detailed in @tbl-subreddit-counts:
+The count of posts per subreddit in the resulting initial `submissions` dataset is detailed in @tbl-subreddit-counts:
 
 ```{python}
 #| echo: false
@@ -46,7 +47,7 @@ Markdown(md)
 
 
 
-Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are actually removed or deleted. @fig-validity-counts shows the count of valid comments per Subreddit:
+Another component of the data that we’d like to observe is how many submissions and comments we can actually extract textual information from. Below, we can see the distribution of “valid” versus “invalid” posts for each subreddit, with “invalid” posts being those that have been removed or deleted. It seems very common that posts are removed or deleted. @fig-validity-counts shows the count of valid comments per Subreddit:
 
 ```{python}
 #| echo: false
@@ -72,11 +73,11 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Data transformations and additional variables  {#sec-data-transformations}
 
-Although we summarize the new variables below, they are are described within the EDA sections below.
+Although we summarize the new variables below, they are described within the EDA sections below.
 
 
 * `engagements`: the sum of submissions and comments for a particular subreddit.
-* `interaction_score` an equal-weighted average of the number of comments and the score in each post.
+* `interaction_score`: an equal-weighted average of the number of comments and the score in each post.
 * `week_of_the_year`: created from the `created_utc` column, it describes the week of the year corresponding to the particular post's date.
 * `hour_of_the_day`: created from the `created_utc` column, it describes the hour of the day corresponding to the particular post's date.
 
@@ -84,14 +85,14 @@ Although we summarize the new variables below, they are are described within the
 
 ## Regex Search and Dummies {#sec-regex-search}
 
-To gauge the overall engagement in the posts, we used regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in @tbl-keyword-counts:
+To gauge the overall engagement in the posts, we used Regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in @tbl-keyword-counts:
 
 
 ```{python}
 #| echo: false
 #| label: tbl-keyword-counts
 #| tbl-cap-location: bottom
-#| tbl-cap: Displays the results of the dummy variable excercise using Regex.
+#| tbl-cap: Displays the results of the dummy variable exercise using Regex.
 
 
 # load
@@ -191,7 +192,7 @@ We can create a boxplot with this small dataset to see the distribution. Since w
 
 
 
-We can infer from the plot that NSFW content increases the engagement with the post, although more analysis will be conducted in subsequent sections.
+We can infer from the plot that NSFW content increases engagement with the post, although more analysis will be conducted in subsequent sections.
 
 
 
@@ -207,8 +208,7 @@ To determine the times of day when a post typically receives the most engagement
 ![Shows the average comments per hour and per week.](img/eda-plots/average-comments-hour-and-week-data.png){#fig-average-comments-hour-and-week}
 
 
-This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time) is low on activity in the story time subreddits.
-
+This analysis clearly shows from roughly 6:00 AM to 11:00 AM UTC (or 1:00 AM to 6:00 AM Eastern time), there is low activity in the story time subreddits.
 
 
 ::: {.callout-note appearance="simple"}
@@ -219,9 +219,10 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Subreddit community prediction {#sec-community-prediction}
 
-One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated additional variable `engagements` as the sum of submissions and comments for a particular subreddit.
+One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated an additional variable, `engagements`, as the sum of submissions and comments for a particular subreddit.
 
-One component of the data that we’d like to look at is the distribution of subreddits among submissions and comments. In @fig-aita-counts-over-time, we can see this distribution, with many engagements coming from the `AmItheA\*hole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke a lot of engagement from other users, in the form of comments, so this level of engagement can be expected.
+One component of the data we'd like to look at is the distribution of subreddits among submissions and comments. In @fig-aita-counts-over-time, we can see this distribution, with many engagements coming from the `AmItheA\*hole`, `relationship_advice`, and `antiwork` subreddits. These subreddits invoke much engagement from other users in the form of comments, so this level of engagement can be expected.
+
 
 
 ```{python}
@@ -251,9 +252,9 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## Flair prediction {#sec-flair-prediction}
 
-In this section we take a closer look at the subreddit r/AmItheA\*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.
+In this section, we take a closer look at the subreddit r/AmItheA\*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.
 
-In r/AITA, users post stories about situations in the real world where they have performed some sort of action or behaved in some certain manner, but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: A\*hole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.
+In r/AITA, users post stories about situations in the real world where they have performed some action or behaved in some particular manner but are questioning whether their actions are good/bad, in a sense. Other users on the subreddit then comment on these story-like submissions and state whether they think the way the original poster acted was good or bad. Thus, each post is assigned a “flair” (i.e., tag) denoting the “judgment” of the post and can be any one of the following: A\*hole, Not the A-hole, Everyone Sucks, and Not the A-hole. The first flair indicates the original poster acted in a reprehensible/poor manner, the second is the opposite, the third flair denotes a situation in which all parties are at fault, and the final flair indicates that no one acted in a particularly poor manner.
 
 The number of posts that are flaired as each of the flairs in the r/AITA is show in @fig-aita-flairs-barchart:
 
@@ -265,7 +266,8 @@ The number of posts that are flaired as each of the flairs in the r/AITA is show
 ![Shows the subreddit's flairs in treemap form.](img/eda-plots/AITA-flairs-treemap-2022.png){#fig-aita-flairs-treemap}
 
 
-As we can see, Redditors by and large “judge” the majority of original posters to be “Not the A-hole,” but there are certainly plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs’ occurrences as well as the possible reasons behind these occurrences will be explored further in the NLP and ML sections.
+As we can see, Redditors, by and large, "judge" the majority of original posters as "Not the A-hole," but there are plenty of posts where the judgments resulted in different outcomes. The frequency of these flairs' occurrences and the possible reasons behind these occurrences, will be explored further in the NLP and ML sections.
+
 
 
 ::: {.callout-note appearance="simple"}
@@ -276,7 +278,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ## NLP EDA for Emerging Trends and Controversial Comments {#sec-controversial-comments}
 
-@fig-current-events shows a regex count of the current events per Subreddit:
+@fig-current-events shows a Regex count of the current events per Subreddit:
 
 ![Shows the topic ocurrence counts in different subreddits.](img/eda-plots/current-events.png){#fig-current-events}
 

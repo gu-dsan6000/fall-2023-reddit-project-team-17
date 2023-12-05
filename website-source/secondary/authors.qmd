@@ -21,7 +21,7 @@ I am currently a second-year student pursuing a Master of Science in Data Scienc
 
 ### Victor De Lima
 ![](../img/website-images/authors/victor.jpeg)
-I am currently a second year student at the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I am hoping to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu
+I am currently a second-year student in the MS in Data Science and Analytics program. I am very interested in how machine learning models work. I want to play a part in how these models can be made better and smarter. I hope to lay a strong foundation for this during my time at the DSAN program. Some of my other interests are science in general, physics, technology, traveling, and history. I also love programming. vad49@georgetown.edu
 
 
 :::

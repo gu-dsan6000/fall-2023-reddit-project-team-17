@@ -7,12 +7,12 @@
 
 > _The business goals do not clearly articulate the purpose and rationale for undertaking the project._
 
-We added a section in the introduction regarding the project goals which provides a clearer explanation of how the goals fit together. We also update the text of the individual goals to better reflect their rationale.
+We added a section in the introduction regarding the project goals, which provides a clearer explanation of how the goals fit together. We also update the text of the individual goals to reflect their rationale better.
 
 
 > _Additionally, the business goals include some technical terms, focusing more on how to address the question rather than fully connecting with what the audience can gain from it. The technical approach, on the other hand, is clearly directed towards a technical audience, employing technical language to explain the implementation._ 
 
-We revised the business goals that had this issue and removed the technical terms from them. We made sure that the technical terms are only included in the technical section.
+We revised the business goals with this issue and removed the technical terms. We ensured that the technical terms were only included in the technical section.
 
 
 
@@ -41,19 +41,19 @@ The subreddits are included in the top of the plot. The "Validity" text was remo
 
 > _A brief discussion about the external dataset and its relevance to project goals would enhance the project plan's completeness._
 
-We added a language to the section discussing how books from external sources will improve the RNN model to improve on this point.
+We added language to the section discussing how books from external sources will improve the RNN model to improve on this point.
 
 
 ## ML work
 
-We did not received feedback for this section.
+We did not receive feedback for this section.
 
 
 ## Website/results
 
 > _The inability to view code on the website is a significant issue (We saw that you sent the code and data file separately by email, but it is better to be available on the website). Ensure that all notebooks are accessible to the audience in the later submission, as transparency in the coding process is crucial._
 
-We requested to the instructional team to make our GitHub repo public. To keep the rendered pages clean, we prefer not filling up the body of the website with code. In each section, we provided links to the code in GitHub which are now accesible publicly.
+We requested the instructional team to make our GitHub repo public. To keep the rendered pages clean, we prefer not to fill up the body of the website with code. In each section, we provided links to the code in GitHub, which is now publicly accessible.
 
 
 > _Be cautious about the professor's advice on using only 10,000 rows in plotting; it seems that most graphs and tables contain over 10,000 data points._

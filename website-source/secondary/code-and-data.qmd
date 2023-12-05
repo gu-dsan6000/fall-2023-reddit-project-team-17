@@ -6,9 +6,7 @@ All the code used in this project is available on [Github](https://github.com/gu
 
 ## Data
 
-This project uses the @baumgartner_pushshift_2020 dataset. The columns available are listed below. Definitions were sourced from @baumgartner_pushshift_2020 and @the_reddit_archives_json_2016.
-
-
+This project uses the @baumgartner_pushshift_2020 dataset. The features available are listed below. While not all formal definitions are made publicly available by the dataset authors, those shown below were sourced from @baumgartner_pushshift_2020 and @the_reddit_archives_json_2016.
 
 
 
