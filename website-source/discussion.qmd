@@ -16,10 +16,6 @@ We revised the business goals with this issue and removed the technical terms. W
 
 
 
-
-
-
-
 ## EDA work
 
 ### Peer Feedback
@@ -33,6 +29,17 @@ This is included in the project, please see the following [link](eda.qmd#sec-cle
 
 The subreddits are included in the top of the plot. The "Validity" text was removed for better visualization.
 
+### Instructional Team Feedback
+
+
+> _None of the business goals are really business goals. They are descriptions of the analyses you plan to do. What is desired is why you want to do these analysis and what you expect to get out of them._
+
+Answer
+
+> _A bit more narrative needed, but the EDA plots are well done._ 
+
+
+Answer
 
 
 ## NLP work
@@ -43,10 +50,37 @@ The subreddits are included in the top of the plot. The "Validity" text was remo
 
 We added language to the section discussing how books from external sources will improve the RNN model to improve on this point.
 
+### Instructional Team Feedback
+
+
+> _Figure 4 needs to be labeled as "men", "women" or "male", "female". "m" and "f" is not acceptable._
+
+This point was addressed by reformatting the plot with the appropriate naming convention.
+
+
+> _The caption of Figure 5 does not appear to be aligned with the figure._ 
+
+Answer
+
+
+> _What is the story of the last section? It's quite unclear._
+
+Answer
+
+
 
 ## ML work
 
-We did not receive feedback for this section.
+### Instructional Team Feedback
+
+> _Your RF models basically predicts that all the data lies in two categories, on the whole. Comment, and if needed, justify why these models are still reasonable._ 
+
+Answer
+
+
+> _The last few sections need to be filled in with narrative to understand what you're trying to do._
+
+Answer
 
 
 ## Website/results
@@ -62,4 +96,5 @@ We verified that this is not the case in any of the plots.
 
 
 
-## Appendix - updates made since intermediate deliverables not included in feedback
+
+

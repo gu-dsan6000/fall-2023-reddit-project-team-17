@@ -62,10 +62,8 @@ The questions we address in this work are:
 
 **Idea 1**
 
-EDA
-
-* `Business goal`: Establish a new engagement metric employing the relationship between the number of comments and the score of Reddit posts.
-* `Technical approach`: We plan to analyze the relationship between the number of comments and post scores on social media platforms. This involves collecting data grouped by subreddits or similar categories and using `pyspark.sql.functions` to calculate the correlation between these two metrics. We will develop an `interaction_score` metric based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.
+* `Business goal`: Explore the relationship between the number of comments and the score of Reddit posts to develop a unified measure for better assessing a story’s engagement.
+* `Technical approach`: We plan to analyze the relationship between the number of comments and post scores on Reddit storytelling posts. This involves collecting data grouped by subreddits and using `pyspark.sql.functions` to calculate the correlation between these two metrics. We will develop an `interaction_score` feature based on our findings, averaging the number of comments and post scores. This new metric aims to provide a unified measure of user engagement across various posts and platforms.
 * For more on this goal, click [here](eda.qmd#sec-relationship-comments-score).
 
 
