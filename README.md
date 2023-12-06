@@ -7,7 +7,7 @@ Website link: https://gu-dsan6000.github.io/fall-2023-reddit-project-team-17/
 * Alex Pattarini - amp419@georgetown.edu
 * Landon Carpenter - lc1276@georgetown.edu
 * Matt Moriarty - mdm341@georgetown.edu
-* Victor De Lima - vad49@georgetown.edu
+* Victor De Lima - vad49@georgetown.edu 
 
 ## Project Overview
 
