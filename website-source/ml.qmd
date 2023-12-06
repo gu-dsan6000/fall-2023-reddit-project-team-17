@@ -199,13 +199,15 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ### Top Comment Summary Generation  {#sec-pre-trained-models}
 
-After all of the NLP work to identify comments that were scored high and contained the topic we had chosen, in this case, comments related to COVID-19 in the subreddit `r/NoStupidQuestions`. We were successfully able to identify comments that would be useful to summarize to gain an understanding of the narrative in a particular subreddit. One example of this is below. 
+One of the biggest stories in recent history is COVID-19. Our NLP work identified the top comments related to COVID-19 within the subreddit `r/NoStupidQuestions` and then we wanted to summarize these comments to capture that story while greatly reducing the time it would take to read and comprehend it. To do this, we used an open-source model from Huggingface and tuned the hyperparameters to keep the new summaries at 25% of the original text length as a minimum, with 15 tokens of cushion on the maximum length parameter. 
 
-The model used to perform this summarization was a “facebook/bart-large-cnn” [@lewis_bart_2019].
+A major hurdle in evaluating the performance of our model is that reference summaries would be needed. To generate the reference summaries, an API call to GPT-4 was used. Once we had reference summaries, we were able to generate ROUGE scores to better understand the open-source model's performance.
 
+Below is a plot of the ROUGE (Recall-Oriented Understudy for Gisting Evaluation) scores. In this case, our open-source model is the one being evaluated and the reference summaries are from GPT-4. The plots below show multiple scores to get a more holistic understanding of the model’s performance.
 
 ![Shows the result of the sentiment analysis using the pre-trained model.](img/ml-plots/rouge-scores-plot.png){#fig-rouge-scores-plot}
 
+Below is an example of our model's summarization ability on a Reddit post within `r/NoStupidQuestions` that references an article, which can be found on [this site](https://portside.org/). It is clear that the summarizer does a great job of extracting key information from the article, making sure to summarize it with a length that is roughly 25% of the length of the article itself.
 
 ##### Before Summarization (After Stemming and removing StopWords):
 
@@ -231,7 +233,7 @@ The model used to perform this summarization was a “facebook/bart-large-cnn”
 
 > Carlin has drawn attention for a routine from his 1999 special, “You Are All Diseased.” He mischievously suggests that a childhood spent swimming in the polluted Hudson River was the reason he didn’t catch polio. Some viewers concluded — wrongly — that her father would have opposed coronavirus vaccines. “Everyone’s like, see? George Carlin would have been anti-vaccination,” she said. ‘I’m like, no. My dad was pro-science,. pro-rational thinking, pro-evidence-based medicine.
 
-
+The model used to perform this summarization was a “facebook/bart-large-cnn” [@lewis_bart_2019].
 
 
 

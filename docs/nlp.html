@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.333">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,8 +74,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -223,28 +222,28 @@ div.csl-indent {
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
 <p>This section outlines the NLP procedures conducted for the project. We performed a comprehensive sentiment analysis on Reddit’s r/AmItheA*hole, revealing a dominant negative sentiment across posts, regardless of their flairs, and a correlation between positive sentiments and higher user engagement. Additional analysis of demographics showed varied sentiment distributions across age and gender. We also extend the analysis to multi-class classification on Reddit, aiming to predict authors’ age and gender using NLP and ML techniques. We found that post sentiments varied minimally across age groups, predominantly featuring negative sentiments, with a significant concentration in the 18-25 age bracket. Gender analysis echoed this trend, with negative sentiments dominating all identified genders, as numerically validated by the gender sentiment distribution table. Furthermore, the data preparation for machine learning involved cleaning and transforming text through <code>CountVectorizer</code>, focusing on the most frequent words.</p>
-<p>After identifying “NoStupidQuestions” as the subreddit that we would investigate for topics related to Covid-19 trends we created a plot that should convey its interest over time in this particular subreddit. Separately, the research integrated Reddit submissions with classic literature texts, employing detailed NLP transformations and data filtering. This preparation will facilitate the development of the input data to train a recurrent neural network (RNN) that will generate new story submissions.</p>
-<p>All sections used johnsnowlabs <code>sparkNLP</code> to perform the text analysis. Please see the links to the <code>.ipynb</code> notebooks in each section for the specific implementation.</p>
+<p>After identifying “NoStupidQuestions” as the subreddit that we would investigate for topics related to Covid-19 trends, we created a plot that should convey its interest over time in this particular subreddit. Separately, the research integrated Reddit submissions with classic literature texts, employing detailed NLP transformations and data filtering. This preparation will facilitate the development of the input data to train a recurrent neural network (RNN) that will generate new story submissions.</p>
+<p>All sections used the John Snow Labs <code>sparkNLP</code> package to perform the text analysis. Please see the links to each section’s <code>.ipynb</code> notebooks for the specific implementation.</p>
 </section>
 <section id="analysis-report" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-report">Analysis Report</h2>
 <section id="sec-flair-sentiment-model" class="level3">
 <h3 class="anchored" data-anchor-id="sec-flair-sentiment-model">Flair Sentiment Model</h3>
-<p>In this section we explored the textual content of the posts of r/AmItheA*hole (r/AITA) with respect to their assigned flairs and subsequently applying a pretrained sentiment model. Using a sparkNLP pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (A*hole, Not the A*hole, Everybody Sucks, No A*holes Here) attached were processed/cleaned and run through a pretrained sentiment model. The sentiment model most commonly assigned these posts a “negative” sentiment, as shown in <a href="#fig-flair-sentiments-barchart">Figure&nbsp;1</a>. This holds true across posts assigned any of the four primary flairs.</p>
+<p>In this section, we explored the textual content of the r/AmItheA*hole (r/AITA) posts with respect to their assigned flairs and subsequently applied a pre-trained sentiment model. Using a <code>sparkNLP</code> pipeline, all text posts from r/AITA in 2022 with one of the four primary flairs (A*hole, Not the A*hole, Everybody Sucks, No A*holes Here) attached were processed/cleaned and run through a pre-trained sentiment model. The sentiment model most commonly assigned these posts a “negative” sentiment, as shown in <a href="#fig-flair-sentiments-barchart">Figure&nbsp;1</a>. This holds across posts assigned to any of the four primary flairs.</p>
 <div id="fig-flair-sentiments-barchart" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/flair_sentiments_barchart.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Shows the subreddit sentiment by flair.</figcaption>
 </figure>
 </div>
-<p>To further delve into the sentiments of these posts in r/AITA, we analyzed these sentiment assignments with respect to the engagement a post receives, represented by the number of comments under each posts. In the <a href="#fig-flair-engagements-barchart">Figure&nbsp;2</a>, the mean number of comments per post grouped by flair assignment and sentiment assignment.</p>
+<p>To further delve into the sentiments of these posts in r/AITA, we analyzed these sentiment assignments with respect to the engagement a post receives, represented by the number of comments under each post. In the <a href="#fig-flair-engagements-barchart">Figure&nbsp;2</a>, the mean number of comments per post is grouped by flair assignment and sentiment assignment.</p>
 <div id="fig-flair-engagements-barchart" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/flair_engagements_barchart.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Shows the subreddit engagement by flair.</figcaption>
 </figure>
 </div>
-<p>From this plot above, we can extract several conclusions. We can see that posts assigned the “A*hole” flair receive the most user engagement (on average) and posts assigned “No A-holes here” receive the least engagement, on average. Additionally, it is apparent that posts assigned a “negative” sentiment receive less user engagement than those with a “positive” sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more “positive” a post’s sentiment/writing is, the more likely it is to receive more engagement (at least in the form of number of comments).</p>
+<p>From this plot above, we can extract several conclusions. We can see that posts assigned the “A*hole” flair receive the most user engagement (on average), and posts assigned “No A-holes here” receive the least engagement, on average. Additionally, posts assigned a “negative” sentiment receive less user engagement than those with a “positive” sentiment across all four primary flairs. Thus, it is possible there could be a relationship wherein the more “positive” a post’s sentiment/writing is, the more likely it is to receive more engagement (at least in the form of the number of comments).</p>
 <p><a href="#tbl-aita-sentiment-engagements">Table&nbsp;1</a> below is a numerical representation of <a href="#fig-flair-engagements-barchart">Figure&nbsp;2</a> showing the average number of comments per post by flair and sentiment assignment.</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -302,22 +301,22 @@ div.csl-indent {
 </section>
 <section id="sec-extracting-age-and-gender" class="level3">
 <h3 class="anchored" data-anchor-id="sec-extracting-age-and-gender">Extracting the age and gender of the author of the post</h3>
-<p>In using NLP and ML techniques to predict the age and gender of the author who created a post, it’s important to observe the distribution of ages and genders as they relate to other variables of interest. In particular, it can be interesting to observe these variables as they relate to post sentiment. Note that the age and gender of the author of the post is not provided in the dataset and is instead extracted from the post itself using regex, if available.</p>
-<p>In <a href="#fig-sentiment-age">Figure&nbsp;3</a> we can see a density plot of the age of the author of a post, grouped by the categorized sentiment of the post itself. We find that there doesn’t seem to be much of a difference between the distribution of ages for each sentiment, as each seems to peak around ages between 18 and 25 years old. Furthermore, we can clearly see that the vast majority of posts contain negative sentiment - likely posts written about negative experiences and asking for advice.</p>
+<p>In using NLP and ML techniques to predict the age and gender of the author who created a post, it’s important to observe the distribution of ages and genders as they relate to other variables of interest. In particular, observing these variables as they relate to post sentiment can be interesting. Note that the age and gender of the post’s author are not provided in the dataset and are extracted from the post itself using Regex, if available.</p>
+<p>In <a href="#fig-sentiment-age">Figure&nbsp;3</a>, we can see a density plot of the age of the author of a post, grouped by the categorized sentiment of the post itself. There doesn’t seem to be much difference between the distribution of ages for each sentiment, as each seems to peak around ages between 18 and 25 years old. Furthermore, we can see that most posts contain negative sentiment - likely posts written about negative experiences and asking for advice.</p>
 <div id="fig-sentiment-age" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/predicting-subreddits-density-age.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Shows how age is distributed across sentiment</figcaption>
 </figure>
 </div>
-<p>We can visualize similar features regarding the identified gender of the author of a post in <a href="#fig-sentiment-gender">Figure&nbsp;4</a>. Here, we can see the distribution of categorized sentiment of posts, grouped by the identified gender of the author of the post. Again, we find that the distribution of sentiments across genders is relatively similar, with the vast majority of posts containing negative sentiment.</p>
+<p>We can visualize similar features regarding the identified gender of the author of a post in <a href="#fig-sentiment-gender">Figure&nbsp;4</a>. Here, we can see the distribution of categorized sentiment of posts grouped by the identified gender of the post’s author. Again, the distribution of sentiments across genders is relatively similar, with most posts containing negative sentiment.</p>
 <div id="fig-sentiment-gender" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/predicting-subreddits-density-gender.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Shows how gender is distributed across sentiment</figcaption>
 </figure>
 </div>
-<p><a href="#tbl-gender-table">Table&nbsp;2</a> represents the same data as above, but expresses the relative frequencies of categorized post sentiment, grouped by the author’s identified gender. Here, we find numerically that the distribution of sentiments is very similar across genders, with negative sentiments making up almost 95% of instances for all genders.</p>
+<p><a href="#tbl-gender-table">Table&nbsp;2</a> represents the same data as above but expresses the relative frequencies of categorized post sentiment grouped by the author’s identified gender. Here, we find numerically that the distribution of sentiments is very similar across genders, with negative sentiments making up almost 95% of instances for all genders.</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div id="tbl-gender-table" class="anchored">
@@ -354,12 +353,12 @@ div.csl-indent {
 </section>
 <section id="sec-nlp-with-countvectorizer" class="level3">
 <h3 class="anchored" data-anchor-id="sec-nlp-with-countvectorizer">NLP with <code>CountVectorizer</code></h3>
-<p>In order to incorporate NLP-based predictors in a machine learning model, we first have to process the content of each reddit post such that it can appropriately be fed into the model. Importantly, textual data cannot be sent directly into a machine learning model - we must represent the text numerically such that it can be interpreted by the model. One way in which we do this is by identifying how many times each word is used in each post.</p>
-<p>In preparing the data for machine learning models, we first want to clean the textual data before we represent it numerically. In doing so, we opt to perform the following cleaning steps:</p>
+<p>To incorporate NLP-based predictors in a machine learning model, we first have to process the content of each Reddit post such that it can appropriately be fed into the model. Importantly, textual data cannot be sent directly into a machine learning model - we must represent the text numerically such that it can be interpreted by the model. One way in which we do this is by identifying how many times each word is used in each post.</p>
+<p>In preparing the data for machine learning models, we first want to clean the textual data before representing it numerically. In doing so, we opt to perform the following cleaning steps:</p>
 <ul>
-<li>Remove all special characters, retaining only alphabetic characters and spaces: This will help us focus only on the words used, rather than any punctuation present.</li>
+<li>Remove all special characters, retaining only alphabetic characters and spaces: This will help us focus only on the words used rather than any punctuation present.</li>
 <li>Convert the text to lowercase: This will help us standardize word usage by interpreting capitalized and non-capitalized words as the same.</li>
-<li>Tokenize the text: This will help us break down posts into their individual word tokens, rather than maintaining one long document.</li>
+<li>Tokenize the text: This will help us break down posts into their individual word tokens rather than maintaining one long document.</li>
 <li>Remove “stop words”: This will help us remove extremely common words, such as “a” and “and”, so that we can focus more on the selective vocabulary that each author uses.</li>
 <li>Stem and lemmatize words: This will help us take different variations of the same word, such as “run”, “running”, and “ran”, and reduce them into the stem of the word (“run”).</li>
 </ul>
@@ -368,8 +367,8 @@ div.csl-indent {
 <li>Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of time it occurs.</li>
 <li>Subset to the “n” most frequent words across all documents: This will help us filter out very uncommon words, including, but not limited to, misspelled words.</li>
 </ul>
-<p>By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used, while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% most frequent words used might make up 80% of the total words used, with most words being used very infrequently (Zipf’s Law).</p>
-<p><a href="#tbl-count-vectorizer-dataframe-preview">Table&nbsp;3</a> is a glimpse at what our transformed dataset looks like as it prepares to be sent into a machine learning model. We obtain “n” columns - one for each of the “n” most frequent words - with values representing the frequency with which they appear in each document. These features can be combined with other features of the data, such as the number of comments associated with a post, to form a feature set suitable for a machine learning model.</p>
+<p>By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% of the most frequently used words might make up 80% of the total words used, with most being used infrequently (Zipf’s Law).</p>
+<p><a href="#tbl-count-vectorizer-dataframe-preview">Table&nbsp;3</a> is a glimpse at what our transformed dataset looks like as it prepares to be sent into a machine learning model. We obtain “n” columns - one for each of the “n” most frequent words - with values representing the frequency with which they appear in each document. These features can be combined with other data features, such as the number of comments associated with a post, to form a feature set suitable for a machine learning model.</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div id="tbl-count-vectorizer-dataframe-preview" class="anchored">
@@ -552,11 +551,11 @@ div.csl-indent {
 </section>
 <section id="sec-preparing-covid-19-data" class="level3">
 <h3 class="anchored" data-anchor-id="sec-preparing-covid-19-data">Preparing Covid-19 data in <code>NoStupidQuestions</code></h3>
-<p>After performing NLP on the <code>NoStupidQuestions</code> subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work. We wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From <a href="#fig-covid-nsq">Figure&nbsp;5</a>, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.</p>
+<p>After performing NLP on the <code>NoStupidQuestions</code> subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work, we wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From <a href="#fig-covid-nsq">Figure&nbsp;5</a>, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.</p>
 <div id="fig-covid-nsq" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/covid-nsq.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Shows how gender is distributed across sentiment</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Shows the daily number of COVID-19-related posts over time</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-simple callout-note">
@@ -572,8 +571,8 @@ div.csl-indent {
 </section>
 <section id="sec-rnn-data-preparation" class="level3">
 <h3 class="anchored" data-anchor-id="sec-rnn-data-preparation">Preparing Reddit and External Data for Training an RNN</h3>
-<p>For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically <em>The Scarlet Letter</em> by Nathaniel Hawthorne <span class="citation" data-cites="hawthorne_scarlet_2008">[<a href="#ref-hawthorne_scarlet_2008" role="doc-biblioref">1</a>]</span>, <em>The Odyssey</em> by Homer <span class="citation" data-cites="homer_odyssey_1999">[<a href="#ref-homer_odyssey_1999" role="doc-biblioref">2</a>]</span>, <em>Crime and Punishment</em> by Fyodor Dostoyevsky <span class="citation" data-cites="dostoyevsky_crime_2006">[<a href="#ref-dostoyevsky_crime_2006" role="doc-biblioref">3</a>]</span>, <em>Metamorphosis</em> by Franz Kafka <span class="citation" data-cites="kafka_metamorphosis_2005">[<a href="#ref-kafka_metamorphosis_2005" role="doc-biblioref">4</a>]</span>, and <em>The Great Gatsby</em> by F. Scott Fitzgerald <span class="citation" data-cites="fitzgerald_great_2021">[<a href="#ref-fitzgerald_great_2021" role="doc-biblioref">5</a>]</span>. While the stories retrieved from Reddit have high scores, adding books from external sources makes sure that out training data will contain story telling that has stood the test of time and trascended generations. This may make the model more likely to output better, more compelling output.</p>
-<p>To prepare the Reddit data, we extracted only the relevant information from the parquets, such as <code>subreddit</code>, <code>title</code>, <code>selftext</code>, <code>score</code>, and <code>URL</code>, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any “Edit:” sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn’t have at least 4,500 characters (around 750 words). Then, we filtered for only stored with <code>score</code> in the top 85th percentile, thereby focusing on submissions that garnered significant user interaction.</p>
+<p>For this exercise, we focused on preparing text that contains great storytelling to train a Recurrent Neural Network (RNN) that can generate new stories. We use our 12 months of Reddit submissions data described in the EDA section for the analysis. Additionally, we integrate external data containing the text of famous stories from Project Gutenberg books that have stood the test of time, specifically <em>The Scarlet Letter</em> by Nathaniel Hawthorne <span class="citation" data-cites="hawthorne_scarlet_2008">[<a href="#ref-hawthorne_scarlet_2008" role="doc-biblioref">1</a>]</span>, <em>The Odyssey</em> by Homer <span class="citation" data-cites="homer_odyssey_1999">[<a href="#ref-homer_odyssey_1999" role="doc-biblioref">2</a>]</span>, <em>Crime and Punishment</em> by Fyodor Dostoyevsky <span class="citation" data-cites="dostoyevsky_crime_2006">[<a href="#ref-dostoyevsky_crime_2006" role="doc-biblioref">3</a>]</span>, <em>Metamorphosis</em> by Franz Kafka <span class="citation" data-cites="kafka_metamorphosis_2005">[<a href="#ref-kafka_metamorphosis_2005" role="doc-biblioref">4</a>]</span>, and <em>The Great Gatsby</em> by F. Scott Fitzgerald <span class="citation" data-cites="fitzgerald_great_2021">[<a href="#ref-fitzgerald_great_2021" role="doc-biblioref">5</a>]</span>. While the stories retrieved from Reddit have high scores, adding books from external sources ensures that our training data will contain storytelling that has stood the test of time and transcended generations. This may make the model more likely to output better, more compelling output.</p>
+<p>To prepare the Reddit data, we extracted only the relevant information from the parquets, such as <code>subreddit</code>, <code>title</code>, <code>selftext</code>, <code>score</code>, and <code>URL</code>, and filtered out deleted or empty submissions. To select the best stories, we used a regular expressions pattern to remove any “Edit:” sections to remove post-edit additions that could skew the analysis. Since stories must be at least a few paragraphs, we removed all posts that didn’t have at least 4,500 characters (around 750 words). Then, we filtered for only stored with <code>score</code> in the top 85th percentile, focusing on submissions that garnered significant user interaction.</p>
 <p>We then combined the text sources. The data underwent a series of NLP transformations, including custom tokenization and lowercasing, to prepare it for advanced analysis. We constructed a vocabulary and transformed the individual characters into tokens. The resulting frequency of each token is shown in <a href="#fig-token-frequency-plot">Figure&nbsp;6</a>. Lastly, we stored the processed data in a structured Parquet format alongside the character-to-index mappings, crucial for the subsequent machine-learning modeling.</p>
 <div id="fig-token-frequency-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -581,7 +580,7 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;6: Shows the count of the Top 10 tokens</figcaption>
 </figure>
 </div>
-<p>As an additionally way to visualize the resulting dataset, we also can see the results of the top 10 N-Grams, where <span class="math inline">\(N=5\)</span> in <a href="#tbl-n-gram-results">Table&nbsp;4</a>.</p>
+<p>As an additional way to visualize the resulting dataset, we also can see the results of the top 10 N-Grams, where <span class="math inline">\(N=5\)</span> in <a href="#tbl-n-gram-results">Table&nbsp;4</a>.</p>
 <div class="cell tbl-cap-location-bottom" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div id="tbl-n-gram-results" class="anchored">

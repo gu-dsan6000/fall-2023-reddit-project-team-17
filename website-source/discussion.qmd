@@ -34,12 +34,12 @@ The subreddits are included in the top of the plot. The "Validity" text was remo
 
 > _None of the business goals are really business goals. They are descriptions of the analyses you plan to do. What is desired is why you want to do these analysis and what you expect to get out of them._
 
-Answer
+We addressed this concern by revising our business goals to be less technical, as well as more explicit about what we expect to get out of them.
 
 > _A bit more narrative needed, but the EDA plots are well done._ 
 
-
 Answer
+
 
 
 ## NLP work
@@ -60,7 +60,7 @@ This point was addressed by reformatting the plot with the appropriate naming co
 
 > _The caption of Figure 5 does not appear to be aligned with the figure._ 
 
-Answer
+To address this, we modified this caption to ensure that it aligned with the COVID-19-related visualization and not the gender-related visualization above it.
 
 
 > _What is the story of the last section? It's quite unclear._
@@ -75,7 +75,7 @@ Answer
 
 > _Your RF models basically predicts that all the data lies in two categories, on the whole. Comment, and if needed, justify why these models are still reasonable._ 
 
-Answer
+This is a very important note and we addressed it in two ways. First, we describe this particular downfall of the Random Forest model, explaining why it raises concern. Additionally, we build both a baseline model and a Random Forest built on a balanced version of our dataset in order to provide points of comparison for the original Random Forest model.
 
 
 > _The last few sections need to be filled in with narrative to understand what you're trying to do._

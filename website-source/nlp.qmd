@@ -175,7 +175,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 After performing NLP on the `NoStupidQuestions` subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work, we wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From @fig-covid-nsq, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.
 
 
-![Shows how gender is distributed across sentiment](img/nlp-plots/covid-nsq.png){#fig-covid-nsq}
+![Shows the daily number of COVID-19-related posts over time](img/nlp-plots/covid-nsq.png){#fig-covid-nsq}
 
 
 
