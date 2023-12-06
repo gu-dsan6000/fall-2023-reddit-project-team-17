@@ -312,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Idea 6</strong></p>
 <ul>
 <li><code>Business Goal</code>: Determine and analyze the sentiments of <code>r/AmItheA**hole</code> posts with respect to user engagement and “flairs” to analyze how Redditors judge each other’s stories.</li>
-<li><code>Technical Proposal</code>: Apply a pretrained sentiment model to all non empty text posts in <code>r/AmItheA**hole</code> created in 2022. Compare and contrast sentiments by the levels of the four primary “flairs” (Asshole, Not the A-hole, Everyone Sucks, No A-holes here) and by various measures of user engagement (e.g., number of comments). Create various visualizations displaying these comparisons and draw conclusions.</li>
+<li><code>Technical Proposal</code>: Apply a pre-trained sentiment model to all non-empty text posts in <code>r/AmItheA**hole</code> created in 2022. Compare and contrast sentiments by the levels of the four primary “flairs” (A**hole, Not the A-hole, Everyone Sucks, No A-holes here) and by various measures of user engagement (e.g., number of comments). Create various visualizations displaying these comparisons and draw conclusions.</li>
 <li>For more on this goal, click <a href="./nlp.html#sec-flair-sentiment-model">here</a>.</li>
 </ul>
 <p><strong>Idea 7</strong></p>
@@ -330,7 +330,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Idea 9</strong></p>
 <ul>
 <li><code>Business goal</code>: Determine/predict “flairs” of Reddit posts in <code>r/AITA</code> to analyze why Redditors judge other Redditors’ stories the way they do.</li>
-<li><code>Technical approach</code>: Focusing primarily on the subreddit <code>r/AITA</code> and its flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here), apply NLP techniques such as tokenization on text-based submissions to extract the important contents of each post. Apply a multi-class classification model trained on labelled <code>r/AITA</code> posts (i.e., text posts with a flair) to predict which flair a given post will receive based on its text content. Present confusion matrices on testing dataset and identify the words/phrases most commonly associated with each flair type.</li>
+<li><code>Technical approach</code>: Focusing primarily on the subreddit <code>r/AITA</code> and its flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here), apply NLP techniques such as tokenization on text-based submissions to extract the important contents of each post. Apply a multi-class classification model trained on labeled <code>r/AITA</code> posts (i.e., text posts with a flair) to predict which flair a given post will receive based on its text content. Present confusion matrices on the testing dataset and identify the words/phrases most commonly associated with each flair type.</li>
 <li>For more on this goal, click <a href="./ml.html#sec-flair-prediction">here</a>.</li>
 </ul>
 <p><strong>Idea 10</strong></p>
@@ -342,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Idea 11</strong></p>
 <ul>
 <li><code>Business goal</code>: Summarize top comments of interest for a particular topic, with the objective of obtaining the key pieces of information from the text.</li>
-<li><code>Technical approach</code>: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don’t want to label summaries by hand and accuracy can be subjective, we will using an API call to GPT-4 to get reference summaries, and then with those summaries, generate rouge 1, 2, and L scores to evaluate the model. We will use hyperparameter tuning to keep both summaries close to 25% of the length of the original text.</li>
+<li><code>Technical approach</code>: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don’t want to label summaries by hand and accuracy can be subjective, we will use an API call to GPT-4 to get reference summaries, and then with those summaries, generate rouge 1, 2, and L scores to evaluate the model. We will use hyperparameter tuning to keep both summaries close to 25% of the length of the original text.</li>
 <li>For more on this goal, click <a href="./ml.html#sec-pre-trained-models">here</a>.</li>
 </ul>
 

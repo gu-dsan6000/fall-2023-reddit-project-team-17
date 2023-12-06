@@ -9,24 +9,27 @@ Website link: https://gu-dsan6000.github.io/fall-2023-reddit-project-team-17/
 * Matt Moriarty - mdm341@georgetown.edu
 * Victor De Lima - vad49@georgetown.edu
 
+## Project Overview
+
+Since ancient times, storytelling has captivated the human imagination. It has been a powerful tool for imparting wisdom and shaping cultural identities. From the oral traditions of ancient civilizations to the written narratives of modern times, stories continually evolve to reflect the complexities of human emotions and values. Society in the social media era generates vast amounts of text data in which great stories are contained and often go unnoticed. In this project, we are interested in taking a deep dive into storytelling in Reddit: how it comes to be, how it engages the audience, and what lessons we can learn to make ourselves better storytellers.
+
 ## Feedback Groups
 
 * Giving feedback to: 18
 * Receiving feedback from: 16
 
-
 ## Group bucket
 
-- s3://project17-bucket-alex/
+- `s3://project17-bucket-alex/`
 
 ## Full dataset
 
-* s3://bigdatateaching/reddit-parquet/submissions/
-* s3://bigdatateaching/reddit-parquet/comments/
+* `s3://bigdatateaching/reddit-parquet/submissions/`
+* `s3://bigdatateaching/reddit-parquet/comments/`
 
 ## Subreddits
 
-`AITA`, `AskMen`, `AskWomen`, `TrueOffMyChest`, `unpopularopinion`, `tifu`, `socialskills`, `antiwork`, `relationship_advice`, `explainlikeimfive`, `OutOfTheLoop `, `NoStupidQuestions`
+`r/AmItheA**hole`, `r/AskMen`, `r/AskWomen`, `r/TrueOffMyChest`, `r/unpopularopinion`, `r/tifu`, `r/socialskills`, `r/antiwork`, `r/relationship_advice`, `r/explainlikeimfive`, `r/OutOfTheLoop `, `r/NoStupidQuestions`
 
 ## Theme Colors
 

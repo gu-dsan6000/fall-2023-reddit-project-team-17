@@ -97,7 +97,7 @@ The questions we address in this work are:
 **Idea 6**
 
 * `Business Goal`: Determine and analyze the sentiments of `r/AmItheA**hole` posts with respect to user engagement and “flairs” to analyze how Redditors judge each other's stories.
-* `Technical Proposal`: Apply a pretrained sentiment model to all non empty text posts in `r/AmItheA**hole` created in 2022. Compare and contrast sentiments by the levels of the four primary “flairs” (Asshole, Not the A-hole, Everyone Sucks, No A-holes here) and by various measures of user engagement (e.g., number of comments). Create various visualizations displaying these comparisons and draw conclusions.
+* `Technical Proposal`: Apply a pre-trained sentiment model to all non-empty text posts in `r/AmItheA**hole` created in 2022. Compare and contrast sentiments by the levels of the four primary "flairs" (A**hole, Not the A-hole, Everyone Sucks, No A-holes here) and by various measures of user engagement (e.g., number of comments). Create various visualizations displaying these comparisons and draw conclusions.
 * For more on this goal, click [here](nlp.qmd#sec-flair-sentiment-model).
 
 
@@ -118,7 +118,7 @@ The questions we address in this work are:
 **Idea 9**
 
 * `Business goal`: Determine/predict “flairs” of Reddit posts in `r/AITA` to analyze why Redditors judge other Redditors' stories the way they do.
-* `Technical approach`: Focusing primarily on the subreddit `r/AITA` and its flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here), apply NLP techniques such as tokenization on text-based submissions to extract the important contents of each post. Apply a multi-class classification model trained on labelled `r/AITA` posts (i.e., text posts with a flair) to predict which flair a given post will receive based on its text content. Present confusion matrices on testing dataset and identify the words/phrases most commonly associated with each flair type.
+* `Technical approach`: Focusing primarily on the subreddit `r/AITA` and its flairs (Asshole, Not the A-hole, Everyone Sucks, No A-holes here), apply NLP techniques such as tokenization on text-based submissions to extract the important contents of each post. Apply a multi-class classification model trained on labeled `r/AITA` posts (i.e., text posts with a flair) to predict which flair a given post will receive based on its text content. Present confusion matrices on the testing dataset and identify the words/phrases most commonly associated with each flair type.
 * For more on this goal, click [here](ml.qmd#sec-flair-prediction).
 
 
@@ -132,7 +132,7 @@ The questions we address in this work are:
 **Idea 11**
 
 * `Business goal`: Summarize top comments of interest for a particular topic, with the objective of obtaining the key pieces of information from the text.
-* `Technical approach`: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don't want to label summaries by hand and accuracy can be subjective, we will using an API call to GPT-4 to get reference summaries, and then with those summaries, generate rouge 1, 2, and L scores to evaluate the model. We will use hyperparameter tuning to keep both summaries close to 25% of the length of the original text.
+* `Technical approach`: Identify an open-source model that can accurately summarize top comments related to a particular topic of interest. Since we don't want to label summaries by hand and accuracy can be subjective, we will use an API call to GPT-4 to get reference summaries, and then with those summaries, generate rouge 1, 2, and L scores to evaluate the model. We will use hyperparameter tuning to keep both summaries close to 25% of the length of the original text.
 * For more on this goal, click [here](ml.qmd#sec-pre-trained-models).
 
 

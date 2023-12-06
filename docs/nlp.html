@@ -364,7 +364,7 @@ div.csl-indent {
 </ul>
 <p>In performing these cleaning steps, we obtain representations of the textual components of each post that we can begin to represent numerically. To do this, we conduct a few more steps:</p>
 <ul>
-<li>Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of time it occurs.</li>
+<li>Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of times it occurs.</li>
 <li>Subset to the “n” most frequent words across all documents: This will help us filter out very uncommon words, including, but not limited to, misspelled words.</li>
 </ul>
 <p>By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% of the most frequently used words might make up 80% of the total words used, with most being used infrequently (Zipf’s Law).</p>
@@ -662,7 +662,7 @@ div.csl-indent {
 </section>
 <section id="sec-data-storage" class="level3">
 <h3 class="anchored" data-anchor-id="sec-data-storage">Data Storage</h3>
-<p>Outputs of the NLP cleaning procedures are stored in <code>.parquet</code> the team bucket <code>s3a://project17-bucket-alex/</code> for ease of use with ML models.</p>
+<p>Outputs of the NLP cleaning procedures are stored in <code>.parquet</code> format in the team bucket <code>s3a://project17-bucket-alex/</code> for ease of use with ML models.</p>
 
 
 

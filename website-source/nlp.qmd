@@ -135,7 +135,7 @@ In preparing the data for machine learning models, we first want to clean the te
 
 In performing these cleaning steps, we obtain representations of the textual components of each post that we can begin to represent numerically. To do this, we conduct a few more steps:
 
-* Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of time it occurs.
+* Calculate word frequencies: This will help us obtain a numeric representation for each word within each document - the number of times it occurs.
 * Subset to the “n” most frequent words across all documents: This will help us filter out very uncommon words, including, but not limited to, misspelled words.
 
 By obtaining word frequencies and subsetting the vocabulary to a more manageable size, we can retain a large portion of the total words used while greatly reducing the search space with respect to our vocabulary. For instance, the top 10% of the most frequently used words might make up 80% of the total words used, with most being used infrequently (Zipf's Law).
@@ -238,4 +238,4 @@ The external data is available [here](https://github.com/gu-dsan6000/fall-2023-r
 
 ### Data Storage {#sec-data-storage}
 
-Outputs of the NLP cleaning procedures are stored in `.parquet` the team bucket `s3a://project17-bucket-alex/` for ease of use with ML models.
+Outputs of the NLP cleaning procedures are stored in `.parquet` format in the team bucket `s3a://project17-bucket-alex/` for ease of use with ML models.

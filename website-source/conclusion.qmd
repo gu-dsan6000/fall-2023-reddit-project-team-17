@@ -8,9 +8,21 @@ First, we sought to identify if storytelling language usage differs between comm
 
 Next, we performed a deep dive into the subreddit `r/AmItheA**hole`, focusing on the flairs assigned to each post. We focused on four "primary flairs," which were "Asshole," "Not the A-hole," "Everyone Sucks," and "No A-holes here," and performed exploratory analysis, natural language processing, sentiment analysis, and applied machine learning models. Through these analyses, we concluded that it is very difficult to accurately predict how Redditors will judge these stories according to these flairs. It is apparent that the overall manner in which Redditors judge one another may be more complex than the content of their posts only. Additionally, we found that the more positive the text of a post is, the more engagement it seemingly receives from other Reddit users, at least for this particular subreddit.
 
-Furthermore, we prepared a dataset for training a Recurrent Neural Network (RNN) to generate stories. We combined high-scoring Reddit submissions with texts from classic literature like "The Scarlet Letter" and "The Odyssey." The Reddit data was carefully curated for quality, and we applied natural language processing techniques like tokenization to prepare both sources for analysis. We then built and trained an RNN model using tools like `PySpark`, `PyTorch`, and CUDA. We implemented procedures to set the hyperparameters for better model training and to avoid overfitting. Low loss and perplexity values indicated our model's strong predictive performance. Although the generated stories aren't entirely cohesive, the model successfully forms coherent words, demonstrating a grasp of basic linguistic structures and marking a significant step towards more complex story generation.
+Additionally, we prepared a dataset for training a Recurrent Neural Network (RNN) to generate stories. We combined high-scoring Reddit submissions with texts from classic literature like "The Scarlet Letter" and "The Odyssey." The Reddit data was carefully curated for quality, and we applied natural language processing techniques like tokenization to prepare both sources for analysis. We then built and trained an RNN model using tools like `PySpark`, `PyTorch`, and CUDA. We implemented procedures to set the hyperparameters for better model training and to avoid overfitting. Low loss and perplexity values indicated our model's strong predictive performance. Although the generated stories aren't entirely cohesive, the model successfully forms coherent words, demonstrating a grasp of basic linguistic structures and marking a significant step towards more complex story generation.
 
-Finally, because one of the best ways to gain an understanding of a topic in a subreddit is to read the most popular comments, we wanted to reduce that workload as much as possible. To do this, we performed exploratory data analysis and natural language processing to identify our topics of interest. We then found an open-source model that could accurately summarize a comment to roughly a fourth of its previous size. This could greatly reduce the necessary time for someone to gain a strong understanding of the discourse happening related to a topic within a particular subreddit.
+Furthermore, because one of the best ways to gain an understanding of a topic in a subreddit is to read the most popular comments, we wanted to reduce that workload as much as possible. To do this, we performed exploratory data analysis and natural language processing to identify our topics of interest. We then found an open-source model that could accurately summarize a comment to roughly a fourth of its previous size. This could greatly reduce the necessary time for someone to gain a strong understanding of the discourse happening related to a topic within a particular subreddit.
+
+Finally, we even visualized our own generated Reddit stories with the help of DALLE-3 (see @fig-stories-generation-images below).
+
+::: {#fig-stories-generation-images layout-ncol=3}
+![Once upon a time...](img/website-images/story_generation1.png){#fig-stories-generation-image1}
+
+![The sun set over the ancient, whispering forest...](img/website-images/story_generation2.png){#fig-stories-generation-image2}
+
+![The sound of sirens pierced the night...](img/website-images/story_generation3.png){#fig-stories-generation-image3}
+
+DALLE-3-generated images for RNN-generated stories from initial prompts
+:::
 
 ## Future Work
 
@@ -18,7 +30,7 @@ Having explored many different avenues regarding storytelling through Reddit, th
 
 Regarding subreddit community prediction, we would like to explore additional types of multi-class classification models capable of outperforming our existing models. Furthermore, to address the vast class imbalance in the dataset, we wish to employ sampling techniques that can allow us to gather a more representative and balanced dataset *without* the steep cost of downsampling to the least common class.
 
-Further analysis related to the `r/AmItheA**hole` subreddit and how Redditors judge others could explore other types of models, predictors, and subreddits involving a similar dynamic between posters and responders. In particular, investigating other measures of user engagement could help broaded our understanding of the judgement present in this subreddit.
+Further analysis related to the `r/AmItheA**hole` subreddit and how Redditors judge others could explore other types of models, predictors, and subreddits involving a similar dynamic between posters and responders. In particular, investigating other measures of user engagement could help broaden our understanding of the judgement present in this subreddit.
 
 Furthermore, we could employ more advanced techniques for text generation, mainly focusing on transformer models. These have shown superior performance in generating more coherent and diverse text. While our RNN understood basic grammar structures, it fell short of generating the stories we were expecting. Transformers are better at handling long-range dependencies, making them ideal for complex tasks like story generation. By incorporating transformers, we anticipate a significant enhancement in the model's ability to create linguistically correct stories that are closer to human-like storytelling.
 
@@ -26,4 +38,4 @@ Finally, for our work in summarization, we could explore the option of fine-tuni
 
 ## Final Thoughts
 
-Ultimately, we learned a lot about language usage across Reddit through our analyses on specific storytelling subreddit communities. We employed numerous analytical techniques, such as Big Data Processing, Exploratory Data Analysis, Natural Language Processing, and Machine Learning in order to broaded our understanding of language usage on Reddit. Finally, we gathered our analyses and thoughts into a well-documented website while offering both technical and non-technical insights throughout.
+Ultimately, we learned a lot about language usage across Reddit through our analyses of specific storytelling subreddit communities. We employed numerous analytical techniques, such as Big Data Processing, Exploratory Data Analysis, Natural Language Processing, and Machine Learning, in order to broaden our understanding of language usage on Reddit. Finally, we gathered our analyses and thoughts into a well-documented website while offering both technical and non-technical insights throughout.
