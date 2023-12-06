@@ -162,10 +162,10 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ### Story Generation {#sec-story-generation}
 
 ::: {.callout-note appearance="tip"}
-The saved model used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth).
+The **saved model** used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth).
 :::
 
-In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using `PySpark` and `PyTorch`. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.
+We developed a story generation model using a recurrent neural network (RNN) model to address our goal of crafting stories that Reddit's audience finds engaging. We built and trained the model using `PySpark` and `PyTorch`. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.
 
 The model's architecture is based on a Long Short-Term Memory (LSTM) layer, which captures long-term dependencies in sequential data. In our setup, we defined hyperparameters such as the input size of 128, hidden state at 256, and used a two-layer LSTM. The model has 12,766,510 trainable parameters.
 
@@ -177,7 +177,7 @@ The training and validation perplexities are shown in @fig-rnn-training-validati
 
 To evaluate the model's effectiveness, we focused on loss and perplexity. A lower perplexity value suggests a higher predictive accuracy of the model. The model achieved a test loss of 1.6227 and a perplexity value of 5.0667, indicating a strong performance in predictive capabilities.
 
-We were ready to generate stories with the trained. Some examples are shown in @tbl-rnn-generation:
+We were ready to generate stories with the trained model. Some examples are shown in @tbl-rnn-generation:
 
 | Prompt      | Generated Text |
 | ----------- | ----------- |
@@ -187,9 +187,19 @@ We were ready to generate stories with the trained. Some examples are shown in @
 
 : Shows the prompt and generated text by the RNN model {#tbl-rnn-generation}
 
+As we can see in the above table, the text generated still doesn't construct sentences with the appropriate structure to be considered stories. Nonetheless, although our model cannot yet generate cohesive stories, it's important to recognize the success of the underlying process. We trained the model only on individual characters, and the learning process allowed it to piece together coherent words and phrases. This ability demonstrates the model's understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model's output aligns well with the objectives of our project. Future work will include leveraging the text generation capabilities of transformer models, which are better suited for this use case. With these, we aim to produce compelling stories crafted from training data from the best Reddit and broad literature storytelling.
 
+For complementary purposes only, we imagine what illustrations of our generated stories would look like using DALLE-3. Below, in @fig-story-generation-images, are illustrations corresponding to each of the generated stories shown above.
 
-Although our model cannot yet generate cohesive stories, it's important to recognize the success in the underlying process. The characters produced by the model consistently combine to form coherent words, an ability that demonstrates the model's understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model's output aligns well with the objectives of our project.
+::: {#fig-story-generation-images layout-ncol=3}
+![Once upon a time...](img/website-images/story_generation1.png){#fig-story-generation-image1}
+
+![The sun set over the ancient, whispering forest...](img/website-images/story_generation2.png){#fig-story-generation-image2}
+
+![The sound of sirens pierced the night...](img/website-images/story_generation3.png){#fig-story-generation-image3}
+
+DALLE-3-generated images for RNN-generated stories from initial prompts
+:::
 
 ::: {.callout-note appearance="simple"}
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-ml/project-nlp-posts-and-books-model.ipynb).

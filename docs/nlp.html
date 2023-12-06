@@ -551,7 +551,8 @@ div.csl-indent {
 </section>
 <section id="sec-preparing-covid-19-data" class="level3">
 <h3 class="anchored" data-anchor-id="sec-preparing-covid-19-data">Preparing Covid-19 data in <code>NoStupidQuestions</code></h3>
-<p>After performing NLP on the <code>NoStupidQuestions</code> subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work, we wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From <a href="#fig-covid-nsq">Figure&nbsp;5</a>, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.</p>
+<p>This section dove into understanding the relationship between COVID-19 and the subreddit <code>r/NoStupidQuestions</code>, over the timeframe of our data. After data cleaning and prep, keywords were used to find comments of interest from the “body” of a comment that had been tokenized and had stopwords removed. We then created the visualization below, <a href="#fig-covid-nsq">Figure&nbsp;5</a>, to show how the engagement with this story changed over time. While there was no major consistent trend over time, engagement did seem to be higher early on and there are some spikes that might tell us about the dialogue around this story.</p>
+<p>Data from this work will be used for further investigation in the ML portion of our project. There, we will use the comments we have just identified and a summarization model to summarize the top comments related to our chosen topic. This will hopefully give us a much more precise understanding of this topic.</p>
 <div id="fig-covid-nsq" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/nlp-plots/covid-nsq.png" class="img-fluid figure-img"></p>

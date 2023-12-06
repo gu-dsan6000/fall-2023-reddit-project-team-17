@@ -12,13 +12,21 @@ from IPython.display import Markdown
 
 # EDA
 
-## The Data Subset {#sec-data-subset}
+## Executive Summary
 
-We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `r/AITA`, `r/AskMen`, `r/AskWomen`, `r/TrueOffMyChest`, `r/unpopularopinion`, `r/tifu`, `r/socialskills`, `r/antiwork`, `r/relationship_advice`, `r/explainlikeimfive`, `r/OutOfTheLoop`, and `r/NoStupidQuestions`. 
+This section describes our data processing, cleaning, and exploration work for our 2022 storytelling-focused subreddit data subset. The selected data encompasses comments and submissions from 12 popular subreddits, including `r/AITA`, `r/AskMen`, `r/AskWomen`, and others. We process this data using `PySpark` and AWS SageMaker. Beyond the data retrieval procedure from the class AWS bucket using Spark jobs, the cleaning process involves selecting columns useful for the analysis and removing entries with empty or deleted content.
+
+Our analysis includes several critical aspects relevant to addressing our business goals. Firstly, we explore the data, including the distribution of posts across subreddits and the ratio of valid to invalid posts. We use Regex for preliminary sentiment analysis and add external data sources, like classic literature text, to expand the research potential of our data. These methods allow us to examine various aspects, such as the impact of NSFW content on engagement, the relationship between comments and scores, and the times of day when posts receive the most attention. We also begin the exploratory work for our ML goals, including subreddit community prediction and flair prediction in `r/AITA`.
+
+## Analysis Report
+
+### The Data Subset {#sec-data-subset}
+
+We selected a subset of the data related to subreddits dedicated to storytelling during 2022. Namely, we chose the 12 subreddits `r/AITA`, `r/AskMen`, `r/AskWomen`, `r/TrueOffMyChest`, `r/unpopularopinion`, `r/tifu`, `r/socialskills`, `r/antiwork`, `r/relationship_advice`, `r/explainlikeimfive`, `r/OutOfTheLoop`, and `r/NoStupidQuestions`.
 
 Using PySpark, we processed the `.parquet` files provided for the project in the `s3://bigdatateaching/reddit-parquet/` bucket by subseting it only to the subreddits of interest. We read the comments and submissions data, filtered them based on the subreddits list, and wrote the results to our own group S3 directory we created for the project. We ran this procedure as a `PySparkProcessor` job using Amazon SageMaker. We used 8 `ml.m5.xlarge` instances. The code for this procedures is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/filtering-jobs/filtering-jobs.ipynb). The data we acquired has a shape of 3,444,283 x 68 for the submissions table and 76,503,363 x 21 for the comments table.
 
-## Cleaning and Checks {#sec-cleaning-and-checks}
+### Cleaning and Checks {#sec-cleaning-and-checks}
 
 Our cleaning process includes removing from both datasets the columns that are not needed for each particular set of analyses. Also, in the `comments` table, we remove the rows where the `body` has been either removed, deleted, or is empty. In the `submissions` table, we also remove where the `selftext` has been removed, deleted, or is empty. The resulting rows are 977,181 for the `submissions` table and 70,594,314 for the `comments` table. We also performed data checks after these steps to ensure no missing values were in the processed dataset. Beyond this initial cleaning, every analysis required its own cleaning, which we detailed in each corresponding section.
 
@@ -71,10 +79,9 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## Data transformations and additional variables  {#sec-data-transformations}
+### Data transformations and additional variables  {#sec-data-transformations}
 
-Although we summarize the new variables below, they are described within the EDA sections below.
-
+Although our new variables are described throughout this EDA section, we provide a brief summary below.
 
 * `engagements`: the sum of submissions and comments for a particular subreddit.
 * `interaction_score`: an equal-weighted average of the number of comments and the score in each post.
@@ -83,7 +90,7 @@ Although we summarize the new variables below, they are described within the EDA
 
 
 
-## Regex Search and Dummies {#sec-regex-search}
+### Regex Search and Dummies {#sec-regex-search}
 
 To gauge the overall engagement in the posts, we used Regex to create dummy variables that indicate whether the words 'fascinating,' 'entertaining,' and 'boring' appear on a post. We then aggregated them, with the results shown in @tbl-keyword-counts:
 
@@ -132,12 +139,12 @@ Markdown(md)
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/project-eda-exploratory.ipynb).
 ::: 
 
-## External Data {#sec-external-data}
+### External Data {#sec-external-data}
 
 We have two primary sources of external data. The first is a community members dataset detailing the number of members each of the 12 subreddits has. By combining this data into the submissions table, we will get a valuable extra data point for our analysis related to the engagement of posts. This data was collected from Reddit itself. Our second source is the text of the books Metamorphosis by Franz Kafka and The Scarlet Letter by Nathaniel Hawthorne. We aim to perform an NLP time-series sentiment analysis on these books and the most engaging long-form story posts, and by calculating the correlations, we'll be able to determine if these take the reader through a similar sentiment pattern and infer whether that is the reason for their popularity. This data was collected from Project Gutenberg. These data sources are available at [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/tree/main/data/external-data).
 
 
-## The relationship between the number of comments and the score of Reddit posts {#sec-relationship-comments-score}
+### The relationship between the number of comments and the score of Reddit posts {#sec-relationship-comments-score}
 
 The number of comments (`num_comments`) and the score of a post (`score`), which is the upvotes minus the downvotes the post has received, are ways to gauge engagement with the post. Determining whether these variables are correlated can justify their combination into an aggregate engagement metric. To do this, we group the submissions by subreddit and leverage the `corr` function from `pyspark.sql.functions`. @tbl-correlation-by-subreddit shows the results:
 
@@ -181,7 +188,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## The impact of not-safe-for-work (NSFW) content on user engagement. {#sec-nsfw-content}
+### The impact of not-safe-for-work (NSFW) content on user engagement. {#sec-nsfw-content}
 
 
 To determine if not safe for work post affects user interactions, first, we filter the `submissions` dataset for where the `over_18` flag is true (which in this tiny percentage of them). Then, we randomly sample an equal amount of false cases, and with this, we create a small, balanced dataset with the same amount of posts flagged as NSFW as those that are not. 
@@ -201,7 +208,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 ::: 
 
 
-## The times of the day when posts typically receive the most engagement. {#sec-times-of-day}
+### The times of the day when posts typically receive the most engagement. {#sec-times-of-day}
 
 To determine the times of day when a post typically receives the most engagement, we create two **additional variables**: `week_of_the_year` and `hour_of_the_day`, both coming from the `created_utc` column. We remove the first two days of 2022 as these would be considered part of week 53 of 2021. Then, we can group and pivot the count of our new variables, resulting in the @fig-average-comments-hour-and-week:
 
@@ -217,7 +224,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## Subreddit community prediction {#sec-community-prediction}
+### Subreddit community prediction {#sec-community-prediction}
 
 One interesting task that we have our sights set on is predicting the subreddit to which a post belongs, given the textual components of the post. In doing so, there are many components of the data that we would like to explore. For this, we also generated an additional variable, `engagements`, as the sum of submissions and comments for a particular subreddit.
 
@@ -250,7 +257,7 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## Flair prediction {#sec-flair-prediction}
+### Flair prediction {#sec-flair-prediction}
 
 In this section, we take a closer look at the subreddit r/AmItheA\*hole (henceforth referred to as r/AITA) with the goal of both analyzing and predicting what “flair” is assigned to each post based on its text content. The exploratory segment of this analysis involves analyzing and visualizing the frequency counts of each “flair” in r/AITA for 2022.
 
@@ -276,13 +283,13 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 
 
-## NLP EDA for Emerging Trends and Controversial Comments {#sec-controversial-comments}
+### NLP EDA for Emerging Trends and Controversial Comments {#sec-controversial-comments}
 
-@fig-current-events shows a Regex count of the current events per Subreddit:
+In this section, we want to see whether popular topics that we’ve chosen are talked about and to take that a  step further, the narratives that we have chosen from popular topics are broken down in each subreddit. @fig-current-events below paints a clear picture of which subreddits have engagement related to the stories we are interested in exploring and shows the degree of engagement with comparisons to other subreddits and topics.
 
 ![Shows the topic ocurrence counts in different subreddits.](img/eda-plots/current-events.png){#fig-current-events}
 
-@fig-engagement-comparison shows the performance of controversial posts:
+Another element of this exploration of stories that we wanted to understand was the impact the“controversiality” would have on other engagement metrics in the dataset. Below we look at the "scores", "gildings", and whether a comment was "stickied" for both controversial (1) and non-controversial (0) comments. From @fig-engagement-comparison, we can clearly see that the “controversial” metric does not have a positive impact on any of the engagement metrics that were identified in our exploratory data analysis.
 
 ![Shows the engagement by varying metrics.](img/eda-plots/engagement-comparison.png){#fig-engagement-comparison}
 
@@ -293,5 +300,3 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 The code used for this section is available [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/topic_trends.ipynb) and [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/code/project-eda/engagement_sentiment_corr.ipynb).
 
 ::: 
-
-

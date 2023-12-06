@@ -38,7 +38,7 @@ We addressed this concern by revising our business goals to be less technical, a
 
 > _A bit more narrative needed, but the EDA plots are well done._ 
 
-Answer
+In response to this feedback, we added more narrative structure throughout our website's EDA page.
 
 
 
@@ -65,7 +65,7 @@ To address this, we modified this caption to ensure that it aligned with the COV
 
 > _What is the story of the last section? It's quite unclear._
 
-Answer
+We provided more narrative flow to our NLP section in response to this feedback, allowing this section to more clearly present our goals.
 
 
 
@@ -77,10 +77,9 @@ Answer
 
 This is a very important note and we addressed it in two ways. First, we describe this particular downfall of the Random Forest model, explaining why it raises concern. Additionally, we build both a baseline model and a Random Forest built on a balanced version of our dataset in order to provide points of comparison for the original Random Forest model.
 
-
 > _The last few sections need to be filled in with narrative to understand what you're trying to do._
 
-Answer
+Similar to the previous sections, we added more narrative flow to the ML page, better tying in the analyses with our overall goals for the project.
 
 
 ## Website/results

@@ -434,10 +434,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The saved model used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth">here</a>.</p>
+<p>The <strong>saved model</strong> used for this section is available <a href="https://github.com/gu-dsan6000/fall-2023-reddit-project-team-17/blob/main/data/ml-data/rnn_model_250_0.15.pth">here</a>.</p>
 </div>
 </div>
-<p>In our project, we developed a story generation model using a recurrent neural network (RNN) model, which we built and trained using <code>PySpark</code> and <code>PyTorch</code>. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.</p>
+<p>We developed a story generation model using a recurrent neural network (RNN) model to address our goal of crafting stories that Reddit’s audience finds engaging. We built and trained the model using <code>PySpark</code> and <code>PyTorch</code>. To enhance the computation speed, we integrated CUDA into the process. Our data is the mix of top stories from various subreddits and popular books sourced externally, developed during the NLP portion of the project. The preprocessed portion of the dataset usable for training purposes is 1037 MB. We found that a smaller subset of 160.59 MB was adequate for the analysis.</p>
 <p>The model’s architecture is based on a Long Short-Term Memory (LSTM) layer, which captures long-term dependencies in sequential data. In our setup, we defined hyperparameters such as the input size of 128, hidden state at 256, and used a two-layer LSTM. The model has 12,766,510 trainable parameters.</p>
 <p>For the training process, we set the learning rate at 0.01, a maximum of 100 epochs, and a batch size of 64. To ensure the model didn’t overfit, we employed an early stopping mechanism with a patience of 5 epochs and a validation loss improvement threshold of 0.01. The Adam optimizer was chosen for optimization, paired with a cross-entropy loss function for calculating the model’s error rate. The total training time was 1h 41 mins.</p>
 <p>The training and validation perplexities are shown in <a href="#fig-rnn-training-validation-perplexity">Figure&nbsp;11</a>:</p>
@@ -448,7 +448,7 @@ Note
 </figure>
 </div>
 <p>To evaluate the model’s effectiveness, we focused on loss and perplexity. A lower perplexity value suggests a higher predictive accuracy of the model. The model achieved a test loss of 1.6227 and a perplexity value of 5.0667, indicating a strong performance in predictive capabilities.</p>
-<p>We were ready to generate stories with the trained. Some examples are shown in <a href="#tbl-rnn-generation">Table&nbsp;2</a>:</p>
+<p>We were ready to generate stories with the trained model. Some examples are shown in <a href="#tbl-rnn-generation">Table&nbsp;2</a>:</p>
 <div id="tbl-rnn-generation" class="anchored">
 <table class="table">
 <caption>Table&nbsp;2: Shows the prompt and generated text by the RNN model</caption>
@@ -478,7 +478,39 @@ Note
 </tbody>
 </table>
 </div>
-<p>Although our model cannot yet generate cohesive stories, it’s important to recognize the success in the underlying process. The characters produced by the model consistently combine to form coherent words, an ability that demonstrates the model’s understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model’s output aligns well with the objectives of our project.</p>
+<p>As we can see in the above table, the text generated still doesn’t construct sentences with the appropriate structure to be considered stories. Nonetheless, although our model cannot yet generate cohesive stories, it’s important to recognize the success of the underlying process. We trained the model only on individual characters, and the learning process allowed it to piece together coherent words and phrases. This ability demonstrates the model’s understanding of basic linguistic structures, a foundational step toward more complex story generation. This aspect of the model’s output aligns well with the objectives of our project. Future work will include leveraging the text generation capabilities of transformer models, which are better suited for this use case. With these, we aim to produce compelling stories crafted from training data from the best Reddit and broad literature storytelling.</p>
+<p>For complementary purposes only, we imagine what illustrations of our generated stories would look like using DALLE-3. Below, in <a href="#fig-story-generation-images">Figure&nbsp;12</a>, are illustrations corresponding to each of the generated stories shown above.</p>
+<div id="fig-story-generation-images" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-story-generation-image1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/website-images/story_generation1.png" class="img-fluid figure-img" data-ref-parent="fig-story-generation-images"></p>
+<figcaption class="figure-caption">(a) Once upon a time…</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-story-generation-image2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/website-images/story_generation2.png" class="img-fluid figure-img" data-ref-parent="fig-story-generation-images"></p>
+<figcaption class="figure-caption">(b) The sun set over the ancient, whispering forest…</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-story-generation-image3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="img/website-images/story_generation3.png" class="img-fluid figure-img" data-ref-parent="fig-story-generation-images"></p>
+<figcaption class="figure-caption">(c) The sound of sirens pierced the night…</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;12: DALLE-3-generated images for RNN-generated stories from initial prompts</figcaption><p></p>
+</figure>
+</div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -498,7 +530,7 @@ Note
 <div id="fig-rouge-scores-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="img/ml-plots/rouge-scores-plot.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;12: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;13: Shows the result of the sentiment analysis using the pre-trained model.</figcaption>
 </figure>
 </div>
 <p>Below is an example of our model’s summarization ability on a Reddit post within <code>r/NoStupidQuestions</code> that references an article, which can be found on <a href="https://portside.org/">this site</a>. It is clear that the summarizer does a great job of extracting key information from the article, making sure to summarize it with a length that is roughly 25% of the length of the article itself.</p>

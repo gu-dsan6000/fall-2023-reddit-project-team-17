@@ -171,9 +171,9 @@ The code used for this section is available [here](https://github.com/gu-dsan600
 
 ### Preparing Covid-19 data in `NoStupidQuestions` {#sec-preparing-covid-19-data}
 
+This section dove into understanding the relationship between COVID-19 and the subreddit `r/NoStupidQuestions`, over the timeframe of our data. After data cleaning and prep, keywords were used to find comments of interest from the “body” of a comment that had been tokenized and had stopwords removed. We then created the visualization below, @fig-covid-nsq, to show how the engagement with this story changed over time. While there was no major consistent trend over time, engagement did seem to be higher early on and there are some spikes that might tell us about the dialogue around this story. 
 
-After performing NLP on the `NoStupidQuestions` subreddit to find longer posts related to COVID-19 for later Machine-Learning-related work, we wanted to visualize the interest over time to see if anything stood out or if there were recognizable trends. From @fig-covid-nsq, we can see a couple of large spikes in interest. The parquet file should capture these spikes and will be a great place to perform our Machine Learning summarization.
-
+Data from this work will be used for further investigation in the ML portion of our project. There, we will use the comments we have just identified and a summarization model to summarize the top comments related to our chosen topic. This will hopefully give us a much more precise understanding of this topic.
 
 ![Shows the daily number of COVID-19-related posts over time](img/nlp-plots/covid-nsq.png){#fig-covid-nsq}
 
